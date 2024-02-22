@@ -7,10 +7,14 @@ Replace the contents of this file with the completed assignments, as described i
 - [app map & wireframe instructions](instructions-0a-app-map-wireframes.md).
 - [prototype instructions](instructions-0b-prototyping.md)
 
-# App Map 
+# App Map
+
 ![Alt Text](images/appMap.png "Log In After Sign Up")
 
 # Wireframe Annotations/Descriptions
+
+[**Prototype and Wireframe**](https://www.figma.com/file/GAfeFkQj6gh0whKbp6WvLe/Prototype-%231?type=design&node-id=0%3A1&mode=design&t=2AdOSfrzjfudxNQg-1)
+
 ## Log In
 
 ![Alt Text](images/login.png "Log In After Sign Up")
@@ -42,7 +46,6 @@ Notes:
 - The profile page also displays the top 4 books in the user’s Current Reads, Want to Read, and Past Reads sections. By clicking on the text of the section, the user can go to a page that displays all of their books saved under that category.
 - The page also includes an ‘Edit profile’ button which leads to a page that allows the user to change their public information and private information (including email address and password).
 
-
 ## Book page
 
 ![Alt Text](images/BookPage.png "Page to view a book")
@@ -68,9 +71,10 @@ Notes:
 clicks on this, the display will show a list of their friends with their name and the book they are currently
 reading along with the author's name underneath.
 
-## Books read 
+## Books read
+
 ![Alt Text](images/BooksRead.png "Books read")
 
+## Books want to read
 
-## Books want to read 
 ![Alt Text](images/BooksWantToRead.png "Books want to read")
