@@ -24,6 +24,10 @@ Notes:
 #3 - Profile view 
 
 #4 - Book page 
+- I added two screens. 
+1: Books read which showcases the books you have read, a photo of the cover , and the title and author. 
+2: Books want to read which showcases the books you want to read, a photo of the cover , and the title and author. 
+
 
 #5 - Friend's Book view
 - Friend's book view is accessed once the user clicks on one of their friend's current reads that is 
