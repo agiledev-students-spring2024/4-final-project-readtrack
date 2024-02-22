@@ -1,11 +1,7 @@
 # User Experience Design
 
-This repository contains instructions and files for two assignments that together comprise the user experience design phase of a web app.
-
-Replace the contents of this file with the completed assignments, as described in:
-
-- [app map & wireframe instructions](instructions-0a-app-map-wireframes.md).
-- [prototype instructions](instructions-0b-prototyping.md)
+# Link to figma prototype 
+![Link to our figma prototype](https://www.figma.com/proto/GAfeFkQj6gh0whKbp6WvLe/Prototype-%231?type=design&node-id=29-17&t=tonMeewzD2Nn0fcH-1&scaling=scale-down&page-id=0%3A1)
 
 # App Map 
 ![Alt Text](images/appMap.png "Log In After Sign Up")
@@ -15,13 +11,13 @@ Replace the contents of this file with the completed assignments, as described i
 
 ![Alt Text](images/login.png "Log In After Sign Up")
 
-A simple login page that asks a user for a `Username` and `Password`. If the user does not have a profile, they can click `Sign Up` or `Login with third-party apps`.
+- A simple login page that asks a user for a `Username` and `Password`. If the user does not have a profile, they can click `Sign Up` or `Login with third-party apps`.
 
 ## Sign-up/New Profile
 
 ![Alt Text](images/NewProfile.png "Create new profile")  
 
-A simple page Sign-up page for new users where they can add their `First`, `Last` name, `Email`, and `Password`. If they have an account, they go back to `Login`.
+- A simple page Sign-up page for new users where they can add their `First`, `Last` name, `Email`, and `Password`. If they have an account, they go back to `Login`.
 
 ## Homepage
 
@@ -71,6 +67,9 @@ reading along with the author's name underneath.
 ## Books read 
 ![Alt Text](images/BooksRead.png "Books read")
 
+- Showcases the books the user has saved to their completed books list. Allows the user to click individual books for more information.
 
 ## Books want to read 
 ![Alt Text](images/BooksWantToRead.png "Books want to read")
+
+- Showcases the books the user has saved to their Want to Read books list. Allows the user to click individual books for more information.
