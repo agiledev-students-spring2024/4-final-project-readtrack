@@ -7,21 +7,23 @@ Replace the contents of this file with the completed assignments, as described i
 - [app map & wireframe instructions](instructions-0a-app-map-wireframes.md).
 - [prototype instructions](instructions-0b-prototyping.md)
 
-# Wireframe Annotations/Descriptions
+# App Map 
+![Alt Text](images/appMap.png "Log In After Sign Up")
 
-### Log In
+# Wireframe Annotations/Descriptions
+## Log In
 
 ![Alt Text](images/login.png "Log In After Sign Up")
 
 A simple login page that asks a user for a `Username` and `Password`. If the user does not have a profile, they can click `Sign Up` or `Login with third-party apps`.
 
-### Sign-up/New Profile
+## Sign-up/New Profile
 
 ![Alt Text](images/NewProfile.png "Create new profile")  
 
 A simple page Sign-up page for new users where they can add their `First`, `Last` name, `Email`, and `Password`. If they have an account, they go back to `Login`.
 
-### Homepage
+## Homepage
 
 ![Alt Text](images/Homepage.png "Homepage")  
 
@@ -32,7 +34,7 @@ to the user, allowing them access to go between pages.
 Notes:
 - each section moves horizontally based on how much data there is
 
-### Profile view
+## Profile view
 
 ![Alt Text](images/ProfileView.png "Create new profile")
 
@@ -41,13 +43,13 @@ Notes:
 - The page also includes an ‘Edit profile’ button which leads to a page that allows the user to change their public information and private information (including email address and password).
 
 
-### Book page
+## Book page
 
 ![Alt Text](images/BookPage.png "Page to view a book")
 
 - Accessible at multiple points throughout the app, this page shows basic information about the selected book, including its title, author, image, page count, description, and star rate of the book.
 
-### Friend's Book view
+## Friend's Book view
 
 ![Alt Text](images/FriendBookView.png "View a friend's books")
 
@@ -58,7 +60,7 @@ of the book and a description of the book.
 Notes:
 - The book and info page move vertically to display more info as the user swipes down.
 
-### Friends List
+## Friends List
 
 ![Alt Text](images/FriendsList.png "List of Friends")
 
@@ -66,9 +68,9 @@ Notes:
 clicks on this, the display will show a list of their friends with their name and the book they are currently
 reading along with the author's name underneath.
 
-### Books read 
+## Books read 
 ![Alt Text](images/BooksRead.png "Books read")
 
 
-### Books want to read 
+## Books want to read 
 ![Alt Text](images/BooksWantToRead.png "Books want to read")
