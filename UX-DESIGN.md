@@ -1,16 +1,12 @@
 # User Experience Design
 
-# Link to figma prototype
-
-![Link to our figma prototype](https://www.figma.com/proto/GAfeFkQj6gh0whKbp6WvLe/Prototype-%231?type=design&node-id=29-17&t=tonMeewzD2Nn0fcH-1&scaling=scale-down&page-id=0%3A1)
+[**Prototype and Wireframe**](https://www.figma.com/file/GAfeFkQj6gh0whKbp6WvLe/Prototype-%231?type=design&node-id=0%3A1&mode=design&t=2AdOSfrzjfudxNQg-1)
 
 # App Map
 
 ![Alt Text](images/appMap.png "Log In After Sign Up")
 
 # Wireframe Annotations/Descriptions
-
-[**Prototype and Wireframe**](https://www.figma.com/file/GAfeFkQj6gh0whKbp6WvLe/Prototype-%231?type=design&node-id=0%3A1&mode=design&t=2AdOSfrzjfudxNQg-1)
 
 ## Log In
 
