@@ -59,4 +59,13 @@ Notes:
 clicks on this, the display will show a list of their friends with their name and the book they are currently 
 reading along with the author's name underneath.
 
+#7 - Books read
+
+![Alt Text](images/BooksRead.png "List of Books the user has read") 
+
+
+
+#8 - Books want to read
+
+![Alt Text](images/BooksWantToRead.png "List books user would like to read") 
 
