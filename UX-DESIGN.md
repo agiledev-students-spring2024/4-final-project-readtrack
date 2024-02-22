@@ -9,7 +9,7 @@ Replace the contents of this file with the completed assignments, as described i
 
 # Wireframe Annotations/Descriptions 
 
-#1 - Log In 
+#1 - Log In
 
 ![Log in](logIN.png)
 
@@ -21,6 +21,17 @@ Replace the contents of this file with the completed assignments, as described i
 
 ![Homepage wireframe](homepage.png)
 - Homepage is personalized to the user as it contains their current reads and suggestion for the reader
+
+![Alt Text](images/LogInAfterSignup.png "Log In After Sign Up") 
+
+#1 - Sign-up/New Profile
+
+![Alt Text](images/NewProfile.png "Create new profile")  
+
+#2 - Homepage
+
+![Alt Text](images/Homepage.png "Homepage")  
+- Homepage is personalized to the user as it contains their current reads and suggestion for the reader
 based on the genres,authors,etc they have read before. Not only this but the homepage also displays the user's
 friends current reads and the top 10 books of the week. The homepage is also where the navbar is first presented
 to the user, allowing them access to go between pages.
@@ -31,15 +42,28 @@ Notes:
 #3 - Profile view 
 
 ![Profile view](profileView.png) 
+
 - The profile display’s the user’s public information, including their name, username, number of friends, profile picture, and bio. The profile is accessible through the navbar.
 - The profile page also displays the top 4 books in the user’s Current Reads, Want to Read, and Past Reads sections. By clicking on the text of the section, the user can go to a page that displays all of their books saved under that category.
 - The page also includes an ‘Edit profile’ button which leads to a page that allows the user to change their public information and private information (including email address and password).
 
 #4 - Book page 
 
+![Alt Text](images/ProfileView.png "Create new profile") 
+
+#4 - Book page 
+
+![Alt Text](images/BookPage.png "Page to view a book") 
+
+- I added two screens. 
+1: Books read which showcases the books you have read, a photo of the cover , and the title and author. 
+2: Books want to read which showcases the books you want to read, a photo of the cover , and the title and author. 
+
 
 
 #5 - Friend's Book view
+
+![Alt Text](images/FriendBookView.png "View a friend's books") 
 
 
 - Friend's book view is accessed once the user clicks on one of their friend's current reads that is 
@@ -51,8 +75,18 @@ Notes:
 - The book and info page move vertically to display more info as the user swipes down.
 
 #6 - Friends List 
+
+![Alt Text](images/FriendsList.png "List of Friends") 
+
 - Friends List view is accessed through the navbar 'friends' option that is displayed. Once the user 
 clicks on this, the display will show a list of their friends with their name and the book they are currently 
 reading along with the author's name underneath.
 
+#7 - Books read
+
+![Alt Text](images/BooksRead.png "List of Books the user has read") 
+
+#8 - Books want to read
+
+![Alt Text](images/BooksWantToRead.png "List books user would like to read") 
 
