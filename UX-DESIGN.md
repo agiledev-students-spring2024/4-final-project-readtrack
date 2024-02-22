@@ -9,11 +9,16 @@ Replace the contents of this file with the completed assignments, as described i
 
 # Wireframe Annotations/Descriptions 
 
-#1 - Log In 
+#1 - Log In
 
-#1 - Sign-up/New Profile 
+![Alt Text](images/LogInAfterSignup.png "Log In After Sign Up") 
 
-#2 - Homepage 
+#1 - Sign-up/New Profile
+![Alt Text](images/NewProfile.png "Create new profile")  
+
+#2 - Homepage
+
+![Alt Text](images/Homepage.png "Homepage")  
 - [Homepage is personalized to the user as it contains their current reads and suggestion for the reader
 based on the genres,authors,etc they have read before. Not only this but the homepage also displays the user's
 friends current reads and the top 10 books of the week. The homepage is also where the navbar is first presented
@@ -22,6 +27,8 @@ Notes:
 - [each section moves horizontally based on how much data there is]
 
 #3 - Profile view 
+
+![Alt Text](images/ProfileView.png "Create new profile") 
 
 #4 - Book page 
 - I added two screens. 
