@@ -3,6 +3,8 @@ import Home from "./components/home";
 import Login from "./components/login";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/navbar";
+import SignUpPage from "./components/SignUpPage";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
@@ -25,7 +27,9 @@ function App() {
             path="/login"
             element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />}
           />
+          <Route path="/signup" element={<SignUpPage />} />
         </Routes>
+        <Navbar />
       </BrowserRouter>
     </div>
   );
