@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
 
 const Login = (props) => {
   const [email, setEmail] = useState('')
@@ -7,7 +7,6 @@ const Login = (props) => {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  const navigate = useNavigate()
 
   const onButtonClick = () => {
     // Set initial error values to empty
