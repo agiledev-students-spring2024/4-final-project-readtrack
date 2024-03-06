@@ -10,7 +10,7 @@ const MainHome = (props) => {
                 <div className="bookDividers"> personal  </div>
                 <div className="bookDividers"> recommended </div>
                 <div className="bookDividers"> friends </div>
-                <div className="bookDividers"> top 10 </div>
+                <div className="bookDividers"> top </div>
             </div>
 
         </div>
