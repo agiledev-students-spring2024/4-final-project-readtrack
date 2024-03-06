@@ -4,7 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/home";
 import Navbar from "./components/navbar";
 import SignUpPage from "./components/Form/SignUpPage";
-import Login from './components/Form/login'
+import Login from './components/Form/login';
+import MainHome from './components/mainHome';
 import ReadingFinished from "./components/ReadingFinished";
 import ReadingProgress from "./components/ReadingProgress";
 import ReadingWishlist from "./components/ReadingWishlist";
@@ -33,6 +34,7 @@ function App() {
             element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />}
           />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/mainHome" element={<MainHome />} />
         </Routes>
         <Navbar />
       </BrowserRouter>
