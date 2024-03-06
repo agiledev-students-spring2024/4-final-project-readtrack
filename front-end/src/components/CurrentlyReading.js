@@ -16,3 +16,5 @@ const CurrentlyReading = () => {
     </div>
   );
 };
+
+export default CurrentlyReading;
