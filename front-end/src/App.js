@@ -1,10 +1,11 @@
 import "./App.css";
-import Home from "./components/home";
-import Login from "./components/login";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./components/home";
 import Navbar from "./components/navbar";
-import SignUpPage from "./components/SignUpPage";
+import SignUpPage from "./components/Form/SignUpPage";
+import Login from './components/Form/login'
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
