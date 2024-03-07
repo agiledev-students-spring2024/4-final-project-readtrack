@@ -1,6 +1,18 @@
 # Project Repository
 [ProductVisionStatement]
 - a description of project, including the [Product Vision Statement](https://knowledge.kitchen/content/courses/agile-development-and-devops/scrum/product-vision-statement/)
+To empower book enthusiasts by creating a dynamic and engaging online platform that revolutionizes the way users discover, organize, and share their reading experiences. Our vision is to launch a user-friendly web app that offers instant access to a comprehensive book database, enables personalized book management through 'Currently Reading', 'Want to Read', and 'Finished Reading' lists, and fosters a community of readers who can explore and connect over shared literary interests. By releasing an MVP that encapsulates the core functionalities of profile customization, book list management, and user interaction, we aim to quickly gather feedback for iterative enhancements, ensuring our solution not only meets but exceeds the evolving needs of our audience.
+[Establishing The Vision](Themes)
+- User Engagement: 
+- Content Discovery:
+- Personalization:
+[Establishing The Vision](Features)
+- User Engagement: Profile creation/ editing
+- User Engagement: Viewing other users' profiles
+- Content Discovery: Searchable and browseable database of books
+- Content Discovery: Recommendations based on user activity
+- Personalization: Creating and managing book lists such as "Currently Reading," "Want to Read," and "Finished Reading"
+- Personalization: Personalized book suggestions
 
 [CoreMembers] 
 [Kiara Chombo](https://github.com/k1arac)
@@ -11,10 +23,10 @@
 
 [Instructions]
 - instructions for building and testing the project (update with that information once the project reaches that stage)
+The project's wireframe is developed using Figma. The project's front-end is developed using ReactJs and TailwindCSS.
 
 [ProductDevelopment]
 - a short history of how the project came to be and information about how to contribute to the project (i.e. a link to the [CONTRIBUTING.md](./CONTRIBUTING.md) document)
-
 [Sprints]
 1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
 During Sprint 0 the team convened virtually to discuss the different pages we believe our application would need. We created a list of these pages then distributed the pages for each team member to work on the wireframes for. Afterwards we connected all of the pages so that buttons on one page may link to another page so that the wireframe would be ready to present to shareholders.
