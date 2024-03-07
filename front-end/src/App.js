@@ -22,8 +22,8 @@ import ProfilePage from './pages/Form/profile'; // Import the ProfilePage compon
 
 
 function App() {
-  
-  
+
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const onUpdateProfile = (updatedInfo) => {
@@ -43,19 +43,11 @@ function App() {
     }
     return <Navbar />;
   }
+
   function AppRoutes() {
-    // All original routes here
     return (
         return (
       <Routes>
-        <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-        <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/search" element={<BookSearch onSearch={handleBookSearch} />} />
-        <Route path="/mainHome" element={<MainHome />} />
-        <Route path="/edit-profile" element={<EditProfile onUpdateProfile={onUpdateProfile} />} />
-        <Route path="/profile" element={<ProfilePage />} /> {/* Add the route for the ProfilePage */}
-        <Route path="/friend-shelf" element={<FriendShelf />} />
         <Route path="/" element={<Layout><Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></Layout>} />
         <Route path="/login" element={<Layout><Login setLoggedIn={setLoggedIn} setEmail={setEmail} /></Layout>} />
         <Route path="/signup" element={<Layout><SignUpPage /></Layout>} />
