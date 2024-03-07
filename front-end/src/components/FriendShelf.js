@@ -24,6 +24,7 @@ const friendsReading = [
     bookTitle: 'To Kill a Mockingbird',
     bookAuthor: 'Harper Lee',
   },
+
   // ... Add more dummy data as needed
 ];
 
