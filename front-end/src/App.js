@@ -3,19 +3,19 @@ import './index.css';
 
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./components/home";
-import Navbar from "./components/navbar";
-import SignUpPage from "./components/Form/SignUpPage";
-import Login from './components/Form/login';
-import EditProfile from './components/Form/editProfile';
-import MainHome from './components/mainHome';
-import ReadingFinished from "./components/ReadingFinished";
-import ReadingProgress from "./components/ReadingProgress";
-import ReadingWishlist from "./components/ReadingWishlist";
-import CurrentlyReading from "./components/CurrentlyReading";
-import BookSearch from "./components/BookSearch";
+import Home from "./pages/home";
+import Navbar from "./pages/navbar";
+import SignUpPage from "./pages/Form/SignUpPage";
+import Login from './pages/Form/login';
+import EditProfile from './pages/Form/editProfile';
+import MainHome from './pages/mainHome';
+import ReadingFinished from "./pages/ReadingFinished";
+import ReadingProgress from "./pages/ReadingProgress";
+import ReadingWishlist from "./pages/ReadingWishlist";
+import CurrentlyReading from "./pages/CurrentlyReading";
+import BookSearch from "./pages/BookSearch";
 
-import ProfilePage from './components/Form/profile'; // Import the ProfilePage component
+import ProfilePage from './pages/Form/profile'; // Import the ProfilePage component
 
 
 function App() {
