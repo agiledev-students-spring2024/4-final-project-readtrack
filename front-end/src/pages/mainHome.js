@@ -7,20 +7,14 @@ import FriendShelf from '../components/FriendShelf';
 const MainHome = (props) => {
 
     return (
-        <div className="homepageLayout">
-            <div >
-                <Header title="User's Homepage" />
-                {/* <FriendShelf /> */}
-                <BookShelf title="Current Reads" />
-                <BookShelf title="Friends Current Reads" />
-                <BookShelf title="This Week's Top 10 Reads" />
-                <BookShelf title="Suggestions for You" />
-            </div>
-
+        <div className="bg-goodread-white" >
+            <Header title="User's Homepage" />
+            {/* <FriendShelf /> */}
+            <BookShelf title="Current Reads" />
+            <BookShelf title="Friends Current Reads" />
+            <BookShelf title="This Week's Top 10 Reads" />
+            <BookShelf title="Suggestions for You" />
         </div>
-
-
-
     )
 }
 

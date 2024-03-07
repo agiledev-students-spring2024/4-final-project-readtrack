@@ -10,9 +10,10 @@ const Home = (props) => {
     <div className="mainContainer">
       <div className={'titleContainer'}>
         <div className={'appIcon'}>
-        <img src={appIcon} alt="icon" className="w-20 h-20" />
+          <img src={appIcon} alt="icon" className="w-20 h-20" />
         </div>
-        <div>Welcome!</div>
+        <div className="text-goodreads-darkbrown">Welcome</div>
+        <div className="text-2xl text-goodreads-brown"> to readTrack!</div>
       </div>
       <div className="flex space-x-4">
         <input
