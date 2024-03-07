@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SignUpPage = () => {
+const SignUpPage = (props) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -19,6 +19,7 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle the form submission logic here, like validation and sending data to backend
+    props.setLoggedIn(true);
     navigate('/mainHome'); // not sure if we navigate straight to mainHome or to login -> mainHome -Jeff
     console.log(formData);
   };
