@@ -6,7 +6,8 @@ import ReadingWishlist from './ReadingWishlist';
 import ReadingProgress from './ReadingProgress';
 
 const BookPage = () => {
-    const placeholder = "https://placehold.co/400x600"; 
+    // const placeholder = "https://placehold.co/400x600"; 
+    const placeholder = "https://picsum.photos/400/600";
     return (
         <div className="bookInfo">
             <Header title="Title by Author" />

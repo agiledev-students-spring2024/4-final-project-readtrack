@@ -5,21 +5,24 @@ import PropTypes from 'prop-types';
 const friendsReading = [
   {
     id: 1,
-    friendImage: 'https://via.placeholder.com/150',
+    // friendImage: 'https://via.placeholder.com/150',
+    friendImage: 'https://picsum.photos/150',
     friendName: 'Alice',
     bookTitle: 'The Great Gatsby',
     bookAuthor: 'F. Scott Fitzgerald',
   },
   {
     id: 2,
-    friendImage: 'https://via.placeholder.com/150',
+    // friendImage: 'https://via.placeholder.com/150',
+    friendImage: 'https://picsum.photos/150',
     friendName: 'Bob',
     bookTitle: '1984',
     bookAuthor: 'George Orwell',
   },
   {
     id: 3,
-    friendImage: 'https://via.placeholder.com/150',
+    // friendImage: 'https://via.placeholder.com/150',
+    friendImage: 'https://picsum.photos/150',
     friendName: 'Charlie',
     bookTitle: 'To Kill a Mockingbird',
     bookAuthor: 'Harper Lee',
@@ -30,7 +33,7 @@ const friendsReading = [
 
 const FriendShelf = ({ friendsList = friendsReading }) => {
   return (
-    <div className="flex space-x-4 overflow-x-auto">
+    <div className="flex space-x-4 overflow-x-auto justify-center">
       {friendsList.map((friend) => (
         <div key={friend.id} className="flex flex-col items-center space-y-2 border-2 border-gray-200 rounded-lg">
           <img

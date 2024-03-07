@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const BookShelf = ({ title, bookCovers = [] }) => {
-  const placeholder = "https://placehold.co/400x600"; // Placeholder image URL
+  // const placeholder = "https://placehold.co/400x600"; // Placeholder image URL
+  const placeholder = "https://picsum.photos/400/600";
 
   return (
     <div className="flex flex-col text-left py-4 pl-4 justify-center bg-custom-gradient outline-4 outline-goodreads-darkbrown w-full">
