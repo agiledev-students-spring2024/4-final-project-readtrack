@@ -136,3 +136,46 @@
   margin: 6% auto;
   color: white;
 }
+
+.progressContainer {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  height: 100px;
+  flex-direction: column;
+
+}
+
+.barFill {
+  border-radius: 18px;
+  background-color: #bef264;
+  /* float: left; */
+  width: 50%;
+  min-height: 10px;
+}
+
+.statusText {
+  /* border: 1px solid black; */
+  height: 30%;
+  /* width: 70%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.statusBar {
+  /* border: 1px solid black; */
+  height: 30%;
+  /* width: 70%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+      
+.barShell {
+  border-radius: 18px;
+  width: 100px;	
+  border: 1px black solid;		
+}

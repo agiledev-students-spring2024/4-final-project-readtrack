@@ -1,28 +1,23 @@
-import react from "react"
-
-function AddReadingFinished() {
+function UpdateFinishedBookList() {
   return (
-    <button>
-      Add to finished book list
-    </button>
-  );
-};
-
-// option to remove book from reading list quickly
-function RemoveReadingFinished() {
-  return (
-    <button>
-      Remove from finished book list
-    </button>
-
+    <div className="">
+      {/* below button should store whether or not the current book has been added to finished book list */}
+      {/* const { bookAdded } = props */}
+      <button>
+        {/* take current book page this button is on and add/ remove from finished list */}
+        <input className={'btn'} type="button" 
+        onClick={() => {/* Add/ remove book from finished list */}}  
+        // / value={bookAdded ? 'Remove from finished books' : 'Add to finished books'}}
+        value = {'Add to Finished Book List'} />
+      </button>
+    </div>
   );
 };
 
 const ReadingFinished = () => {
   return (
     <div className="">
-      <AddReadingFinished />
-      <RemoveReadingFinished />
+      <UpdateFinishedBookList />
     </div>
   );
 };
