@@ -4,12 +4,15 @@ import FriendShelf from '../components/FriendShelf';
 
 const Friends = (props) => {
 
+    // classname ispfriendslist
     return (
-        <div className="ispFriendsList">
-            <div>
+        <div className="displayFriends">
             <Header title="Friends List" />
-                <h1></h1>
-                <FriendShelf title="first line" />
+            <div className="flex flex-col py-10 pl-2 justify-center bg-custom-gradient outline-4 outline-goodreads-darkbrown w-full">
+                <FriendShelf title="first line of friends" />
+                <div className="mt-5">
+                    <FriendShelf title="second line of friends" />  
+                </div>
             </div>
         </div> 
     )

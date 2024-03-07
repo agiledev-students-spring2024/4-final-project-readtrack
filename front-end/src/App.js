@@ -46,7 +46,6 @@ function App() {
 
   function AppRoutes() {
     return (
-        return (
       <Routes>
         <Route path="/" element={<Layout><Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></Layout>} />
         <Route path="/login" element={<Layout><Login setLoggedIn={setLoggedIn} setEmail={setEmail} /></Layout>} />
