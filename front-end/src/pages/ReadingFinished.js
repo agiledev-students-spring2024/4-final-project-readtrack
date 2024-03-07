@@ -1,24 +1,18 @@
-function UpdateFinishedBookList() {
-  return (
-    <div className="">
-      {/* below button should store whether or not the current book has been added to finished book list */}
-      {/* const { bookAdded } = props */}
-      <button>
-        {/* take current book page this button is on and add/ remove from finished list */}
-        <input className={'btn'} type="button" 
-        onClick={() => {/* Add/ remove book from finished list */}}  
-        // / value={bookAdded ? 'Remove from finished books' : 'Add to finished books'}}
-        value = {'Add to Finished Book List'} />
-      </button>
-    </div>
-  );
-};
+import React, { useState } from "react";
 
-const ReadingFinished = () => {
+function ReadingFinished() {
+  const [bookAdded, setBookAdded] = useState(false);
+  
+  function UpdateFinishedReading() {
+    // add/ remove this book to the user's "Finished Reading Book List" update button display below
+    setBookAdded(!bookAdded);
+  }
+
   return (
-    <div className="">
-      <UpdateFinishedBookList />
-    </div>
+    <button className="btn-sm" onClick={UpdateFinishedReading}>
+      {/* Add to Finished Books */}
+      {bookAdded ? 'Remove from Finished Books' : 'Add to Finished Books'}
+    </button>
   );
 };
 

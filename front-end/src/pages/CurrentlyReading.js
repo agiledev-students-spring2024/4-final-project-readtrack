@@ -1,27 +1,18 @@
-import React from "react"
-// maybe the  button updates depending on whether the book has/ hasn't been added
-// button to add a book to currentlyReading from that book's page
-function UpdateCurrentlyReading() {
-  return (
-    <div className="">
-      {/* below button should store whether or not the current book has been added to currentlyreading */}
-      {/* const { bookAdded } = props */}
-      <button>
-        {/* take current book page this button is on and add to currently reading reading list */}
-        <input className={'btn'} type="button" 
-        onClick={() => {/* Add book to currently reading or remove */}}  
-        // / value={bookAdded ? 'Remove from Currently Reading' : 'Add to Currently Reading'}}
-        value = {'Add to Currently Reading'} />
-      </button>
-    </div>
-  );
-};
+import React, { useState } from "react";
 
-const CurrentlyReading = () => {
+function CurrentlyReading() {
+  const [bookAdded, setBookAdded] = useState(false);
+  
+  function UpdateCurrentlyReading() {
+    // add/ remove this book to the user's "Finished Reading Book List" update button display below
+    setBookAdded(!bookAdded);
+  }
+
   return (
-    <div className="">
-      <UpdateCurrentlyReading />
-    </div>
+    <button className="btn-sm" onClick={UpdateCurrentlyReading}>
+      {/* Add to Finished Books */}
+      {bookAdded ? 'Remove from Currently Reading' : 'Add to Currently Reading'}
+    </button>
   );
 };
 

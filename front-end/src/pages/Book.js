@@ -1,5 +1,9 @@
 import React from 'react';
 import Header from '../components/header';
+import CurrentlyReading from './CurrentlyReading';
+import ReadingFinished from './ReadingFinished';
+import ReadingWishlist from './ReadingWishlist';
+import ReadingProgress from './ReadingProgress';
 
 const BookPage = () => {
     const placeholder = "https://placehold.co/400x600"; 
@@ -24,6 +28,17 @@ const BookPage = () => {
                     <p className="text-xs">Pages: 360</p>
                     <p className="text-xs">Genres: Horror, Mystery</p>
                     <p className="text-xs">First Published: June 26, 1993</p>
+                </div>
+                <div className="px-10 pb-5 mx-8">
+                    <div className='mx-2'>
+                        <CurrentlyReading />
+                    </div>
+                    <div className='mx-2'>
+                        <ReadingFinished />
+                    </div>
+                    <div className='mx-2'>
+                        <ReadingWishlist />
+                    </div>
                 </div>
                 <div className="px-10 pb-5">
                     <b>Ratings</b>
