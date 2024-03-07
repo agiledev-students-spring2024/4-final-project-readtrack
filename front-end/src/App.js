@@ -17,6 +17,8 @@ import BookSearch from "./pages/BookSearch";
 import FriendShelf from "./components/FriendShelf";
 import Friends from "./pages/Friends"
 import Layout from "./components/Layout";
+import Book from "./pages/Book";
+import FriendProfile from "./pages/friendsProfile";
 
 import ProfilePage from './pages/Form/profile'; // Import the ProfilePage component
 
@@ -46,7 +48,6 @@ function App() {
 
   function AppRoutes() {
     return (
-        return (
       <Routes>
         <Route path="/" element={<Layout><Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></Layout>} />
         <Route path="/login" element={<Layout><Login setLoggedIn={setLoggedIn} setEmail={setEmail} /></Layout>} />
@@ -57,6 +58,8 @@ function App() {
         <Route path="/profile" element={<Layout> <ProfilePage /> </Layout>} />
         <Route path="/friend-shelf" element={<Layout> <FriendShelf /> </Layout>} />
         <Route path="/friends" element={<Layout> <Friends /> </Layout>} />
+        <Route path="/title-by-author" element={<Layout> <Book /> </Layout>} />
+        <Route path="/friend-profile" element={<Layout> <FriendProfile /> </Layout>} />
       </Routes>
     );
   }
