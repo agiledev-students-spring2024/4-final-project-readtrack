@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-// import appIcon from "./front-end/images1/icon.png";
-
+import appIcon from '../images/readIcon.png';
 const Home = (props) => {
   const { loggedIn, email } = props
   const navigate = useNavigate()
@@ -10,24 +9,20 @@ const Home = (props) => {
   return (
     <div className="mainContainer">
       <div className={'titleContainer'}>
-        {/* <div className={'appIcon'}>
-          <img src={appIcon} alt="icon"> </img>
-        </div> */}
+        <div className={'appIcon'}>
+        <img src={appIcon} alt="icon" className="w-20 h-20" />
+        </div>
         <div>Welcome!</div>
       </div>
-      <div>This is the landing page.</div>
-      <div className={'buttonContainer'}>
+      <div className="flex space-x-4">
         <input
-          className={'inputButton'}
+          className="btn"
           type="button"
           onClick={() => navigate("/login")}
           value={loggedIn ? 'Log out' : 'Log in'}
         />
-        {loggedIn ? <div>Your email address is {email}</div> : <div />}
-      </div>
-      <div className={'buttonContainer'}>
         <input
-          className={'inputButton'}
+          className="btn"
           type="button"
           onClick={() => navigate("/signup")}
           value="Sign up"
