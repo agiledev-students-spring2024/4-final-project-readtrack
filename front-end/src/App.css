@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
+}
+
 .App {
   text-align: center;
 }
@@ -35,10 +40,12 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 .mainContainer {
   flex-direction: column;
   display: flex;
@@ -89,7 +96,7 @@
   justify-content: center;
 }
 
-.inputContainer > .errorLabel {
+.inputContainer>.errorLabel {
   color: red;
   font-size: 12px;
 }
@@ -101,4 +108,74 @@
   border-radius: 8px;
   border: 1px solid grey;
   padding-left: 8px;
+}
+
+.bander {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  color: white;
+  height: 100px;
+  width: auto;
+  font-size: 20px;
+}
+
+.bookContainer {
+  margin-top: 9%;
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+.bookDividers {
+  display: block;
+  width: auto;
+  height: 140px;
+  background-color: #282c34;
+  margin: 6% auto;
+  color: white;
+}
+
+.progressContainer {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  height: 100px;
+  flex-direction: column;
+
+}
+
+.barFill {
+  border-radius: 18px;
+  background-color: #bef264;
+  /* float: left; */
+  width: 50%;
+  min-height: 10px;
+}
+
+.statusText {
+  /* border: 1px solid black; */
+  height: 30%;
+  /* width: 70%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.statusBar {
+  /* border: 1px solid black; */
+  height: 30%;
+  /* width: 70%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+      
+.barShell {
+  border-radius: 18px;
+  width: 100px;	
+  border: 1px black solid;		
 }
