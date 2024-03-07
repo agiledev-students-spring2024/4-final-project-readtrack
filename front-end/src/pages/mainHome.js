@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/header';
 import BookShelf from '../components/bookshelf';
+import FriendShelf from '../components/FriendShelf';
 
 const MainHome = (props) => {
 
@@ -9,7 +10,7 @@ const MainHome = (props) => {
             
             <div >
                 <Header title="Friends" />
-                <BookShelf title="Currently Reading" />
+                <FriendShelf />
                 <div className="bookDividers"> personal  </div>
                 <div className="bookDividers"> recommended </div>
                 <div className="bookDividers"> friends </div>
