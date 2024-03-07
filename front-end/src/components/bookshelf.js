@@ -18,7 +18,7 @@ const BookShelf = ({ title, bookCovers = [] }) => {
                 key={i}
                 src={cover || placeholder}
                 alt={`Book ${i + 1}`}
-                className="w-20 h-30 object-cover border-2 flex-none"
+                className="w-20 h-30 object-cover border-2"
               />
             </Link>
           ))
@@ -31,7 +31,7 @@ const BookShelf = ({ title, bookCovers = [] }) => {
                     key={i}
                     src={placeholder}
                     alt={`Book ${i + 1}`}
-                    className="w-20 h-30 object-cover border-2 flex-none"
+                    className="w-20 h-30 object-cover border-2"
                   />
                 </Link>
               )
