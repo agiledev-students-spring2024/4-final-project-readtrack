@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/header';
 import FriendShelf from '../components/FriendShelf';
+import { Link } from "react-router-dom";
 
 // do we want the hard-coded second line for demo or no?
 
