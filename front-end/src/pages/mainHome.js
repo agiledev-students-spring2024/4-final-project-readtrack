@@ -6,7 +6,7 @@ import BookShelf from '../components/bookshelf';
 const MainHome = (props) => {
 
     return (
-        <div cllassName="bg-goodread-white">
+        <div className="bg-goodread-white">
             <div >
                 <Header title="User's Homepage" />
                 <BookShelf title="Current Reads" />
