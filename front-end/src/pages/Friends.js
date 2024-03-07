@@ -2,9 +2,10 @@ import React from 'react';
 import Header from '../components/header';
 import FriendShelf from '../components/FriendShelf';
 
+// do we want the hard-coded second line for demo or no?
+
 const Friends = (props) => {
 
-    // classname ispfriendslist
     return (
         <div className="displayFriends">
             <Header title="Friends List" />

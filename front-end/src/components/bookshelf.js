@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const BookShelf = ({ title, bookCovers = [] }) => {
   const placeholder = "https://placehold.co/400x600"; // Placeholder image URL
@@ -12,23 +13,27 @@ const BookShelf = ({ title, bookCovers = [] }) => {
       <div className="flex space-x-4 overflow-x-auto m-3">
         {bookCovers.length > 0
           ? bookCovers.map((cover, i) => (
-            <img
-              key={i}
-              src={cover || placeholder}
-              alt={`Book ${i + 1}`}
-              className="w-20 h-30 object-cover border-2"
-            />
+            <Link to="/title-by-author">
+              <img
+                key={i}
+                src={cover || placeholder}
+                alt={`Book ${i + 1}`}
+                className="w-20 h-30 object-cover border-2"
+              />
+            </Link>
           ))
           : Array(10)
             .fill()
             .map(
               (_, i) => (
-                <img
-                  key={i}
-                  src={placeholder}
-                  alt={`Book ${i + 1}`}
-                  className="w-20 h-30 object-cover border-2"
-                />
+                <Link to="/title-by-author">
+                  <img
+                    key={i}
+                    src={placeholder}
+                    alt={`Book ${i + 1}`}
+                    className="w-20 h-30 object-cover border-2"
+                  />
+                </Link>
               )
             )}
       </div>
