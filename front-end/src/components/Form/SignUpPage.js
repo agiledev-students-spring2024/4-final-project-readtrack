@@ -70,7 +70,7 @@ const SignUpPage = () => {
               />
             </div>
             <div className="flex items-baseline justify-between">
-              <button className="px-6 py-2 mt-4 text-white bg-gray-800 rounded-lg hover:bg-gray-700">Sign Up</button>
+              <button className="btn">Sign Up</button>
               <a href="/login" className="text-sm text-blue-600 hover:underline">Already have an account? Login</a>
             </div>
           </div>
