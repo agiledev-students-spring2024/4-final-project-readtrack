@@ -1,42 +1,45 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onButtonClick = () => {
-    // Set initial error values to empty
-    setEmailError('')
-    setPasswordError('')
-  
-    // Check if the user has entered both fields correctly
-    if ('' === email) {
-      setEmailError('Please enter your email')
-      return
+    setEmailError('');
+    setPasswordError('');
+
+    if (email === '') {
+      setEmailError('Please enter your email');
+      return;
     }
-  
+
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      setEmailError('Please enter a valid email')
-      return
+      setEmailError('Please enter a valid email');
+      return;
     }
-  
-    if ('' === password) {
-      setPasswordError('Please enter a password')
-      return
+
+    if (password === '') {
+      setPasswordError('Please enter a password');
+      return;
     }
-  
+
     if (password.length < 7) {
-      setPasswordError('The password must be 8 characters or longer')
-      return
+      setPasswordError('The password must be 8 characters or longer');
+      return;
     }
-  
-    // Authentication calls will be made here...
-  }
+
+    // if validation true:
+    props.setEmail(email); // update email state in App.js
+    props.setLoggedIn(true); // update loggedIn state in App.js
+
+    // nav to mainHome
+    navigate('/mainHome');
+  };
 
   return (
     <div className={'mainContainer'}>
@@ -68,7 +71,7 @@ const Login = (props) => {
         <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
