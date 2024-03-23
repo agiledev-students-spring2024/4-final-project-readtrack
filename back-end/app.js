@@ -1,5 +1,13 @@
+const { default: axios } = require("axios");
 const express = require("express");
 const app = express();
+const mockUsers = [
+  { id: 1, username: 'user1', email: 'user1@example.com', books: ['The Great Gatsby', 'To Kill a Mockingbird'], profile: 'avatar1.png' },
+  { id: 2, username: 'user2', email: 'user2@example.com', books: ['1984', 'Brave New World'], profile: 'avatar2.png' },
+  { id: 3, username: 'user3', email: 'user3@example.com', books: ['The Catcher in the Rye', 'The Grapes of Wrath'], profile: 'avatar3.png' },
+  { id: 4, username: 'user4', email: 'user4@example.com', books: ['The Great Gatsby', '1984'], profile: 'avatar4.png' }
+  
+];
 
 app.get("/", (req, res) => {
   res.send("Hello!");
@@ -11,11 +19,18 @@ app.post("/users/login", (req, res) => {
   res.status(200).send("User logged in");
 });
 app.get("/users", (req, res) => {
-  res.status(200).send("Here are all the users");
+  res.status(200).json(mockUsers);
 });
 app.get("/users/:id", (req, res) => {
   const { id } = req.params;
-  res.status(200).send(`Here is user ${req.params.id}`);
+  const user = mockUsers.find((user) => user.id === parseInt(id));
+  if(user) {
+    res.status(200).json(user);
+  
+  }
+  else {
+    res.status(404).send("User not found");
+  }
 });
 // Route for updating a user's profile
 app.put("/users/:id/profile", (req, res) => {
