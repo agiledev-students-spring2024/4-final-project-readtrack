@@ -9,7 +9,6 @@ app.use(cors());
 let mockUsers = [
   {
     id: 1,
-    fullname: "John Doe",
     username: "user1",
     email: "user1@example.com",
     books: ["The Great Gatsby", "To Kill a Mockingbird"],
@@ -17,7 +16,6 @@ let mockUsers = [
   },
   {
     id: 2,
-    fullname: "J Doe",
     username: "user2",
     email: "user2@example.com",
     books: ["1984", "Brave New World"],
@@ -26,7 +24,6 @@ let mockUsers = [
   {
     id: 3,
     username: "user3",
-    fullname: "John D",
     email: "user3@example.com",
     books: ["The Catcher in the Rye", "The Grapes of Wrath"],
     profile: "avatar3.png",
@@ -34,7 +31,6 @@ let mockUsers = [
   {
     id: 4,
     username: "user4",
-    fullname: "John H. Doe",
     email: "user4@example.com",
     books: ["The Great Gatsby", "1984"],
     profile: "avatar4.png",
@@ -94,9 +90,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/users/register", async (req, res) => {
-  const { fullname, username, email, password } = req.body;
+  const { username, email, password } = req.body;
 
-  if (!fullname || !username || !email || !password) {
+  if (!username || !email || !password) {
     return res.status(400).send('Please provide a username, email, and password.');
   }
 
@@ -106,7 +102,6 @@ app.post("/users/register", async (req, res) => {
 
     const newUser = {
       id: mockUsers.length + 1,
-      fullname,
       username,
       email,
       password: hashedPassword,
@@ -144,13 +139,13 @@ app.get("/users/:id", (req, res) => {
   }
 });
 
-app.put("/users/:id", (req, res) => {
+app.put("/users/:id/profile", (req, res) => {
   const { id } = req.params;
-  const { fullname, username, email } = req.body;
-
+  const { name, username, bio } = req.body;
+  // finds user and updates profile
   const userIndex = mockUsers.findIndex(user => user.id === parseInt(id));
   if (userIndex !== -1) {
-    mockUsers[userIndex] = { ...mockUsers[userIndex], fullname, username, email };
+    mockUsers[userIndex] = { ...mockUsers[userIndex], name, username, bio };
     res.status(200).json(mockUsers[userIndex]);
   } else {
     res.status(404).send("User not found");

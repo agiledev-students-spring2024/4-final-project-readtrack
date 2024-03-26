@@ -1,5 +1,4 @@
 import "./App.css";
-
 import "./index.css";
 
 import { useState } from "react";
@@ -21,13 +20,11 @@ import Layout from "./components/Layout";
 import Book from "./pages/Book";
 import FriendProfile from "./pages/friendsProfile";
 
-import ProfilePage from './pages/Form/profile';
+import ProfilePage from "./pages/Form/profile"; // Import the ProfilePage component
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(null);
-
+  const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
-
   const onUpdateProfile = (updatedInfo) => {
     //update user profile here
   };
@@ -47,17 +44,105 @@ function App() {
   function AppRoutes() {
     return (
       <Routes>
-        <Route path="/" element={<Layout><Home email={email} loggedIn={loggedInUser !== null} setLoggedIn={setLoggedInUser} /></Layout>} />
-        <Route path="/login" element={<Layout><Login setLoggedInUser={setLoggedInUser} setEmail={setEmail} /></Layout>} />
-        <Route path="/signup" element={<Layout><SignUpPage setLoggedInUser={setLoggedInUser} /></Layout>} />
-        <Route path="/search" element={<Layout><BookSearchPage /></Layout>} />
-        <Route path="/mainHome" element={<Layout> <MainHome /> </Layout>} />
-        <Route path="/edit-profile" element={<Layout> <EditProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> </Layout>} />
-        <Route path="/profile" element={<Layout> <ProfilePage loggedInUser={loggedInUser} /> </Layout>} />
-        <Route path="/friend-shelf" element={<Layout> <FriendShelf /> </Layout>} />
-        <Route path="/friends" element={<Layout> <Friends /> </Layout>} />
-        <Route path="/title-by-author" element={<Layout> <Book /> </Layout>} />
-        <Route path="/friend-profile" element={<Layout> <FriendProfile /> </Layout>} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Home
+                email={email}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+              />
+            </Layout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Layout>
+              <Login setLoggedIn={setLoggedIn} setEmail={setEmail} />
+            </Layout>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <Layout>
+              <SignUpPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <Layout>
+              <BookSearchPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/mainHome"
+          element={
+            <Layout>
+              {" "}
+              <MainHome />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <Layout>
+              {" "}
+              <EditProfile onUpdateProfile={onUpdateProfile} />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Layout>
+              {" "}
+              <ProfilePage />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/friend-shelf"
+          element={
+            <Layout>
+              {" "}
+              <FriendShelf />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/friends"
+          element={
+            <Layout>
+              {" "}
+              <Friends />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/title-by-author"
+          element={
+            <Layout>
+              {" "}
+              <Book />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/friend-profile"
+          element={
+            <Layout>
+              {" "}
+              <FriendProfile />{" "}
+            </Layout>
+          }
+        />
       </Routes>
     );
   }

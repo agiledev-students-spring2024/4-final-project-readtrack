@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = (props) => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    fullname: '',
     username: '',
     email: '',
     password: '',
@@ -16,20 +16,20 @@ const SignUpPage = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch('http://localhost:3001/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fullname: formData.fullname,
         username: formData.username,
         email: formData.email,
         password: formData.password,
       }),
     })
       .then(response => {
-        console.log("response: ", response);
+        console.log("response: ", response)
         if (response.ok) {
           return response.json();
         }
@@ -37,11 +37,13 @@ const SignUpPage = (props) => {
       })
       .then(data => {
         console.log('User registered:', data);
-        props.setLoggedInUser(data); // update loggedInUser state in App.js
+        // props.setLoggedIn(true);
         navigate('/mainHome');
       })
       .catch(error => console.error('Error registering user:', error));
   };
+
+
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -50,54 +52,34 @@ const SignUpPage = (props) => {
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <div>
-              <label className="block" htmlFor="fullname">Full Name</label>
-              <input
-                type="text"
-                placeholder="Full Name"
-                name="fullname"
-                onChange={handleChange}
-                className="w-full px-4 py-2 mt-2 border rounded-md"
-                value={formData.fullname}
-              />
-            </div>
-            <div>
               <label className="block" htmlFor="username">Username</label>
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                onChange={handleChange}
+              <input type="text" placeholder="Username"
+                name="username" onChange={handleChange} // Change made here
                 className="w-full px-4 py-2 mt-2 border rounded-md"
-                value={formData.username}
+                value={formData.username} // Adjusted to formData.username
               />
             </div>
+
+
             <div className="mt-4">
               <label className="block" htmlFor="email">Email</label>
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                onChange={handleChange}
+              <input type="email" placeholder="Email"
+                name="email" onChange={handleChange}
                 className="w-full px-4 py-2 mt-2 border rounded-md"
                 value={formData.email}
               />
             </div>
             <div className="mt-4">
               <label className="block" htmlFor="password">Password</label>
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={handleChange}
+              <input type="password" placeholder="Password"
+                name="password" onChange={handleChange}
                 className="w-full px-4 py-2 mt-2 border rounded-md"
                 value={formData.password}
               />
             </div>
             <div className="flex items-baseline justify-between">
               <button className="btn">Sign Up</button>
-              <a href="/login" className="text-sm text-blue-600 hover:underline">
-                Already have an account? Login
-              </a>
+              <a href="/login" className="text-sm text-blue-600 hover:underline">Already have an account? Login</a>
             </div>
           </div>
         </form>

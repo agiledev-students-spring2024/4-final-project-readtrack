@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
+const EditProfile = (props) => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        fullname: "",
-        username: "",
-        email: "",
+        firstName: '',
+        lastName: '',
+        email: ''
+        // firstName: props.currentUser.firstName || '',
+        // lastName: props.currentUser.lastName || '',
+        // email: props.currentUser.email || '',
+        // other fields to edit
     });
-
-    useEffect(() => {
-        if (loggedInUser) {
-            setFormData({
-                fullname: loggedInUser.fullname || "",
-                username: loggedInUser.username || "",
-                email: loggedInUser.email || "",
-            });
-        }
-    }, [loggedInUser]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,19 +20,8 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3001/users/${loggedInUser.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setLoggedInUser(data);
-                navigate("/profile");
-            })
-            .catch((error) => console.error("Error updating profile:", error));
+        props.onUpdateProfile(formData);
+        navigate("/profile")
     };
 
     return (
@@ -51,34 +34,34 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
                     <div className="mb-4">
                         <label
                             className="block text-gray-700 font-bold mb-2"
-                            htmlFor="fullname"
+                            htmlFor="firstName"
                         >
-                            Full Name
+                            First Name
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="fullname"
+                            id="firstName"
                             type="text"
-                            name="fullname"
-                            placeholder="John Doe"
-                            value={formData.fullname}
+                            name="firstName"
+                            placeholder="John"
+                            value={formData.firstName}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="mb-4">
                         <label
                             className="block text-gray-700 font-bold mb-2"
-                            htmlFor="username"
+                            htmlFor="lastName"
                         >
-                            Username
+                            Last Name
                         </label>
                         <input
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="fullname"
+                            id="lastName"
                             type="text"
-                            name="username"
-                            placeholder="John Doe"
-                            value={formData.username}
+                            name="lastName"
+                            placeholder="Doe"
+                            value={formData.lastName}
                             onChange={handleChange}
                         />
                     </div>
