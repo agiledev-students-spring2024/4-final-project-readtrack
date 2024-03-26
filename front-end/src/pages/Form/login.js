@@ -1,45 +1,62 @@
-import React, { useState } from 'react'
-
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = (props) => {
+const Login = ({ setLoggedInUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-
+  const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
 
   const onButtonClick = () => {
     setEmailError('');
     setPasswordError('');
+    setLoginError('');
 
     if (email === '') {
       setEmailError('Please enter your email');
       return;
     }
-
     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       setEmailError('Please enter a valid email');
       return;
     }
-
     if (password === '') {
       setPasswordError('Please enter a password');
       return;
     }
-
     if (password.length < 3) {
       setPasswordError('The password must be 4 characters or longer');
       return;
     }
 
-    // if validation true:
-    props.setEmail(email); // update email state in App.js
-    props.setLoggedIn(true); // update loggedIn state in App.js
-
-    // nav to mainHome
-    navigate('/mainHome');
+    fetch('http://localhost:3001/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then(response => {
+        console.log("Login.js email:", email);
+        console.log("Login.js password:", password);
+        console.log(response);
+        if (response.ok) {
+          return response.json();
+        } else if (response.status === 401) {
+          throw new Error('Invalid email or password');
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then(data => {
+        setLoggedInUser(data);
+        navigate('/mainHome');
+      })
+      .catch(error => {
+        console.error('Error logging in:', error);
+        setLoginError(error.message);
+      });
   };
 
   return (
@@ -48,6 +65,7 @@ const Login = (props) => {
         <div>Login</div>
       </div>
       <br />
+      {loginError && <div className="errorLabel">{loginError}</div>}
       <div className={'inputContainer'}>
         <input
           value={email}
@@ -60,6 +78,7 @@ const Login = (props) => {
       <br />
       <div className={'inputContainer'}>
         <input
+          type="password"
           value={password}
           placeholder="Enter your password here"
           onChange={(ev) => setPassword(ev.target.value)}
@@ -69,7 +88,12 @@ const Login = (props) => {
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
+        <input
+          className={'inputButton'}
+          type="button"
+          onClick={onButtonClick}
+          value={'Log in'}
+        />
       </div>
     </div>
   );
