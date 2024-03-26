@@ -13,17 +13,25 @@ const BookShelf = ({ title, bookCovers = [] }) => {
       <div className="flex overflow-x-auto space-x-4 scrollbar-hide py-4">
         {bookCovers.length > 0
           ? bookCovers.map((cover, i) => (
-            <Link key={i} to="/title-by-author" className="shrink-0">
-              <img src={cover || placeholder} alt={`Book ${i + 1}`} className="w-20 h-30" />
-            </Link>
-          ))
-          : Array(20)
-            .fill()
-            .map((_, i) => (
               <Link key={i} to="/title-by-author" className="shrink-0">
-                <img src={placeholder} alt={`Book ${i + 1}`} className="w-20 h-30" />
+                <img
+                  src={cover || placeholder}
+                  alt={`Book ${i + 1}`}
+                  className="w-20 h-30"
+                />
               </Link>
-            ))}
+            ))
+          : Array(20)
+              .fill()
+              .map((_, i) => (
+                <Link key={i} to="/title-by-author" className="shrink-0">
+                  <img
+                    src={placeholder}
+                    alt={`Book ${i + 1}`}
+                    className="w-20 h-30"
+                  />
+                </Link>
+              ))}
       </div>
     </div>
   );
