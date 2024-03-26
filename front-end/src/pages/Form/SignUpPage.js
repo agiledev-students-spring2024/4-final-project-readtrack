@@ -5,11 +5,9 @@ const SignUpPage = (props) => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    username: '',
     email: '',
     password: '',
-    confirmPassword: '',
   });
 
   const handleChange = (e) => {
@@ -18,11 +16,34 @@ const SignUpPage = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle the form submission logic here, like validation and sending data to backend
-    props.setLoggedIn(true);
-    navigate('/mainHome'); // not sure if we navigate straight to mainHome or to login -> mainHome -Jeff
-    console.log(formData);
+
+    fetch('http://localhost:3001/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      }),
+    })
+      .then(response => {
+        console.log("response: ", response)
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .then(data => {
+        console.log('User registered:', data);
+        // props.setLoggedIn(true);
+        navigate('/mainHome');
+      })
+      .catch(error => console.error('Error registering user:', error));
   };
+
+
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -31,21 +52,15 @@ const SignUpPage = (props) => {
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <div>
-              <label className="block" htmlFor="firstName">First Name</label>
-              <input type="text" placeholder="First Name"
-                name="firstName" onChange={handleChange}
+              <label className="block" htmlFor="username">Username</label>
+              <input type="text" placeholder="Username"
+                name="username" onChange={handleChange} // Change made here
                 className="w-full px-4 py-2 mt-2 border rounded-md"
-                value={formData.firstName}
+                value={formData.username} // Adjusted to formData.username
               />
             </div>
-            <div className="mt-4">
-              <label className="block" htmlFor="lastName">Last Name</label>
-              <input type="text" placeholder="Last Name"
-                name="lastName" onChange={handleChange}
-                className="w-full px-4 py-2 mt-2 border rounded-md"
-                value={formData.lastName}
-              />
-            </div>
+
+
             <div className="mt-4">
               <label className="block" htmlFor="email">Email</label>
               <input type="email" placeholder="Email"
@@ -60,14 +75,6 @@ const SignUpPage = (props) => {
                 name="password" onChange={handleChange}
                 className="w-full px-4 py-2 mt-2 border rounded-md"
                 value={formData.password}
-              />
-            </div>
-            <div className="mt-4">
-              <label className="block" htmlFor="confirmPassword">Confirm Password</label>
-              <input type="password" placeholder="Confirm Password"
-                name="confirmPassword" onChange={handleChange}
-                className="w-full px-4 py-2 mt-2 border rounded-md"
-                value={formData.confirmPassword}
               />
             </div>
             <div className="flex items-baseline justify-between">
