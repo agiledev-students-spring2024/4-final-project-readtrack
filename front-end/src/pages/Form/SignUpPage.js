@@ -29,7 +29,6 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser }) => {
       }),
     })
       .then(response => {
-        console.log("response: ", response);
         if (response.ok) {
           return response.json();
         }
