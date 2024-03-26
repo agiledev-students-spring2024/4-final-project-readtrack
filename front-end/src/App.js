@@ -32,21 +32,7 @@ function App() {
     //update user profile here
   };
 
-  const handleBookSearch = (searchTerm) => {
-
-    console.log(`Search for: ${searchTerm}`);
-    // Call the API to search for books
-    const searchUrl =`http://localhost:3001/books/${searchTerm}`;
-    fetch(searchUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-
-    
-
-    
-  };
+  
 
   function NavbarWithLocation() {
     const location = useLocation();
@@ -62,7 +48,7 @@ function App() {
         <Route path="/" element={<Layout><Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} /></Layout>} />
         <Route path="/login" element={<Layout><Login setLoggedIn={setLoggedIn} setEmail={setEmail} /></Layout>} />
         <Route path="/signup" element={<Layout><SignUpPage /></Layout>} />
-        <Route path="/search" element={<Layout><BookSearchPage onSearch={handleBookSearch} /></Layout>} />
+        <Route path="/search" element={<Layout><BookSearchPage  /></Layout>} />
         <Route path="/mainHome" element={<Layout> <MainHome /> </Layout>} />
         <Route path="/edit-profile" element={<Layout> <EditProfile onUpdateProfile={onUpdateProfile} /> </Layout>} />
         <Route path="/profile" element={<Layout> <ProfilePage /> </Layout>} />
