@@ -26,10 +26,10 @@ const Login = ({ setLoggedInUser }) => {
       setPasswordError('Please enter a password');
       return;
     }
-    if (password.length < 3) {
-      setPasswordError('The password must be 4 characters or longer');
-      return;
-    }
+    // if (password.length < 3) {
+    //   setPasswordError('The password must be 4 characters or longer');
+    //   return;
+    // }
 
     fetch('http://localhost:3001/users/login', {
       method: 'POST',
@@ -39,9 +39,6 @@ const Login = ({ setLoggedInUser }) => {
       body: JSON.stringify({ email, password }),
     })
       .then(response => {
-        console.log("Login.js email:", email);
-        console.log("Login.js password:", password);
-        console.log(response);
         if (response.ok) {
           return response.json();
         } else if (response.status === 401) {
