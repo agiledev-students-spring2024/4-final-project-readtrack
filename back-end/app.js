@@ -7,45 +7,64 @@ const saltRounds = 10;
 app.use(express.json());
 app.use(cors());
 
+async function hashPassword(password) {
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  return hashedPassword;
+}
 
-let mockUsers = [
-  {
-    id: 1,
-    fullname: "John Doe",
-    username: "user1",
-    email: "user1@example.com",
-    password: "12345",
-    books: ["The Great Gatsby", "To Kill a Mockingbird"],
-    profile: "avatar1.png",
-  },
-  {
-    id: 2,
-    fullname: "J Doe",
-    username: "user2",
-    email: "user2@example.com",
-    password: "12345",
-    books: ["1984", "Brave New World"],
-    profile: "avatar2.png",
-  },
-  {
-    id: 3,
-    username: "user3",
-    fullname: "John D",
-    email: "user3@example.com",
-    password: "12345",
-    books: ["The Catcher in the Rye", "The Grapes of Wrath"],
-    profile: "avatar3.png",
-  },
-  {
-    id: 4,
-    username: "user4",
-    fullname: "John H. Doe",
-    email: "user4@example.com",
-    password: "12345",
-    books: ["The Great Gatsby", "1984"],
-    profile: "avatar4.png",
-  },
-];
+async function initializeMockUsers() {
+  const hashedPassword = await hashPassword("123");
+
+  return [
+    {
+      id: 1,
+      fullname: "John Doe",
+      username: "user1",
+      email: "user1@example.com",
+      password: hashedPassword,
+      books: ["The Great Gatsby", "To Kill a Mockingbird"],
+      profile: "avatar1.png",
+    },
+    {
+      id: 2,
+      fullname: "J Doe",
+      username: "user2",
+      email: "user2@example.com",
+      password: hashedPassword,
+      books: ["1984", "Brave New World"],
+      profile: "avatar2.png",
+    },
+    {
+      id: 3,
+      username: "user3",
+      fullname: "John D",
+      email: "user3@example.com",
+      password: hashedPassword,
+      books: ["The Catcher in the Rye", "The Grapes of Wrath"],
+      profile: "avatar3.png",
+    },
+    {
+      id: 4,
+      username: "user4",
+      fullname: "John H. Doe",
+      email: "user4@example.com",
+      password: hashedPassword,
+      books: ["The Great Gatsby", "1984"],
+      profile: "avatar4.png",
+    },
+  ];
+}
+
+let mockUsers = [];
+
+initializeMockUsers()
+  .then((initializedUsers) => {
+    mockUsers = initializedUsers;
+  })
+  .catch((error) => {
+    console.error("Error initializing mock users:", error);
+  });
+
 const books = [
   {
     id: 1,
@@ -140,12 +159,18 @@ app.post("/users/login", async (req, res) => {
     return res.status(401).send('Invalid email or password');
   }
 
-  if (password !== user.password) {
-    return res.status(401).send('Invalid email or password');
-  }
+  try {
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).send('Invalid email or password');
+    }
 
-  const { password: _, ...userWithoutPassword } = user;
-  res.status(200).json(userWithoutPassword);
+    const { password: _, ...userWithoutPassword } = user;
+    res.status(200).json(userWithoutPassword);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error while logging in.');
+  }
 });
 
 app.get("/users", (req, res) => {
