@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SignUpPage = (props) => {
+const SignUpPage = ({ setLoggedInUser, loggedInUser }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullname: '',
@@ -37,12 +37,17 @@ const SignUpPage = (props) => {
       })
       .then(data => {
         console.log('User registered:', data);
-        props.setLoggedInUser(data); // update loggedInUser state in App.js
+        setLoggedInUser(data); // update loggedInUser state in App.js
         navigate('/mainHome');
       })
       .catch(error => console.error('Error registering user:', error));
   };
 
+  // redirect to profile page if user is already logged in
+  if (loggedInUser) {
+    navigate('/profile');
+    return null;
+  }
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="px-8 py-6 mt-4 text-left bg-white">
