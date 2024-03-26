@@ -6,12 +6,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 app.use(express.json());
 app.use(cors());
+
+
 let mockUsers = [
   {
     id: 1,
     fullname: "John Doe",
     username: "user1",
     email: "user1@example.com",
+    password: "12345",
     books: ["The Great Gatsby", "To Kill a Mockingbird"],
     profile: "avatar1.png",
   },
@@ -20,6 +23,7 @@ let mockUsers = [
     fullname: "J Doe",
     username: "user2",
     email: "user2@example.com",
+    password: "12345",
     books: ["1984", "Brave New World"],
     profile: "avatar2.png",
   },
@@ -28,6 +32,7 @@ let mockUsers = [
     username: "user3",
     fullname: "John D",
     email: "user3@example.com",
+    password: "12345",
     books: ["The Catcher in the Rye", "The Grapes of Wrath"],
     profile: "avatar3.png",
   },
@@ -36,6 +41,7 @@ let mockUsers = [
     username: "user4",
     fullname: "John H. Doe",
     email: "user4@example.com",
+    password: "12345",
     books: ["The Great Gatsby", "1984"],
     profile: "avatar4.png",
   },
@@ -126,8 +132,20 @@ app.post("/users/register", async (req, res) => {
   }
 });
 
-app.post("/users/login", (req, res) => {
-  res.status(200).send("User logged in");
+app.post("/users/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = mockUsers.find((user) => user.email === email);
+  if (!user) {
+    return res.status(401).send('Invalid email or password');
+  }
+
+  if (password !== user.password) {
+    return res.status(401).send('Invalid email or password');
+  }
+
+  const { password: _, ...userWithoutPassword } = user;
+  res.status(200).json(userWithoutPassword);
 });
 
 app.get("/users", (req, res) => {
@@ -156,6 +174,7 @@ app.put("/users/:id", (req, res) => {
     res.status(404).send("User not found");
   }
 });
+
 // Route for deleting a user
 app.delete("/users/:id", (req, res) => {
   const { id } = req.params;
@@ -177,6 +196,7 @@ app.post("/users/:id/friends", (req, res) => {
   // Your logic for adding a friend
   res.status(201).send(`Friend added to user ${id}`);
 });
+
 app.post("users/:id/books", (req, res) => {
   const { id } = req.params;
   const { bookId, listType } = req.body; // listType: 'current', 'wantToRead', or 'pastReads'
@@ -198,6 +218,7 @@ app.get("/users/:userId/books", (req, res) => {
 app.get("/books", (req, res) => {
   res.status(200).json(books);
 });
+
 // get a book by its title
 app.get("/books/:title", (req, res) => {
   const { title } = req.params;
