@@ -1,15 +1,14 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import appIcon from '../images/readIcon.png';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import appIcon from "../images/readIcon.png";
 const Home = (props) => {
-  const { loggedIn, email } = props
-  const navigate = useNavigate()
-
+  const { loggedIn, email } = props;
+  const navigate = useNavigate();
 
   return (
     <div className="mainContainer">
-      <div className={'titleContainer'}>
-        <div className={'appIcon'}>
+      <div className={"titleContainer"}>
+        <div className={"appIcon"}>
           <img src={appIcon} alt="icon" className="w-20 h-20" />
         </div>
         <div className="text-goodreads-darkbrown">Welcome</div>
@@ -20,7 +19,7 @@ const Home = (props) => {
           className="btn"
           type="button"
           onClick={() => navigate("/login")}
-          value={loggedIn ? 'Log out' : 'Log in'}
+          value={loggedIn ? "Log out" : "Log in"}
         />
         <input
           className="btn"
@@ -30,7 +29,7 @@ const Home = (props) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
