@@ -47,13 +47,13 @@ function App() {
   function AppRoutes() {
     return (
       <Routes>
-        <Route path="/" element={<Layout><Home email={email} loggedIn={loggedInUser !== null} setLoggedIn={setLoggedInUser} /></Layout>} />
-        <Route path="/login" element={<Layout><Login setLoggedInUser={setLoggedInUser} setEmail={setEmail} /></Layout>} />
-        <Route path="/signup" element={<Layout><SignUpPage setLoggedInUser={setLoggedInUser} /></Layout>} />
+        <Route path="/" element={<Layout><Home loggedInUser={loggedInUser} /></Layout>} />
+        <Route path="/login" element={<Layout><Login setLoggedInUser={setLoggedInUser} /></Layout>} />
+        <Route path="/signup" element={<Layout><SignUpPage setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} /></Layout>} />
         <Route path="/search" element={<Layout><BookSearchPage /></Layout>} />
         <Route path="/mainHome" element={<Layout> <MainHome /> </Layout>} />
         <Route path="/edit-profile" element={<Layout> <EditProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> </Layout>} />
-        <Route path="/profile" element={<Layout> <ProfilePage loggedInUser={loggedInUser} /> </Layout>} />
+        <Route path="/profile" element={<Layout> <ProfilePage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> </Layout>} />
         <Route path="/friend-shelf" element={<Layout> <FriendShelf /> </Layout>} />
         <Route path="/friends" element={<Layout> <Friends /> </Layout>} />
         <Route path="/title-by-author" element={<Layout> <Book /> </Layout>} />
