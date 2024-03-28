@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const cors = require("cors");
 const express = require("express");
 const app = express();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 app.use(express.json());
 app.use(cors());
@@ -122,7 +122,9 @@ app.post("/users/register", async (req, res) => {
   const { fullname, username, email, password } = req.body;
 
   if (!fullname || !username || !email || !password) {
-    return res.status(400).send('Please provide a username, email, and password.');
+    return res
+      .status(400)
+      .send("Please provide a username, email, and password.");
   }
 
   try {
@@ -137,17 +139,16 @@ app.post("/users/register", async (req, res) => {
       password: hashedPassword,
       bio: "",
       books: [],
-      profile: 'default_avatar.png',
+      profile: "default_avatar.png",
     };
 
     mockUsers.push(newUser);
     // not sending back hashed password
     const { password: _, ...userWithoutPassword } = newUser;
     res.status(201).json(userWithoutPassword);
-
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error while registering user.');
+    res.status(500).send("Server error while registering user.");
   }
 });
 
@@ -156,20 +157,20 @@ app.post("/users/login", async (req, res) => {
 
   const user = mockUsers.find((user) => user.email === email);
   if (!user) {
-    return res.status(401).send('Invalid email or password');
+    return res.status(401).send("Invalid email or password");
   }
 
   try {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).send('Invalid email or password');
+      return res.status(401).send("Invalid email or password");
     }
 
     const { password: _, ...userWithoutPassword } = user;
     res.status(200).json(userWithoutPassword);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error while logging in.');
+    res.status(500).send("Server error while logging in.");
   }
 });
 
@@ -191,9 +192,14 @@ app.put("/users/:id", (req, res) => {
   const { id } = req.params;
   const { fullname, username, email } = req.body;
 
-  const userIndex = mockUsers.findIndex(user => user.id === parseInt(id));
+  const userIndex = mockUsers.findIndex((user) => user.id === parseInt(id));
   if (userIndex !== -1) {
-    mockUsers[userIndex] = { ...mockUsers[userIndex], fullname, username, email };
+    mockUsers[userIndex] = {
+      ...mockUsers[userIndex],
+      fullname,
+      username,
+      email,
+    };
     res.status(200).json(mockUsers[userIndex]);
   } else {
     res.status(404).send("User not found");
@@ -203,7 +209,7 @@ app.put("/users/:id", (req, res) => {
 // Route for deleting a user
 app.delete("/users/:id", (req, res) => {
   const { id } = req.params;
-  const userIndex = mockUsers.findIndex(user => user.id === parseInt(id));
+  const userIndex = mockUsers.findIndex((user) => user.id === parseInt(id));
 
   if (userIndex > -1) {
     mockUsers.splice(userIndex, 1); // Removes the user at the found index
@@ -213,7 +219,7 @@ app.delete("/users/:id", (req, res) => {
   }
 });
 
-
+// see the user's friends
 
 // routes relating to an individual user
 app.post("/users/:id/friends", (req, res) => {
