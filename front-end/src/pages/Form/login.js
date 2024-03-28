@@ -26,10 +26,6 @@ const Login = ({ setLoggedInUser }) => {
       setPasswordError('Please enter a password');
       return;
     }
-    // if (password.length < 3) {
-    //   setPasswordError('The password must be 4 characters or longer');
-    //   return;
-    // }
 
     fetch('http://localhost:3001/users/login', {
       method: 'POST',
