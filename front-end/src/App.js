@@ -2,7 +2,7 @@ import "./App.css";
 
 import "./index.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/home";
 import Navbar from "./pages/navbar";
@@ -20,17 +20,24 @@ import Friends from "./pages/Friends";
 import Layout from "./components/Layout";
 import BookPage from "./pages/Book";
 import FriendProfile from "./pages/friendsProfile";
-
-import ProfilePage from './pages/Form/profile';
+import ProtectedRoute from "./ProtectedRoute";
+import ProfilePage from "./pages/Form/profile";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  
 
-  const [email, setEmail] = useState("");
+  useEffect(() => {
+    if (loggedInUser) {
+      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+    } else {
+      localStorage.removeItem("loggedInUser");
+    }
+  } , [loggedInUser]);
 
-  const onUpdateProfile = (updatedInfo) => {
-    //update user profile here
-  };
 
   function NavbarWithLocation() {
     const location = useLocation();
@@ -47,18 +54,121 @@ function App() {
   function AppRoutes() {
     return (
       <Routes>
-        <Route path="/" element={<Layout><Home loggedInUser={loggedInUser} /></Layout>} />
-        <Route path="/login" element={<Layout><Login setLoggedInUser={setLoggedInUser} /></Layout>} />
-        <Route path="/signup" element={<Layout><SignUpPage setLoggedInUser={setLoggedInUser} loggedInUser={loggedInUser} /></Layout>} />
-        <Route path="/search" element={<Layout><BookSearchPage /></Layout>} />
-        <Route path="/mainHome" element={<Layout><MainHome loggedInUser={loggedInUser} /></Layout>} />
-        <Route path="/edit-profile" element={<Layout> <EditProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> </Layout>} />
-        <Route path="/profile" element={<Layout> <ProfilePage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> </Layout>} />
-        <Route path="/friend-shelf" element={<Layout> <FriendShelf /> </Layout>} />
-        <Route path="/friends" element={<Layout> <Friends /> </Layout>} />
-        <Route path="/title-by-author" element={<Layout> <BookPage /> </Layout>} />
-        <Route path="/books/:bookId" element={<Layout><BookPage loggedInUser={loggedInUser} /></Layout>} />
-        <Route path="/friend-profile" element={<Layout> <FriendProfile /> </Layout>} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Home loggedInUser={loggedInUser} />
+            </Layout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Layout>
+              <Login setLoggedInUser={setLoggedInUser} />
+            </Layout>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <Layout>
+              <SignUpPage
+                setLoggedInUser={setLoggedInUser}
+                loggedInUser={loggedInUser}
+              />
+            </Layout>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <Layout>
+              <BookSearchPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/mainHome"
+          element={
+            <ProtectedRoute loggedInUser={loggedInUser}>
+            <Layout>
+              <MainHome loggedInUser={loggedInUser} />
+            </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <ProtectedRoute loggedInUser={loggedInUser}>
+            <Layout>
+              {" "}
+              <EditProfile
+                loggedInUser={loggedInUser}
+                setLoggedInUser={setLoggedInUser}
+              />{" "}
+            </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Layout>
+              {" "}
+              <ProfilePage
+                loggedInUser={loggedInUser}
+                setLoggedInUser={setLoggedInUser}
+              />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/friend-shelf"
+          element={
+            <Layout>
+              {" "}
+              <FriendShelf />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/friends"
+          element={
+            <Layout>
+              {" "}
+              <Friends loggedInUser={loggedInUser} />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/title-by-author"
+          element={
+            <Layout>
+              {" "}
+              <BookPage />{" "}
+            </Layout>
+          }
+        />
+        <Route
+          path="/books/:bookId"
+          element={
+            <Layout>
+              <BookPage loggedInUser={loggedInUser} />
+            </Layout>
+          }
+        />
+        <Route
+          path="/friend-profile"
+          element={
+            <Layout>
+              {" "}
+              <FriendProfile />{" "}
+            </Layout>
+          }
+        />
       </Routes>
     );
   }
@@ -66,7 +176,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <AppRoutes />
+        <AppRoutes loggedInUser={loggedInUser}/>
         <NavbarWithLocation />
       </BrowserRouter>
     </div>
