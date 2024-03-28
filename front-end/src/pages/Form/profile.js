@@ -72,9 +72,9 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
             </div>
             {/* PROFILE BODY */}
             <div>
-                <BookShelf title="Current Reads" />
-                <BookShelf title="Want to Read" />
-                <BookShelf title="Past Reads" />
+                <BookShelf title="Current Reads" userId={loggedInUser.id} />
+                <BookShelf title="Want to Read" userId={loggedInUser.id} />
+                <BookShelf title="Past Reads" userId={loggedInUser.id} />
             </div>
         </div>
     );
