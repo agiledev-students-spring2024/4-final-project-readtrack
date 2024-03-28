@@ -10,7 +10,7 @@ const MainHome = () => {
 
   // Retrieve the loggedInUser from localStorage
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-  console.log("Logged in user:", loggedInUser);
+  
 
   useEffect(() => {
     // Define an async function to fetch books
@@ -39,7 +39,7 @@ const MainHome = () => {
         setFriendsReads(friendsReadsData);
         setTopReads(topReadsData);
         setSuggestions(suggestionsData);
-        console.log("Current Reads:", currentReadsData[0]);
+        console.log("Current Reads:", currentReadsData);
         
 
         

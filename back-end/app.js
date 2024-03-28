@@ -333,22 +333,31 @@ app.get("/users/:userId/books", (req, res) => {
 });
 
 // Getting User 'currently reading' books
-app.get("/users/:userId/books/CurrentReads", (req, res) => {
+app.get("/users/:userId/books/currentReads", (req, res) => {
   const { userId } = req.params;
-  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  const user = mockUsers.find(user => user.id === parseInt(userId));
   if (user) {
-    res.status(200).json(user.books.currentlyReading);
+    const currentlyReadingBooks = user.books.currentlyReading
+      .map(bookId => books.find(book => book.id === bookId))
+      .filter(book => book !== undefined); // Filter out undefined values
+    res.status(200).json(currentlyReadingBooks);
+    console.log('Currently reading books:', currentlyReadingBooks); // Log the books
   } else {
     res.status(404).send("User not found");
   }
 });
+
 
 // Getting User 'want to read' books
 app.get("/users/:userId/books/WanttoRead", (req, res) => {
   const { userId } = req.params;
   const user = mockUsers.find((user) => user.id === parseInt(userId));
   if (user) {
-    res.status(200).json(user.books.wishlist);
+    const wantToReadBooks = user.books.wishlist
+      .map((bookId) => books.find((book) => book.id === bookId))
+      .filter((book) => book !== undefined); // Filter out undefined values
+    res.status(200).json(wantToReadBooks);
+    console.log('Want to read books', wantToReadBooks); // Log the books
   } else {
     res.status(404).send("User not found");
   }
@@ -359,7 +368,12 @@ app.get("/users/:userId/books/PastReads", (req, res) => {
   const { userId } = req.params;
   const user = mockUsers.find((user) => user.id === parseInt(userId));
   if (user) {
-    res.status(200).json(user.books.finishedReading);
+    const pastReadsBooks = user.books.finishedReading
+      .map((bookId) => books.find((book) => book.id === bookId))
+      .filter((book) => book !== undefined); // Filter out undefined values
+
+    res.status(200).json(pastReadsBooks);
+    console.log('Past reads books:', pastReadsBooks); // Log the books
   } else {
     res.status(404).send("User not found");
   }
