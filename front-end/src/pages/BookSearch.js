@@ -9,21 +9,28 @@ const BookSearchPage = ({ onSearch }) => {
   
   const handleSearch = (searchTerm) => {
 
-    console.log(`Search for: ${searchTerm}`);
+    
     // Call the API to search for books
     const searchUrl =`http://localhost:3001/books/${searchTerm}`;
     fetch(searchUrl)
       .then((response) => response.json())
       .then((data) => {
-        setBooks(data)
+       setBooks(data)
+
       });
+      console.log(books)
+      
     
   };
+  
 
   return (
+    
     <div className=" ">
-      <SearchComponent onSearch={onSearch} />
-      <BookShelf bookCovers={books} />
+      
+      <SearchComponent onSearch={handleSearch} />
+      <BookShelf title="Search Results" books={books} /> 
+      
 
 
 
