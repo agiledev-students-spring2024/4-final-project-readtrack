@@ -1,10 +1,9 @@
 # Project Repository
 
-[ProductVisionStatement]
+## Product Vision Statement
 
-- a description of project, including the [Product Vision Statement](https://knowledge.kitchen/content/courses/agile-development-and-devops/scrum/product-vision-statement/)
-  To empower book enthusiasts by creating a dynamic and engaging online platform that revolutionizes the way users discover, organize, and share their reading experiences. Our vision is to launch a user-friendly web app that offers instant access to a comprehensive book database, enables personalized book management through 'Currently Reading', 'Want to Read', and 'Finished Reading' lists, and fosters a community of readers who can explore and connect over shared literary interests. By releasing an MVP that encapsulates the core functionalities of profile customization, book list management, and user interaction, we aim to quickly gather feedback for iterative enhancements, ensuring our solution not only meets but exceeds the evolving needs of our audience.
-  [Establishing The Vision](Themes)
+To empower book enthusiasts by creating a dynamic and engaging online platform that revolutionizes the way users discover, organize, and share their reading experiences. Our vision is to launch a user-friendly web app that offers instant access to a comprehensive book database, enables personalized book management through 'Currently Reading', 'Want to Read', and 'Finished Reading' lists, and fosters a community of readers who can explore and connect over shared literary interests. By releasing an MVP that encapsulates the core functionalities of profile customization, book list management, and user interaction, we aim to quickly gather feedback for iterative enhancements, ensuring our solution not only meets but exceeds the evolving needs of our audience.
+
 - User Engagement:
 - Content Discovery:
 - Personalization:
@@ -16,19 +15,19 @@
 - Personalization: Creating and managing book lists such as "Currently Reading," "Want to Read," and "Finished Reading"
 - Personalization: Personalized book suggestions
 
-[CoreMembers]
-[Kiara Chombo](https://github.com/k1arac)
-[Connor DeLeon](https://github.com/cnnrdel)
-[Hannah Horiuchi](https://github.com/hah8236)
-[Ellis Pinksy](https://github.com/ellispinsky)
-[Jeffery Saeteros](https://github.com/jeffreysaeteros)
+## Core Members
+* [Kiara Chombo](https://github.com/k1arac)
+* [Connor DeLeon](https://github.com/cnnrdel)
+* [Hannah Horiuchi](https://github.com/hah8236)
+* [Ellis Pinksy](https://github.com/ellispinsky)
+* [Jeffery Saeteros](https://github.com/jeffreysaeteros)
 
-[Instructions]
+## Instructions
 
 - instructions for building and testing the project (update with that information once the project reaches that stage)
   The project's wireframe is developed using Figma. The project's front-end is developed using ReactJs and TailwindCSS.
 
-[ProductDevelopment]
+## Product Development
 
 - a short history of how the project came to be and information about how to contribute to the project (i.e. a link to the [CONTRIBUTING.md](./CONTRIBUTING.md) document)
   [Sprints]
