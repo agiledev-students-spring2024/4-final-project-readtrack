@@ -1,0 +1,11 @@
+{
+  "friends": [
+    {
+      "id": "1",
+      "friendImage": "https://picsum.photos/150",
+      "friendName": "Alice",
+      "bookTitle": "The Great Gatsby",
+      "bookAuthor": "F. Scott Fitzgerald"
+    }
+  ]
+}

@@ -2,7 +2,7 @@ const { default: axios } = require("axios");
 const cors = require("cors");
 const express = require("express");
 const app = express();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 app.use(express.json());
 app.use(cors());
@@ -201,7 +201,7 @@ const books = [
     author: "Arthur Conan Doyle 3",
     description: "A collection of detective stories featuring the famous Sherlock Holmes.",
     pages: 307,
-    genres: ["Mystery", "Crime Fiction"],
+   https://github.com/agiledev-students-spring2024/4-final-project-readtrack/pull/86/conflict?name=back-end%252Fapp.js&ancestor_oid=b82118067e65c21f869807231bd74c1ec89c8589&base_oid=52a70b8ee61aa2db3e5e549bb1894bbd4c5dd26f&head_oid=bccc5b49c8267d7236ed8925b4543f7812efcf66 genres: ["Mystery", "Crime Fiction"],
     publishedDate: "1892-10-14",
     coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
@@ -246,7 +246,9 @@ app.post("/users/register", async (req, res) => {
   const { fullname, username, email, password } = req.body;
 
   if (!fullname || !username || !email || !password) {
-    return res.status(400).send('Please provide a username, email, and password.');
+    return res
+      .status(400)
+      .send("Please provide a username, email, and password.");
   }
 
   try {
@@ -261,17 +263,16 @@ app.post("/users/register", async (req, res) => {
       password: hashedPassword,
       bio: "",
       books: [],
-      profile: 'default_avatar.png',
+      profile: "default_avatar.png",
     };
 
     mockUsers.push(newUser);
     // not sending back hashed password
     const { password: _, ...userWithoutPassword } = newUser;
     res.status(201).json(userWithoutPassword);
-
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error while registering user.');
+    res.status(500).send("Server error while registering user.");
   }
 });
 
@@ -281,20 +282,20 @@ app.post("/users/login", async (req, res) => {
 
   const user = mockUsers.find((user) => user.email === email);
   if (!user) {
-    return res.status(401).send('Invalid email or password');
+    return res.status(401).send("Invalid email or password");
   }
 
   try {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).send('Invalid email or password');
+      return res.status(401).send("Invalid email or password");
     }
 
     const { password: _, ...userWithoutPassword } = user;
     res.status(200).json(userWithoutPassword);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error while logging in.');
+    res.status(500).send("Server error while logging in.");
   }
 });
 
@@ -319,9 +320,14 @@ app.put("/users/:id", (req, res) => {
   const { id } = req.params;
   const { fullname, username, email } = req.body;
 
-  const userIndex = mockUsers.findIndex(user => user.id === parseInt(id));
+  const userIndex = mockUsers.findIndex((user) => user.id === parseInt(id));
   if (userIndex !== -1) {
-    mockUsers[userIndex] = { ...mockUsers[userIndex], fullname, username, email };
+    mockUsers[userIndex] = {
+      ...mockUsers[userIndex],
+      fullname,
+      username,
+      email,
+    };
     res.status(200).json(mockUsers[userIndex]);
   } else {
     res.status(404).send("User not found");
@@ -331,7 +337,7 @@ app.put("/users/:id", (req, res) => {
 // Deleting a user
 app.delete("/users/:id", (req, res) => {
   const { id } = req.params;
-  const userIndex = mockUsers.findIndex(user => user.id === parseInt(id));
+  const userIndex = mockUsers.findIndex((user) => user.id === parseInt(id));
 
   if (userIndex > -1) {
     mockUsers.splice(userIndex, 1); // Removes the user at the found index
@@ -340,6 +346,7 @@ app.delete("/users/:id", (req, res) => {
     res.status(404).send("User not found");
   }
 });
+
 
 // routes relating to an individual user
 app.post("/users/:id/friends", (req, res) => {
