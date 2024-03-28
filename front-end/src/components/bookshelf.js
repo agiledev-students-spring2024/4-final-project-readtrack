@@ -35,5 +35,9 @@ BookShelf.propTypes = {
   title: PropTypes.string ,
   bookCovers: PropTypes.arrayOf(PropTypes.string),
 };
+BookShelf.defaultProps = {
+  books: [], // Default to an empty array if books is not provided
+};
+
 
 export default BookShelf;
