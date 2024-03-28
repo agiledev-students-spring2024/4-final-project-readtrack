@@ -22,7 +22,18 @@ async function initializeMockUsers() {
       username: "user1",
       email: "user1@example.com",
       password: hashedPassword,
-      books: ["The Great Gatsby", "To Kill a Mockingbird"],
+      books: {
+        currentlyReading: [
+          { id: 1, coverUrl: "https://example.com/covers/book1.jpg" },
+          { id: 2, coverUrl: "https://example.com/covers/book2.jpg" }
+        ],
+        finishedReading: [
+          { id: 3, coverUrl: "https://example.com/covers/book3.jpg" }
+        ],
+        wishlist: [
+          { id: 4, coverUrl: "https://example.com/covers/book4.jpg" }
+        ]
+      },
       profile: "avatar1.png",
     },
     {
@@ -31,7 +42,18 @@ async function initializeMockUsers() {
       username: "user2",
       email: "user2@example.com",
       password: hashedPassword,
-      books: ["1984", "Brave New World"],
+      books: {
+        currentlyReading: [
+          { id: 1, coverUrl: "https://example.com/covers/book1.jpg" },
+          { id: 2, coverUrl: "https://example.com/covers/book2.jpg" }
+        ],
+        finishedReading: [
+          { id: 3, coverUrl: "https://example.com/covers/book3.jpg" }
+        ],
+        wishlist: [
+          { id: 4, coverUrl: "https://example.com/covers/book4.jpg" }
+        ]
+      },
       profile: "avatar2.png",
     },
     {
@@ -40,7 +62,18 @@ async function initializeMockUsers() {
       fullname: "John D",
       email: "user3@example.com",
       password: hashedPassword,
-      books: ["The Catcher in the Rye", "The Grapes of Wrath"],
+      books: {
+        currentlyReading: [
+          { id: 1, coverUrl: "https://example.com/covers/book1.jpg" },
+          { id: 2, coverUrl: "https://example.com/covers/book2.jpg" }
+        ],
+        finishedReading: [
+          { id: 3, coverUrl: "https://example.com/covers/book3.jpg" }
+        ],
+        wishlist: [
+          { id: 4, coverUrl: "https://example.com/covers/book4.jpg" }
+        ]
+      },
       profile: "avatar3.png",
     },
     {
@@ -49,7 +82,34 @@ async function initializeMockUsers() {
       fullname: "John H. Doe",
       email: "user4@example.com",
       password: hashedPassword,
-      books: ["The Great Gatsby", "1984"],
+      books: {
+        currentlyReading: [
+          {
+            id: 1,
+            title: "The Secret Garden 1",
+            coverUrl: "https://example.com/covers/secret-garden.jpg",
+          },
+          {
+            id: 2,
+            title: "The Secret Garden 2",
+            coverUrl: "https://example.com/covers/secret-garden.jpg",
+          }
+        ],
+        finishedReading: [
+          {
+            id: 3,
+            title: "The Secret Garden 3",
+            coverUrl: "https://example.com/covers/secret-garden.jpg",
+          }
+        ],
+        wishlist: [
+          {
+            id: 4,
+            title: "The Secret Garden 4",
+            coverUrl: "https://example.com/covers/secret-garden.jpg",
+          }
+        ]
+      },
       profile: "avatar4.png",
     },
   ];
@@ -65,59 +125,123 @@ initializeMockUsers()
     console.error("Error initializing mock users:", error);
   });
 
+// const books = [
+//   {
+//     id: 1,
+//     title: "The Secret Garden",
+//     coverUrl: "https://example.com/covers/secret-garden.jpg",
+//   },
+//   {
+//     id: 2,
+//     title: "The Adventures of Sherlock Holmes",
+//     coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
+//   },
+//   {
+//     id: 3,
+//     title: "Pride and Prejudice",
+//     coverUrl: "https://example.com/covers/pride-prejudice.jpg",
+//   },
+//   {
+//     id: 4,
+//     title: "Moby-Dick",
+//     coverUrl: "https://example.com/covers/moby-dick.jpg",
+//   },
+//   {
+//     id: 5,
+//     title: "To Kill a Mockingbird",
+//     coverUrl: "https://example.com/covers/to-kill-a-mockingbird.jpg",
+//   },
+//   {
+//     id: 6,
+//     title: "The Great Gatsby",
+//     coverUrl: "https://example.com/covers/great-gatsby.jpg",
+//   },
+//   { id: 7, title: "1984", coverUrl: "https://example.com/covers/1984.jpg" },
+//   {
+//     id: 8,
+//     title: "Brave New World",
+//     coverUrl: "https://example.com/covers/brave-new-world.jpg",
+//   },
+//   {
+//     id: 9,
+//     title: "The Catcher in the Rye",
+//     coverUrl: "https://example.com/covers/catcher-in-the-rye.jpg",
+//   },
+//   {
+//     id: 10,
+//     title: "The Grapes of Wrath",
+//     coverUrl: "https://example.com/covers/grapes-of-wrath.jpg",
+//   },
+// ];
+
 const books = [
   {
     id: 1,
     title: "The Secret Garden",
+    author: "Frances Hodgson Burnett",
+    description: "A classic novel about a young girl who discovers a hidden garden.",
+    pages: 256,
+    genres: ["Children's Literature", "Fiction"],
+    publishedDate: "1911-05-01",
     coverUrl: "https://example.com/covers/secret-garden.jpg",
   },
   {
     id: 2,
     title: "The Adventures of Sherlock Holmes",
+    author: "Arthur Conan Doyle",
+    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    pages: 307,
+    genres: ["Mystery", "Crime Fiction"],
+    publishedDate: "1892-10-14",
     coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
   {
     id: 3,
-    title: "Pride and Prejudice",
-    coverUrl: "https://example.com/covers/pride-prejudice.jpg",
+    title: "The Adventures of Sherlock Holmes 3",
+    author: "Arthur Conan Doyle 3",
+    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    pages: 307,
+    genres: ["Mystery", "Crime Fiction"],
+    publishedDate: "1892-10-14",
+    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
   {
     id: 4,
-    title: "Moby-Dick",
-    coverUrl: "https://example.com/covers/moby-dick.jpg",
+    title: "The Adventures of Sherlock Holmes 4",
+    author: "Arthur Conan Doyle 4",
+    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    pages: 307,
+    genres: ["Mystery", "Crime Fiction"],
+    publishedDate: "1892-10-14",
+    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
   {
     id: 5,
-    title: "To Kill a Mockingbird",
-    coverUrl: "https://example.com/covers/to-kill-a-mockingbird.jpg",
+    title: "The Adventures of Sherlock Holmes 5",
+    author: "Arthur Conan Doyle 5",
+    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    pages: 307,
+    genres: ["Mystery", "Crime Fiction"],
+    publishedDate: "1892-10-14",
+    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
   {
     id: 6,
-    title: "The Great Gatsby",
-    coverUrl: "https://example.com/covers/great-gatsby.jpg",
+    title: "The Adventures of Sherlock Holmes 6",
+    author: "Arthur Conan Doyle 6",
+    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    pages: 307,
+    genres: ["Mystery", "Crime Fiction"],
+    publishedDate: "1892-10-14",
+    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
-  { id: 7, title: "1984", coverUrl: "https://example.com/covers/1984.jpg" },
-  {
-    id: 8,
-    title: "Brave New World",
-    coverUrl: "https://example.com/covers/brave-new-world.jpg",
-  },
-  {
-    id: 9,
-    title: "The Catcher in the Rye",
-    coverUrl: "https://example.com/covers/catcher-in-the-rye.jpg",
-  },
-  {
-    id: 10,
-    title: "The Grapes of Wrath",
-    coverUrl: "https://example.com/covers/grapes-of-wrath.jpg",
-  },
-];
+]
 
 app.get("/", (req, res) => {
   res.send("Hello!");
 });
 
+// User registration
 app.post("/users/register", async (req, res) => {
   const { fullname, username, email, password } = req.body;
 
@@ -151,6 +275,7 @@ app.post("/users/register", async (req, res) => {
   }
 });
 
+// User login
 app.post("/users/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -173,10 +298,12 @@ app.post("/users/login", async (req, res) => {
   }
 });
 
+// Getting all Users
 app.get("/users", (req, res) => {
   res.status(200).json(mockUsers);
 });
 
+// Getting Users by their id
 app.get("/users/:id", (req, res) => {
   const { id } = req.params;
   const user = mockUsers.find((user) => user.id === parseInt(id));
@@ -187,6 +314,7 @@ app.get("/users/:id", (req, res) => {
   }
 });
 
+// Getting user by id (for editing their profile )
 app.put("/users/:id", (req, res) => {
   const { id } = req.params;
   const { fullname, username, email } = req.body;
@@ -200,7 +328,7 @@ app.put("/users/:id", (req, res) => {
   }
 });
 
-// Route for deleting a user
+// Deleting a user
 app.delete("/users/:id", (req, res) => {
   const { id } = req.params;
   const userIndex = mockUsers.findIndex(user => user.id === parseInt(id));
@@ -212,8 +340,6 @@ app.delete("/users/:id", (req, res) => {
     res.status(404).send("User not found");
   }
 });
-
-
 
 // routes relating to an individual user
 app.post("/users/:id/friends", (req, res) => {
@@ -239,9 +365,126 @@ app.get("/users/:userId/books", (req, res) => {
   res.status(200).json({ userId, listType, books: ["book1Id", "book2Id"] });
 });
 
+// Getting User 'currently reading' books
+app.get("/users/:userId/books/CurrentReads", (req, res) => {
+  const { userId } = req.params;
+  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  if (user) {
+    res.status(200).json(user.books.currentlyReading);
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
+// Getting User 'want to read' books
+app.get("/users/:userId/books/WanttoRead", (req, res) => {
+  const { userId } = req.params;
+  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  if (user) {
+    res.status(200).json(user.books.wishlist);
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
+// Getting User 'past reads' books
+app.get("/users/:userId/books/PastReads", (req, res) => {
+  const { userId } = req.params;
+  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  if (user) {
+    res.status(200).json(user.books.finishedReading);
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
+// Get friends' current reads books
+app.get("/users/:userId/books/FriendsCurrentReads", (req, res) => {
+  // modify mockUsers to include friend info 
+  const { userId } = req.params;
+  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  if (user) {
+    const friendsCurrentReads = [
+      {
+        id: 1,
+        title: "Friend's Current Read 1",
+        coverUrl: "https://example.com/covers/friends-current-read-1.jpg",
+      },
+      {
+        id: 2,
+        title: "Friend's Current Read 2",
+        coverUrl: "https://example.com/covers/friends-current-read-2.jpg",
+      },
+    ];
+    res.status(200).json(friendsCurrentReads);
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
+// Getting this week's top 10 reads books
+app.get("/users/:userId/books/ThisWeek'sTop10Reads", (req, res) => {
+  // may need to modify  books data structure to include popularity info get top 10 books based on that
+  const { userId } = req.params;
+  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  if (user) {
+    const top10Reads = [
+      {
+        id: 1,
+        title: "Top Read 1",
+        coverUrl: "https://example.com/covers/top-read-1.jpg",
+      },
+      {
+        id: 2,
+        title: "Top Read 2",
+        coverUrl: "https://example.com/covers/top-read-2.jpg",
+      },
+    ];
+    res.status(200).json(top10Reads);
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
+// Getting book suggestions
+app.get("/users/:userId/books/SuggestionsforYou", (req, res) => {
+  // analyze user reading preferences, genres, to generate suggestions
+  const { userId } = req.params;
+  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  if (user) {
+    const suggestions = [
+      {
+        id: 1,
+        title: "Suggested Book 1",
+        coverUrl: "https://example.com/covers/suggested-book-1.jpg",
+      },
+      {
+        id: 2,
+        title: "Suggested Book 2",
+        coverUrl: "https://example.com/covers/suggested-book-2.jpg",
+      },
+      // more suggestions ..........
+    ];
+    res.status(200).json(suggestions);
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
 // Get all books
 app.get("/books", (req, res) => {
   res.status(200).json(books);
+});
+
+// Getting a book by its id
+app.get("/books/:bookId", (req, res) => {
+  const { bookId } = req.params;
+  const book = books.find((book) => book.id === parseInt(bookId));
+  if (book) {
+    res.status(200).json(book);
+  } else {
+    res.status(404).send("Book not found");
+  }
 });
 
 // get a book by its title
