@@ -2,7 +2,7 @@ import "./App.css";
 
 import "./index.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/home";
 import Navbar from "./pages/navbar";
@@ -20,17 +20,24 @@ import Friends from "./pages/Friends";
 import Layout from "./components/Layout";
 import BookPage from "./pages/Book";
 import FriendProfile from "./pages/friendsProfile";
-
+import ProtectedRoute from "./ProtectedRoute";
 import ProfilePage from "./pages/Form/profile";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+  
 
-  const [email, setEmail] = useState("");
+  useEffect(() => {
+    if (loggedInUser) {
+      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+    } else {
+      localStorage.removeItem("loggedInUser");
+    }
+  } , [loggedInUser]);
 
-  const onUpdateProfile = (updatedInfo) => {
-    //update user profile here
-  };
 
   function NavbarWithLocation() {
     const location = useLocation();
@@ -85,14 +92,17 @@ function App() {
         <Route
           path="/mainHome"
           element={
+            <ProtectedRoute loggedInUser={loggedInUser}>
             <Layout>
               <MainHome loggedInUser={loggedInUser} />
             </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/edit-profile"
           element={
+            <ProtectedRoute loggedInUser={loggedInUser}>
             <Layout>
               {" "}
               <EditProfile
@@ -100,6 +110,7 @@ function App() {
                 setLoggedInUser={setLoggedInUser}
               />{" "}
             </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
@@ -165,7 +176,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <AppRoutes />
+        <AppRoutes loggedInUser={loggedInUser}/>
         <NavbarWithLocation />
       </BrowserRouter>
     </div>

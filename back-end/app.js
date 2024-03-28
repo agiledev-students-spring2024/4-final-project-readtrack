@@ -19,20 +19,13 @@ async function initializeMockUsers() {
     {
       id: 1,
       fullname: "John Doe",
-      username: "user1",
+      username: "John",
       email: "user1@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [
-          { id: 1, coverUrl: "https://example.com/covers/book1.jpg" },
-          { id: 2, coverUrl: "https://example.com/covers/book2.jpg" }
-        ],
-        finishedReading: [
-          { id: 3, coverUrl: "https://example.com/covers/book3.jpg" }
-        ],
-        wishlist: [
-          { id: 4, coverUrl: "https://example.com/covers/book4.jpg" }
-        ]
+        currentlyReading: [1, 2], // These are book IDs
+        finishedReading: [3],
+        wishlist: [4],
       },
       profile: "avatar1.png",
     },
@@ -43,16 +36,9 @@ async function initializeMockUsers() {
       email: "user2@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [
-          { id: 1, coverUrl: "https://example.com/covers/book1.jpg" },
-          { id: 2, coverUrl: "https://example.com/covers/book2.jpg" }
-        ],
-        finishedReading: [
-          { id: 3, coverUrl: "https://example.com/covers/book3.jpg" }
-        ],
-        wishlist: [
-          { id: 4, coverUrl: "https://example.com/covers/book4.jpg" }
-        ]
+        currentlyReading: [1, 2], // These are book IDs
+        finishedReading: [3],
+        wishlist: [4],
       },
       profile: "avatar2.png",
     },
@@ -63,16 +49,9 @@ async function initializeMockUsers() {
       email: "user3@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [
-          { id: 1, coverUrl: "https://example.com/covers/book1.jpg" },
-          { id: 2, coverUrl: "https://example.com/covers/book2.jpg" }
-        ],
-        finishedReading: [
-          { id: 3, coverUrl: "https://example.com/covers/book3.jpg" }
-        ],
-        wishlist: [
-          { id: 4, coverUrl: "https://example.com/covers/book4.jpg" }
-        ]
+        currentlyReading: [1, 2], // These are book IDs
+        finishedReading: [3],
+        wishlist: [4],
       },
       profile: "avatar3.png",
     },
@@ -83,32 +62,9 @@ async function initializeMockUsers() {
       email: "user4@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [
-          {
-            id: 1,
-            title: "The Secret Garden 1",
-            coverUrl: "https://example.com/covers/secret-garden.jpg",
-          },
-          {
-            id: 2,
-            title: "The Secret Garden 2",
-            coverUrl: "https://example.com/covers/secret-garden.jpg",
-          }
-        ],
-        finishedReading: [
-          {
-            id: 3,
-            title: "The Secret Garden 3",
-            coverUrl: "https://example.com/covers/secret-garden.jpg",
-          }
-        ],
-        wishlist: [
-          {
-            id: 4,
-            title: "The Secret Garden 4",
-            coverUrl: "https://example.com/covers/secret-garden.jpg",
-          }
-        ]
+        currentlyReading: [1, 2], // These are book IDs
+        finishedReading: [3],
+        wishlist: [4],
       },
       profile: "avatar4.png",
     },
@@ -179,7 +135,8 @@ const books = [
     id: 1,
     title: "The Secret Garden",
     author: "Frances Hodgson Burnett",
-    description: "A classic novel about a young girl who discovers a hidden garden.",
+    description:
+      "A classic novel about a young girl who discovers a hidden garden.",
     pages: 256,
     genres: ["Children's Literature", "Fiction"],
     publishedDate: "1911-05-01",
@@ -189,7 +146,8 @@ const books = [
     id: 2,
     title: "The Adventures of Sherlock Holmes",
     author: "Arthur Conan Doyle",
-    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    description:
+      "A collection of detective stories featuring the famous Sherlock Holmes.",
     pages: 307,
     genres: ["Mystery", "Crime Fiction"],
     publishedDate: "1892-10-14",
@@ -199,16 +157,18 @@ const books = [
     id: 3,
     title: "The Adventures of Sherlock Holmes 3",
     author: "Arthur Conan Doyle 3",
-    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    description:
+      "A collection of detective stories featuring the famous Sherlock Holmes.",
     pages: 307,
-    publishedDate : "1892-10-14",
+    publishedDate: "1892-10-14",
     coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
   {
     id: 4,
     title: "The Adventures of Sherlock Holmes 4",
     author: "Arthur Conan Doyle 4",
-    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    description:
+      "A collection of detective stories featuring the famous Sherlock Holmes.",
     pages: 307,
     genres: ["Mystery", "Crime Fiction"],
     publishedDate: "1892-10-14",
@@ -218,7 +178,8 @@ const books = [
     id: 5,
     title: "The Adventures of Sherlock Holmes 5",
     author: "Arthur Conan Doyle 5",
-    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    description:
+      "A collection of detective stories featuring the famous Sherlock Holmes.",
     pages: 307,
     genres: ["Mystery", "Crime Fiction"],
     publishedDate: "1892-10-14",
@@ -228,13 +189,14 @@ const books = [
     id: 6,
     title: "The Adventures of Sherlock Holmes 6",
     author: "Arthur Conan Doyle 6",
-    description: "A collection of detective stories featuring the famous Sherlock Holmes.",
+    description:
+      "A collection of detective stories featuring the famous Sherlock Holmes.",
     pages: 307,
     genres: ["Mystery", "Crime Fiction"],
     publishedDate: "1892-10-14",
     coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
-]
+];
 
 app.get("/", (req, res) => {
   res.send("Hello!");
@@ -346,7 +308,6 @@ app.delete("/users/:id", (req, res) => {
   }
 });
 
-
 // routes relating to an individual user
 app.post("/users/:id/friends", (req, res) => {
   const { id } = req.params;
@@ -406,7 +367,7 @@ app.get("/users/:userId/books/PastReads", (req, res) => {
 
 // Get friends' current reads books
 app.get("/users/:userId/books/FriendsCurrentReads", (req, res) => {
-  // modify mockUsers to include friend info 
+  // modify mockUsers to include friend info
   const { userId } = req.params;
   const user = mockUsers.find((user) => user.id === parseInt(userId));
   if (user) {
