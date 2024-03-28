@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import BookShelf from "../../components/bookshelf";
 
 const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
+  const [description, setDescription] = useState(null);
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
   const placeholder =
