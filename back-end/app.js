@@ -201,8 +201,7 @@ const books = [
     author: "Arthur Conan Doyle 3",
     description: "A collection of detective stories featuring the famous Sherlock Holmes.",
     pages: 307,
-   https://github.com/agiledev-students-spring2024/4-final-project-readtrack/pull/86/conflict?name=back-end%252Fapp.js&ancestor_oid=b82118067e65c21f869807231bd74c1ec89c8589&base_oid=52a70b8ee61aa2db3e5e549bb1894bbd4c5dd26f&head_oid=bccc5b49c8267d7236ed8925b4543f7812efcf66 genres: ["Mystery", "Crime Fiction"],
-    publishedDate: "1892-10-14",
+    publishedDate : "1892-10-14",
     coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
   },
   {
