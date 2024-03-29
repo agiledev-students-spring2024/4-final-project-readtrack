@@ -28,7 +28,6 @@ function App() {
     const storedUser = localStorage.getItem("loggedInUser");
     return storedUser ? JSON.parse(storedUser) : null;
   });
-  
 
   useEffect(() => {
     if (loggedInUser) {
@@ -36,8 +35,7 @@ function App() {
     } else {
       localStorage.removeItem("loggedInUser");
     }
-  } , [loggedInUser]);
-
+  }, [loggedInUser]);
 
   function NavbarWithLocation() {
     const location = useLocation();
@@ -93,9 +91,9 @@ function App() {
           path="/mainHome"
           element={
             <ProtectedRoute loggedInUser={loggedInUser}>
-            <Layout>
-              <MainHome loggedInUser={loggedInUser} />
-            </Layout>
+              <Layout>
+                <MainHome loggedInUser={loggedInUser} />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -103,44 +101,47 @@ function App() {
           path="/edit-profile"
           element={
             <ProtectedRoute loggedInUser={loggedInUser}>
-            <Layout>
-              {" "}
-              <EditProfile
-                loggedInUser={loggedInUser}
-                setLoggedInUser={setLoggedInUser}
-              />{" "}
-            </Layout>
+              <Layout>
+                {" "}
+                <EditProfile
+                  loggedInUser={loggedInUser}
+                  setLoggedInUser={setLoggedInUser}
+                />{" "}
+              </Layout>
             </ProtectedRoute>
           }
         />
         <Route
           path="/profile"
           element={
-            <Layout>
-              {" "}
-              <ProfilePage
-                loggedInUser={loggedInUser}
-                setLoggedInUser={setLoggedInUser}
-              />{" "}
-            </Layout>
+            <ProtectedRoute loggedInUser={loggedInUser}>
+              <Layout>
+                <ProfilePage
+                  loggedInUser={loggedInUser}
+                  setLoggedInUser={setLoggedInUser}
+                />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/friend-shelf"
           element={
-            <Layout>
-              {" "}
-              <FriendShelf />{" "}
-            </Layout>
+            <ProtectedRoute loggedInUser={loggedInUser}>
+              <Layout>
+                <FriendShelf />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/friends"
           element={
-            <Layout>
-              {" "}
-              <Friends loggedInUser={loggedInUser} />{" "}
-            </Layout>
+            <ProtectedRoute loggedInUser={loggedInUser}>
+              <Layout>
+                <Friends loggedInUser={loggedInUser} />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
@@ -155,9 +156,11 @@ function App() {
         <Route
           path="/books/:bookId"
           element={
-            <Layout>
-              <BookPage loggedInUser={loggedInUser} />
-            </Layout>
+            <ProtectedRoute loggedInUser={loggedInUser}>
+              <Layout>
+                <BookPage loggedInUser={loggedInUser} />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
@@ -176,7 +179,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <AppRoutes loggedInUser={loggedInUser}/>
+        <AppRoutes loggedInUser={loggedInUser} />
         <NavbarWithLocation />
       </BrowserRouter>
     </div>
