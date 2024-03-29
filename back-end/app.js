@@ -23,8 +23,8 @@ async function initializeMockUsers() {
       email: "user1@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [1, 2], // These are book IDs
-        finishedReading: [3],
+        currentlyReading: [1, 2, 6, 4, 5], // These are book IDs
+        finishedReading: [3, 8],
         wishlist: [4],
       },
       profile: "avatar1.png",
@@ -36,7 +36,7 @@ async function initializeMockUsers() {
       email: "user2@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [1, 2], // These are book IDs
+        currentlyReading: [7, 9], // These are book IDs
         finishedReading: [3],
         wishlist: [4],
       },
@@ -49,7 +49,7 @@ async function initializeMockUsers() {
       email: "user3@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [1, 2], // These are book IDs
+        currentlyReading: [10], // These are book IDs
         finishedReading: [3],
         wishlist: [4],
       },
@@ -62,7 +62,7 @@ async function initializeMockUsers() {
       email: "user4@example.com",
       password: hashedPassword,
       books: {
-        currentlyReading: [1, 2], // These are book IDs
+        currentlyReading: [4, 8, 10, 3], // These are book IDs
         finishedReading: [3],
         wishlist: [4],
       },
@@ -81,120 +81,116 @@ initializeMockUsers()
     console.error("Error initializing mock users:", error);
   });
 
-// const books = [
-//   {
-//     id: 1,
-//     title: "The Secret Garden",
-//     coverUrl: "https://example.com/covers/secret-garden.jpg",
-//   },
-//   {
-//     id: 2,
-//     title: "The Adventures of Sherlock Holmes",
-//     coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
-//   },
-//   {
-//     id: 3,
-//     title: "Pride and Prejudice",
-//     coverUrl: "https://example.com/covers/pride-prejudice.jpg",
-//   },
-//   {
-//     id: 4,
-//     title: "Moby-Dick",
-//     coverUrl: "https://example.com/covers/moby-dick.jpg",
-//   },
-//   {
-//     id: 5,
-//     title: "To Kill a Mockingbird",
-//     coverUrl: "https://example.com/covers/to-kill-a-mockingbird.jpg",
-//   },
-//   {
-//     id: 6,
-//     title: "The Great Gatsby",
-//     coverUrl: "https://example.com/covers/great-gatsby.jpg",
-//   },
-//   { id: 7, title: "1984", coverUrl: "https://example.com/covers/1984.jpg" },
-//   {
-//     id: 8,
-//     title: "Brave New World",
-//     coverUrl: "https://example.com/covers/brave-new-world.jpg",
-//   },
-//   {
-//     id: 9,
-//     title: "The Catcher in the Rye",
-//     coverUrl: "https://example.com/covers/catcher-in-the-rye.jpg",
-//   },
-//   {
-//     id: 10,
-//     title: "The Grapes of Wrath",
-//     coverUrl: "https://example.com/covers/grapes-of-wrath.jpg",
-//   },
-// ];
-
 const books = [
   {
     id: 1,
     title: "The Secret Garden",
     author: "Frances Hodgson Burnett",
     description:
-      "A classic novel about a young girl who discovers a hidden garden.",
+      "A ten-year-old orphan comes to live in a lonely house on the Yorkshire moors where she discovers an invalid cousin and the mysteries of a locked garden.",
     pages: 256,
-    genres: ["Children's Literature", "Fiction"],
-    publishedDate: "1911-05-01",
-    coverUrl: "https://example.com/covers/secret-garden.jpg",
+    genres: ["Friendship", "Fiction"],
+    publishedDate: "1911",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL37044748M-M.jpg",
   },
   {
     id: 2,
-    title: "The Adventures of Sherlock Holmes",
-    author: "Arthur Conan Doyle",
+    title: "Wide Sargasso Sea",
+    author: "Jean Rhys",
     description:
-      "A collection of detective stories featuring the famous Sherlock Holmes.",
-    pages: 307,
-    genres: ["Mystery", "Crime Fiction"],
-    publishedDate: "1892-10-14",
-    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
+      "Jean Rhys wrote this feminist and anti-colonial prequel to Charlotte Bronte’s novel Jane Eyre which chronicles the events of Mr Rochester’s disastrous marriage to Antoinette Conway or Bertha as we come to know her.",
+    pages: 156,
+    genres: ["Race", "Colonialism"],
+    publishedDate: "1966",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL28464070M-M.jpg",
   },
   {
     id: 3,
-    title: "The Adventures of Sherlock Holmes 3",
-    author: "Arthur Conan Doyle 3",
+    title: "Pride and Prejudice",
+    author: "Jane Austen",
     description:
-      "A collection of detective stories featuring the famous Sherlock Holmes.",
-    pages: 307,
-    publishedDate: "1892-10-14",
-    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
+      "Philosophy, history, wit, and the most passionate love story.",
+    pages: 345,
+    genres: ["Courtship", "Fiction"],
+    publishedDate: "1813",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL50444320M-M.jpg",
   },
   {
     id: 4,
-    title: "The Adventures of Sherlock Holmes 4",
-    author: "Arthur Conan Doyle 4",
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
     description:
-      "A collection of detective stories featuring the famous Sherlock Holmes.",
-    pages: 307,
-    genres: ["Mystery", "Crime Fiction"],
-    publishedDate: "1892-10-14",
-    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
+      "A jarring & poignantly beautiful story about how humans treat each other.",
+    pages: 281,
+    genres: ["Fiction", "Racial segregation"],
+    publishedDate: "1892",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL37027584M-M.jpg",
   },
   {
     id: 5,
-    title: "The Adventures of Sherlock Holmes 5",
-    author: "Arthur Conan Doyle 5",
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
     description:
-      "A collection of detective stories featuring the famous Sherlock Holmes.",
-    pages: 307,
-    genres: ["Mystery", "Crime Fiction"],
-    publishedDate: "1892-10-14",
-    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
+      "The greatest, most scathing dissection of the hollowness at the heart of the American dream.",
+    pages: 281,
+    genres: ["Fiction", "Psychological"],
+    publishedDate: "1920",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL35657482M-M.jpg",
   },
   {
     id: 6,
-    title: "The Adventures of Sherlock Holmes 6",
-    author: "Arthur Conan Doyle 6",
+    title: "Gentle Reminder",
+    author: "Bianca Sparacino",
     description:
-      "A collection of detective stories featuring the famous Sherlock Holmes.",
-    pages: 307,
-    genres: ["Mystery", "Crime Fiction"],
-    publishedDate: "1892-10-14",
-    coverUrl: "https://example.com/covers/sherlock-holmes.jpg",
+      "A gentle reminder for the days you feel light in this world, and for the days in which the sun rises a little slower.",
+    pages: null,
+    genres: ["Self-help", "Mindfulness"],
+    publishedDate: "2020",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL34147323M-M.jpg",
+  },
+  {
+    id: 7,
+    title: "1984",
+    author: "George Orwell",
+    description:
+      "Thematically, Nineteen Eighty-Four centres on the consequences of totalitarianism, mass surveillance, and repressive regimentation of persons and behaviours within society.",
+    pages: 248,
+    genres: ["Futurology", "Surveillance"],
+    publishedDate: "1949",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL37824529M-M.jpg",
+  },
+  {
+    id: 8,
+    title: "The Laws of human nature",
+    author: "Robert Greene",
+    description:
+      "Whether at work, in relationships, or in shaping the world around you, The Laws of Human Nature offers brilliant tactics for success, self-improvement, and self-defense",
+    pages: 609,
+    genres: ["Self-control", "Motivation"],
+    publishedDate: "2018",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL26974419M-M.jpg",
+  },
+  {
+    id: 9,
+    title: "Ons feilbare denken",
+    author: "Daniel Kahneman",
+    description:
+      "Thinking, Fast and Slow, Daniel Kahneman, world-famous psychologist and winner of the Nobel Prize in Economics, takes us on a groundbreaking tour of the mind and explains the two systems that drive the way we think.",
+    pages: 527,
+    genres: ["Psychology"],
+    publishedDate: "2011",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL39216579M-M.jpg",
+  },
+  {
+    id: 10,
+    title: "101 Essays That Will Change The Way You Think",
+    author: "Brianna Wiest",
+    description:
+      "101 Essays That Will Change The Way You Think, the global bestseller and social media phenomenon, is a collection of author Brianna Wiest's most beloved pieces of writing.",
+    pages: 448,
+    genres: ["Self-help", "Mindfulness"],
+    publishedDate: "2018",
+    coverUrl: "https://covers.openlibrary.org/b/OLID/OL31489498M-M.jpg",
   },
 ];
 
@@ -381,71 +377,54 @@ app.get("/users/:userId/books/PastReads", (req, res) => {
 
 // Get friends' current reads books
 app.get("/users/:userId/books/FriendsCurrentReads", (req, res) => {
-  // modify mockUsers to include friend info
-  const { userId } = req.params;
-  const user = mockUsers.find((user) => user.id === parseInt(userId));
-  if (user) {
-    const friendsCurrentReads = [
-      {
-        id: 1,
-        title: "Friend's Current Read 1",
-        coverUrl: "https://example.com/covers/friends-current-read-1.jpg",
-      },
-      {
-        id: 2,
-        title: "Friend's Current Read 2",
-        coverUrl: "https://example.com/covers/friends-current-read-2.jpg",
-      },
-    ];
+  // Assuming user 2 is a friend of the logged-in user
+  const friendId = 2;
+  const friend = mockUsers.find((user) => user.id === friendId);
+
+  if (friend) {
+    const friendsCurrentReads = friend.books.currentlyReading
+      .map((bookId) => books.find((book) => book.id === bookId))
+      .filter((book) => book !== undefined);
     res.status(200).json(friendsCurrentReads);
   } else {
-    res.status(404).send("User not found");
+    res.status(404).send("Friend not found");
   }
 });
 
 // Getting this week's top 10 reads books
 app.get("/users/:userId/books/ThisWeek'sTop10Reads", (req, res) => {
-  // may need to modify  books data structure to include popularity info get top 10 books based on that
-  const { userId } = req.params;
-  const user = mockUsers.find((user) => user.id === parseInt(userId));
-  if (user) {
-    const top10Reads = [
-      {
-        id: 1,
-        title: "Top Read 1",
-        coverUrl: "https://example.com/covers/top-read-1.jpg",
-      },
-      {
-        id: 2,
-        title: "Top Read 2",
-        coverUrl: "https://example.com/covers/top-read-2.jpg",
-      },
-    ];
-    res.status(200).json(top10Reads);
-  } else {
-    res.status(404).send("User not found");
-  }
+  // randomly select 10 books from 'books' array
+  const shuffledBooks = [...books].sort(() => 0.5 - Math.random());
+  const top10Reads = shuffledBooks.slice(0, 10);
+  res.status(200).json(top10Reads);
 });
 
 // Getting book suggestions
 app.get("/users/:userId/books/SuggestionsforYou", (req, res) => {
-  // analyze user reading preferences, genres, to generate suggestions
   const { userId } = req.params;
   const user = mockUsers.find((user) => user.id === parseInt(userId));
+
   if (user) {
-    const suggestions = [
-      {
-        id: 1,
-        title: "Suggested Book 1",
-        coverUrl: "https://example.com/covers/suggested-book-1.jpg",
-      },
-      {
-        id: 2,
-        title: "Suggested Book 2",
-        coverUrl: "https://example.com/covers/suggested-book-2.jpg",
-      },
-      // more suggestions ..........
-    ];
+    // suggestions based on user currently reading books
+    const currentlyReadingGenres = user.books.currentlyReading
+      .map((bookId) => {
+        const book = books.find((book) => book.id === bookId);
+        return book ? book.genres : [];
+      })
+      .flat();
+
+    // filter books based on genres & exclude currently reading books
+    const filteredBooks = books.filter(
+      (book) =>
+        book.genres.some((genre) => currentlyReadingGenres.includes(genre)) &&
+        !user.books.currentlyReading.includes(book.id)
+    );
+
+    // randomly select 5 books from the filtered books
+    const shuffledBooks = [...filteredBooks].sort(() => 0.5 - Math.random());
+    const suggestions = shuffledBooks.slice(0, 5);
+    console.log("Suggestions: ", suggestions)
+
     res.status(200).json(suggestions);
   } else {
     res.status(404).send("User not found");
