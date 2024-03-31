@@ -48,7 +48,7 @@ const NavItem = ({ name, to, iconPaths }) => (
   </Link>
 );
 const Navbar = () => (
-  <nav className="bg-goodreads-darkbrown text-white p-4 fixed bottom-0 inset-x-0 flex justify-between text-xs md:text-sm">
+  <nav className="bg-goodreads-darkbrown text-white p-4 fixed bottom-0 inset-x-0 flex justify-between text-xs md:text-sm ">
     {NAV_ITEMS.map((item, index) => (
       <NavItem key={index} {...item} />
     ))}

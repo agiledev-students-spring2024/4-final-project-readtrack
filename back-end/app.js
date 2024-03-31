@@ -337,7 +337,6 @@ app.get("/users/:userId/books/currentReads", (req, res) => {
       .map(bookId => books.find(book => book.id === bookId))
       .filter(book => book !== undefined); // Filter out undefined values
     res.status(200).json(currentlyReadingBooks);
-    console.log('Currently reading books:', currentlyReadingBooks); // Log the books
   } else {
     res.status(404).send("User not found");
   }
@@ -353,7 +352,6 @@ app.get("/users/:userId/books/WanttoRead", (req, res) => {
       .map((bookId) => books.find((book) => book.id === bookId))
       .filter((book) => book !== undefined); // Filter out undefined values
     res.status(200).json(wantToReadBooks);
-    console.log('Want to read books', wantToReadBooks); // Log the books
   } else {
     res.status(404).send("User not found");
   }
@@ -369,7 +367,6 @@ app.get("/users/:userId/books/PastReads", (req, res) => {
       .filter((book) => book !== undefined); // Filter out undefined values
 
     res.status(200).json(pastReadsBooks);
-    console.log('Past reads books:', pastReadsBooks); // Log the books
   } else {
     res.status(404).send("User not found");
   }
@@ -423,8 +420,6 @@ app.get("/users/:userId/books/SuggestionsforYou", (req, res) => {
     // randomly select 5 books from the filtered books
     const shuffledBooks = [...filteredBooks].sort(() => 0.5 - Math.random());
     const suggestions = shuffledBooks.slice(0, 5);
-    console.log("Suggestions: ", suggestions)
-
     res.status(200).json(suggestions);
   } else {
     res.status(404).send("User not found");

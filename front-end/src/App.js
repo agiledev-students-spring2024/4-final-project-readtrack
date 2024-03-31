@@ -37,17 +37,7 @@ function App() {
     }
   }, [loggedInUser]);
 
-  function NavbarWithLocation() {
-    const location = useLocation();
-    if (
-      location.pathname === "/" ||
-      location.pathname === "/login" ||
-      location.pathname === "/signup"
-    ) {
-      return null;
-    }
-    return <Navbar />;
-  }
+  
 
   function AppRoutes() {
     return (
@@ -180,7 +170,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <AppRoutes loggedInUser={loggedInUser} />
-        <NavbarWithLocation />
       </BrowserRouter>
     </div>
   );
