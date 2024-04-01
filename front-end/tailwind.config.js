@@ -5,15 +5,14 @@ module.exports = {
     extend: {
       colors: {
         goodreads: {
-          white: "#ffffff",
-          lightcream: "#e9e5cd",
-          brown: "#75420e",
-          darkbrown: "#553b08",
-          gray: "#aaaaaa",
+          white: "#FFFCEC", //offwhite 
+          lightcream: "#e9e5cd", //
+          darkblue: "#003049",
+          lightblue: "#669BBC",
         },
       },
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(to bottom, #ffffff,#eeeeee, #e9e5cd)',
+        'custom-gradient': 'linear-gradient(to bottom, #003049, #669BBC)',
       },
     },
   },

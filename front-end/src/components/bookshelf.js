@@ -31,8 +31,8 @@ const BookShelf = ({ books, title }) => {
   ];
 
   return (
-    <div className="flex flex-col text-left py-4 pl-4 justify-center bg-custom-gradient w-full">
-      <h2 className="text-l text-black align-middle font-semibold py-1">{title}</h2>
+    <div className="flex flex-col text-left py-4 pl-4 justify-center bg-custom-gradient w-full my-1">
+      <h2 className="text-l text-white align-middle font-semibold py-1">{title}</h2>
       <div className="flex overflow-x-auto space-x-4 scrollbar-hide pr-4">
         {books.length > 0 ? (
           books.map((book) => (
