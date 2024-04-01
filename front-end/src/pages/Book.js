@@ -24,50 +24,41 @@ const BookPage = ({ loggedInUser }) => {
     }, [bookId]);
 
     if (!book) {
-        return <div>Loading...</div>;
+        return <div className="flex justify-center items-center h-screen">Loading...</div>;
     }
 
     return (
-        <div className="bookInfo">
+        <div className="min-h-screen b">
             <Header title={`${book.title} by ${book.author || 'Unknown Author'}`} />
-            <div className="bg-custom-gradient">
-                <div className="flex items-center justify-center pb-5">
-                    <img
-                        src={book.coverUrl || "https://picsum.photos/400/600"}
-                        alt={book.title}
-                        className="w-40 h-60 object-cover border-2"
-                    />
-                </div>
-                <div className="px-10 pb-5">
-                    <b>Description</b>
-                    <p className="text-sm">{book.description || 'No description available'}</p>
-                </div>
-                <div className="px-10 pb-5">
-                    <b>Details</b>
-                    <p className="text-xs">Pages: {book.pages || 'Unknown'}</p>
-                    <p className="text-xs">Genres: {book.genres ? book.genres.join(', ') : 'Unknown'}</p>
-                    <p className="text-xs">First Published: {book.publishedDate || 'Unknown'}</p>
-                </div>
-                {loggedInUser && (
-                    <div className="px-10 pb-5 mx-8">
-                        <div className='mx-2'>
-                            <CurrentlyReading userId={loggedInUser.id} bookId={bookId} />
-                        </div>
-                        <div className='mx-2'>
-                            <ReadingFinished userId={loggedInUser.id} bookId={bookId} />
-                        </div>
-                        <div className='mx-2'>
-                            <ReadingWishlist userId={loggedInUser.id} bookId={bookId} />
-                        </div>
+            <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+                <div className="flex flex-col md:flex-row">
+                    <div className="md:w-1/3 bg-cover bg-center p-4 flex justify-center">
+                        <img
+                            src={book.coverUrl || "https://picsum.photos/400/600"}
+                            alt={book.title}
+                            className="rounded-lg w-40 md:w-auto md:max-h-96 object-cover"
+                        />
                     </div>
-                )}
-                <div className="px-10 pb-5">
-                    <b>Ratings</b>
-                    <div className="flex items-center justify-center">
-                        <div className="bg-gray-200 p-4 m-2 w-70 text-xs">
-                            <span className="font-bold">Alice's: </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            <br></br> <br></br>
-                            <span className="font-bold">Bob's: </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    <div className="md:w-2/3 p-4">
+                        <h2 className="text-2xl font-bold mb-2">{book.title}</h2>
+                        <p className="italic mb-4">by {book.author || 'Unknown Author'}</p>
+                        <p className="mb-4"><span className="font-semibold">Description:</span> {book.description || 'No description available'}</p>
+                        <p className="mb-4"><span className="font-semibold">Pages:</span> {book.pages || 'Unknown'}</p>
+                        <p className="mb-4"><span className="font-semibold">Genres:</span> {book.genres ? book.genres.join(', ') : 'Unknown'}</p>
+                        <p className="mb-4"><span className="font-semibold">First Published:</span> {book.publishedDate || 'Unknown'}</p>
+                        {loggedInUser && (
+                            <div className="grid grid-cols-3 gap-4">
+                                <CurrentlyReading userId={loggedInUser.id} bookId={bookId} />
+                                <ReadingFinished userId={loggedInUser.id} bookId={bookId} />
+                                <ReadingWishlist userId={loggedInUser.id} bookId={bookId} />
+                            </div>
+                        )}
+                        <div className="pt-4">
+                            <h3 className="text-xl font-bold mb-2">Ratings</h3>
+                            <div className="bg-gray-200 p-4 rounded-lg">
+                                <p className="mb-2"><span className="font-bold">Alice's Rating:</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <p><span className="font-bold">Bob's Rating:</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
