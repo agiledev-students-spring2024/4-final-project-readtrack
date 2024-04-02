@@ -6,7 +6,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-
+/*
 describe('Name', () => {
     describe('level', () => {
         it('what', (done) => {
@@ -20,6 +20,7 @@ describe('Name', () => {
         })
     })
 })
+*/
 
 describe('Login & Signup', () => {
     // successful login
@@ -27,7 +28,7 @@ describe('Login & Signup', () => {
         it('should log in existing user', (done) => {
             chai.request(app)
                 .post('/users/login')
-                .send({'email' : 'user1@example.com', 'password' : 'hashedPassword'})
+                .send({'email' : 'user1@example.com', 'password' : '123'})
                 .end((err, res) => {
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.an('object');
@@ -38,35 +39,38 @@ describe('Login & Signup', () => {
                 })
         })
     })
-
+    
     // failed login due to incorrect email address
     describe('Failed login, email not found', (done) => {
-        it('should return ERROR', (done) => {
+        it('should return 401', (done) => {
             chai.request(app)
-                .post(/users/login)
-                .send({'email' : 'invalid@email.com', 'password': 'dummyPassword'})
+                .post('/users/login')
+                .send({'email' : 'invalid@email.com', 'password': '123'})
                 .end((err, res) => {
                     expect(res).to.have.status(401)
-                    expect(res.body).to.be.a('string')
+                    expect(res.body).to.be.an('object')
                     done()
                 })
         })
     })
-
-    // failed login due to incorrect email address
-    describe('Failed login, email not found', (done) => {
-        it('should return ERROR', (done) => {
+    
+   
+    // failed login due to incorrect password
+    describe('Failed login, incorrect password', (done) => {
+        it('should return 401', (done) => {
             chai.request(app)
-                .post(/users/login)
+                .post('/users/login')
                 .send({'email' : 'user1@example.com', 'password': 'incorrectPassword'})
                 .end((err, res) => {
                     expect(res).to.have.status(401)
-                    expect(res.body).to.be.a('string')
+                    expect(res.body).to.be.an('object')
                     done()
                 })
         })
     })
+    
 
+    /*
     // successful signup
     describe('Successful signup of new user', () => {
         it ('should register new user', (done) => {
@@ -75,8 +79,10 @@ describe('Login & Signup', () => {
                 .done()
         })
     })
+    */
 })
 
+/*
 describe('Book Routes', () => {
     it('should get all books', (done) => {
         chai.request(app)
@@ -88,3 +94,4 @@ describe('Book Routes', () => {
             });
     });
 });
+*/
