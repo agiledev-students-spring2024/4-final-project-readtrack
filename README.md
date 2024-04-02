@@ -19,7 +19,7 @@ To empower book enthusiasts by creating a dynamic and engaging online platform t
 * [Kiara Chombo](https://github.com/k1arac)
 * [Connor DeLeon](https://github.com/cnnrdel)
 * [Hannah Horiuchi](https://github.com/hah8236)
-* [Ellis Pinksy](https://github.com/ellispinsky)
+* [Ellis Pinsky](https://github.com/ellispinsky)
 * [Jeffery Saeteros](https://github.com/jeffreysaeteros)
 
 ## Instructions
