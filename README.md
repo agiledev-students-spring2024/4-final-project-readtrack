@@ -26,6 +26,10 @@ To empower book enthusiasts by creating a dynamic and engaging online platform t
 
 - instructions for building and testing the project (update with that information once the project reaches that stage)
   The project's wireframe is developed using Figma. The project's front-end is developed using ReactJs and TailwindCSS.
+- To test (putting here for now, move later): first run
+   ```npm install chai@4 chai-http@4 --save-dev```
+   then run
+   ```npm test```
 
 ## Product Development
 
