@@ -23,7 +23,7 @@ describe('Name', () => {
 */
 
 describe('Login & Signup', () => {
-    // successful login
+    // successful login - TODO : failing
     describe('Successful login of an existing user', () => {
         it('should log in existing user', (done) => {
             chai.request(app)
@@ -69,17 +69,19 @@ describe('Login & Signup', () => {
         })
     })
     
-
-    /*
     // successful signup
     describe('Successful signup of new user', () => {
         it ('should register new user', (done) => {
             chai.request(app)
                 .post('/users/register')
-                .done()
+                .send({'fullname' : 'Tester', 'username' : 'testing', 'email' : 'testing@testmail.com', 'password' : '123'})
+                .end((err, res) => {
+                    expect(res).to.have.status(201)
+                    expect(res.body).to.be.an('object')
+                    done()
+                })
         })
     })
-    */
 })
 
 /*
