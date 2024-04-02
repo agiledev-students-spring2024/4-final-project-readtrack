@@ -7,6 +7,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     const [currentReads, setCurrentReads] = useState([]);
     const [wantToRead, setWantToRead] = useState([]);
     const [pastReads, setPastReads] = useState([]);
+    const [favorites, setFavorites] = useState([]);
     const navigate = useNavigate();
     const placeholder = "https://images.unsplash.com/photo-1526800544336-d04f0cbfd700?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
@@ -50,6 +51,15 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                 .catch((error) => {
                     console.error("Error fetching past reads:", error);
                 });
+            // Fetch favorite books
+            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/favorites`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setFavorites(data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching past reads:", error);
+                });
         }
     }, [loggedInUser]);
 
@@ -60,9 +70,9 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
     if (!profile) {
         return (
-          <div className="flex justify-center items-center min-h-screen">
-            <span className="text-xl">Loading...</span>
-          </div>
+            <div className="flex justify-center items-center min-h-screen">
+                <span className="text-xl">Loading...</span>
+            </div>
         );
     }
 
@@ -113,7 +123,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                 </div>
             </div>
             <div className="mt-5 space-y-4">
-                <BookShelf title="Favorites" books={pastReads} />
+                <BookShelf title="Favorites" books={favorites} />
                 <BookShelf title="Want to Read" books={wantToRead} />
                 <BookShelf title="Past Reads" books={pastReads} />
             </div>
