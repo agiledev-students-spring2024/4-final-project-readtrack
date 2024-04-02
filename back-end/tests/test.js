@@ -6,7 +6,7 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-/*
+/* TEMPLATE - for hannah, delete when done :)
 describe('Name', () => {
     describe('level', () => {
         it('what', (done) => {
@@ -84,16 +84,3 @@ describe('Login & Signup', () => {
     })
 })
 
-/*
-describe('Book Routes', () => {
-    it('should get all books', (done) => {
-        chai.request(app)
-            .get('/books')
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res.body).to.be.an('array');
-                done();
-            });
-    });
-});
-*/
