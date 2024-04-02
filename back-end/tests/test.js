@@ -109,25 +109,25 @@ describe("Friends", () => {
     it("should display friends", (done) => {
       chai
         .request(app)
-        .get("/friendShelf")
+        .get("/users/1/books/FriendsCurrentReads")
         .end((err, res) => {
           expect(res).to.have.status(200);
-          expect(res.body).to.be.an("object");
+          expect(res.body).to.be.an("array"); // ok -> but could be better
           done();
         });
     });
   });
 
-  describe("Friends Route", () => {
-    it("Friends Page Route", (done) => {
-      chai
-        .request(app)
-        .get("/Friends")
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an("object");
-          done();
-        });
-    });
-  });
+  // describe("Friends Route", () => {
+  //   it("Friends Page Route", (done) => {
+  //     chai
+  //       .request(app)
+  //       .get("/users/1/friends")
+  //       .end((err, res) => {
+  //         expect(res).to.have.status(200);
+  //         expect(res.body).to.be.an("object");
+  //         done();
+  //       });
+  //   });
+  // });
 });

@@ -37,7 +37,7 @@ To empower book enthusiasts by creating a dynamic and engaging online platform t
   [Sprints]
 
 1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
-   During Sprint 0 the team convened virtually to discuss the different pages we believe our application would need. We created a list of these pages then distributed the pages for each team member to work on the wireframes for. Afterwards we connected all of the pages so that buttons on one page may link to another page so that the wireframe would be ready to present to shareholders.
+   During Sprint 0 the team convened virtually to discuss the different pages we believe our application would need. We created a list of these pages then distributed the p ages for each team member to work on the wireframes for. Afterwards we connected all of the pages so that buttons on one page may link to another page so that the wireframe would be ready to present to shareholders.
 
 1. See the [Sprint Planning instructions](instructions-0d-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
    During Sprint 1 the team convened (both virtually and in-person) on multiple occasions to establish, discuss, and check-in on the different parts of the front-end that needed to be created. The team began by taking the previously created user stories and transforming them into tasks. These tasks were then distributed across Github's project board into columns labeled "Todo," "In Progress," and "Complete." After creating the tasks, team members each selected 3-5 tasks to focus on throughout the sprint.
