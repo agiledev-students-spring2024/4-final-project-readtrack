@@ -5,6 +5,21 @@ const app = require('../app.js');
 const expect = chai.expect;
 chai.use(chaiHttp);
 
+
+describe('Name', () => {
+    describe('level', () => {
+        it('what', (done) => {
+            chai.request(app)
+                .get(route)
+                .end((err, res) => {
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('TYPE');
+                    done();
+                })
+        })
+    })
+})
+
 describe('Book Routes', () => {
     it('should get all books', (done) => {
         chai.request(app)
