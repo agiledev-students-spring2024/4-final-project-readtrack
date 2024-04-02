@@ -12,7 +12,44 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
     useEffect(() => {
         if (loggedInUser) {
-            // Fetch user profile and bookshelf data...
+            fetch(`http://localhost:3001/users/${loggedInUser.id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setProfile(data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching user profile:", error);
+                });
+
+            // Fetch current reads books
+            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/currentReads`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setCurrentReads(data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching current reads:", error);
+                });
+
+            // Fetch want to read books
+            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/WanttoRead`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setWantToRead(data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching want to read:", error);
+                });
+
+            // Fetch past reads books
+            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/PastReads`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setPastReads(data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching past reads:", error);
+                });
         }
     }, [loggedInUser]);
 
