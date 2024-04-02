@@ -80,6 +80,7 @@ function App() {
         <Route
           path="/mainHome"
           element={
+
             <ProtectedRoute loggedInUser={loggedInUser}>
               <Layout>
                 <MainHome loggedInUser={loggedInUser} />
