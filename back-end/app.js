@@ -26,6 +26,7 @@ async function initializeMockUsers() {
         currentlyReading: [1, 2, 6, 4, 5], // These are book IDs
         finishedReading: [3, 8],
         wishlist: [4],
+        favorites: [3],
       },
       profile: "avatar1.png",
     },
@@ -39,6 +40,7 @@ async function initializeMockUsers() {
         currentlyReading: [7, 9], // These are book IDs
         finishedReading: [3],
         wishlist: [4],
+        favorites: [3],
       },
       profile: "avatar2.png",
     },
@@ -52,6 +54,7 @@ async function initializeMockUsers() {
         currentlyReading: [10], // These are book IDs
         finishedReading: [3],
         wishlist: [4],
+        favorites: [3],
       },
       profile: "avatar3.png",
     },
@@ -65,6 +68,7 @@ async function initializeMockUsers() {
         currentlyReading: [4, 8, 10, 3], // These are book IDs
         finishedReading: [3],
         wishlist: [4],
+        favorites: [3],
       },
       profile: "avatar4.png",
     },
@@ -352,6 +356,20 @@ app.get("/users/:userId/books/WanttoRead", (req, res) => {
       .map((bookId) => books.find((book) => book.id === bookId))
       .filter((book) => book !== undefined); // Filter out undefined values
     res.status(200).json(wantToReadBooks);
+  } else {
+    res.status(404).send("User not found");
+  }
+});
+
+// Getting User 'favorites' books
+app.get("/users/:userId/books/favorites", (req, res) => {
+  const { userId } = req.params;
+  const user = mockUsers.find((user) => user.id === parseInt(userId));
+  if (user) {
+    const favorites = user.books.favorites
+      .map((bookId) => books.find((book) => book.id === bookId))
+      .filter((book) => book !== undefined); // Filter out undefined values
+    res.status(200).json(favorites);
   } else {
     res.status(404).send("User not found");
   }
