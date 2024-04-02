@@ -73,6 +73,7 @@ const FriendShelf = ({ friendsList = friendsReading }) => {
         <div className="absolute m-0 top-0 left-0 right-0 h-full flex justify-center items-center backdrop-blur-sm">
           <div className="flex flex-col justify-center items-center rounded-lg friendPreview z-10 top-14 left-1/6 flex w-4/6 h-4/5 bg-white fixed">
             <h1 className="font-semibold text-3xl text-gray-900">{`${popupFriendName.friendName} is reading...`}</h1>
+            {/* include links to the friend's profile as well as to the book's page */}
             <img
               className="m-10"
               src={`http://localhost:3001/books/${popupFriendName.bookTitle}`}
