@@ -64,7 +64,7 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser }) => {
                 value={formData.fullname}
               />
             </div>
-            <div>
+            <div className="mt-4">
               <label className="block" htmlFor="username">Username</label>
               <input
                 type="text"
@@ -97,10 +97,11 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser }) => {
                 value={formData.password}
               />
             </div>
-            <div className="flex items-baseline justify-between">
+
+            <div className="mt-4 flex items-baseline justify-between">
               <button className="btn">Sign Up</button>
-              <a href="/login" className="text-sm text-blue-600 hover:underline">
-                Already have an account? Login
+              <a href="/login" className="ml-3 text-sm text-blue-600 hover:underline">
+                Already have an account? Login!
               </a>
             </div>
           </div>
