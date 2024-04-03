@@ -79,7 +79,7 @@ const Login = ({ setLoggedInUser }) => {
       </div>
       <br />
       <div className='flex flex-col items-start justify-center'>
-        <button className='bg-[rgba(51,_51,_51,_0.05)] rounded-[8px] cursor-pointer text-[18px] font-medium leading-[20px] px-[20px] py-[10px] text-center' onClick={handleLogin}>
+        <button className='bg-[rgba(51,_51,_51,_0.05)] hover:bg-[rgba(51,_51,_51,_0.2)] rounded-[8px] cursor-pointer text-[18px] font-medium leading-[20px] px-[20px] py-[10px] text-center' onClick={handleLogin}>
           Log in
         </button>
       </div>
