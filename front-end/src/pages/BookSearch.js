@@ -9,8 +9,7 @@ const BookSearchPage = ({ onSearch }) => {
   
   const handleSearch = (searchTerm) => {
 
-    
-    // Call the API to search for books
+    // Call the API to search for books 
     const searchUrl =`http://localhost:3001/books/${searchTerm}`;
     fetch(searchUrl)
       .then((response) => response.json())
@@ -30,12 +29,7 @@ const BookSearchPage = ({ onSearch }) => {
       
       <SearchComponent onSearch={handleSearch} />
       <BookShelf title="Search Results" books={books} /> 
-      
-
-
-
-
-      
+       
     </div>
   );
 };

@@ -22,6 +22,7 @@ describe('Name', () => {
 */
 
 describe("Login & Signup", () => {
+    
   // successful login - TODO : failing
   describe("Successful login of an existing user", () => {
     it("should log in existing user", (done) => {
@@ -104,7 +105,7 @@ describe("Book Routes", () => {
   });
 });
 
-describe("Friends", () => {
+describe("Friends Routes", () => {
   describe("Friend Shelf Route", () => {
     it("should display friends", (done) => {
       chai
@@ -130,4 +131,33 @@ describe("Friends", () => {
   //       });
   //   });
   // });
+});
+
+describe("User Routes", () => {
+  describe ("Gets all users", () => {
+    it("should get all users", (done) => {
+      chai
+        .request(app)
+        .get("/users")
+        .send()
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("array");
+          done();
+        });
+    });
+  });
+
+  describe("Gets users by their id", () => {
+    it("should get user by their id", (done) => {
+      chai
+        .request(app)
+        .get("/users/1")
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an("object");
+          done();
+        });
+    });
+  });
 });

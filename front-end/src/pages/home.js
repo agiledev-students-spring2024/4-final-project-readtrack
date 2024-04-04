@@ -13,8 +13,9 @@ const Home = ({ loggedInUser }) => {
         </div>
         <div className="text-goodreads-darkbrown">Welcome</div>
         <div className="text-2xl text-goodreads-brown">to readTrack!</div>
+        <div className="mt-4"></div>
       </div>
-      <div className="flex space-x-4">
+      <div className="flex flex-col space-y-4">
         {loggedInUser ? (
           <input
             className="btn"
