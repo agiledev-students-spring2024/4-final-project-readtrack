@@ -1,4 +1,5 @@
 const { default: axios } = require("axios");
+require('dotenv').config();
 const cors = require("cors");
 const express = require("express");
 const app = express();
@@ -6,6 +7,20 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 app.use(express.json());
 app.use(cors());
+// the following are used for authentication with JSON Web Tokens
+const mongoose = require("mongoose")
+
+
+
+try {
+  console.log(process.env.URI)
+  mongoose.connect(process.env.URI)
+  console.log("Connected to MongoDB")
+}
+catch (error) {
+  console.log(error)
+}
+
 
 async function hashPassword(password) {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
