@@ -9,11 +9,13 @@ app.use(express.json());
 app.use(cors());
 // the following are used for authentication with JSON Web Tokens
 const mongoose = require("mongoose")
+const jwt = require('jsonwebtoken');
 
 
 
 try {
   console.log(process.env.URI)
+  console.log(process.env.JWT_SECRET)
   mongoose.connect(process.env.URI)
   console.log("Connected to MongoDB")
 }
@@ -41,7 +43,7 @@ async function initializeMockUsers() {
         currentlyReading: [1, 2, 6, 4, 5], // These are book IDs
         finishedReading: [3, 8],
         wishlist: [4],
-        favorites: [3],
+        favorites: [3, 4, 5],
       },
       profile: "avatar1.png",
     },
@@ -213,6 +215,23 @@ const books = [
   },
 ];
 
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  console.log("token: ", token)
+  if (!token) {
+    return res.status(401).send("No token provided");
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).send("Invalid token");
+    }
+    req.user = user;
+    next();
+  });
+}
+
 app.get("/", (req, res) => {
   res.send("Hello!");
 });
@@ -242,10 +261,15 @@ app.post("/users/register", async (req, res) => {
       profile: "default_avatar.png",
     };
 
+    const token = jwt.sign(
+      { userId: newUser.id, email: newUser.email },
+      process.env.JWT_SECRET
+    );
+
     mockUsers.push(newUser);
     // not sending back hashed password
     const { password: _, ...userWithoutPassword } = newUser;
-    res.status(201).json(userWithoutPassword);
+    res.status(201).json({ user: userWithoutPassword, token });
   } catch (error) {
     console.error(error);
     res.status(500).send("Server error while registering user.");
@@ -266,9 +290,10 @@ app.post("/users/login", async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).send("Invalid email or password");
     }
+    const token = jwt.sign(user, process.env.JWT_SECRET);
 
     const { password: _, ...userWithoutPassword } = user;
-    res.status(200).json(userWithoutPassword);
+    res.status(200).json({ user: userWithoutPassword, token });
   } catch (error) {
     console.error(error);
     res.status(500).send("Server error while logging in.");
@@ -348,13 +373,14 @@ app.get("/users/:userId/books", (req, res) => {
 });
 
 // Getting User 'currently reading' books
-app.get("/users/:userId/books/currentReads", (req, res) => {
+app.get("/users/:userId/books/currentReads", authenticateToken, (req, res) => {
   const { userId } = req.params;
-  const user = mockUsers.find(user => user.id === parseInt(userId));
+  const user = req.user;
+  // const user = mockUsers.find(user => user.id === parseInt(userId));
   if (user) {
-    const currentlyReadingBooks = user.books.currentlyReading
+    const currentlyReadingBooks = (user.books.currentlyReading || [])
       .map(bookId => books.find(book => book.id === bookId))
-      .filter(book => book !== undefined); // Filter out undefined values
+      .filter(book => book !== undefined);
     res.status(200).json(currentlyReadingBooks);
   } else {
     res.status(404).send("User not found");
@@ -367,9 +393,9 @@ app.get("/users/:userId/books/WanttoRead", (req, res) => {
   const { userId } = req.params;
   const user = mockUsers.find((user) => user.id === parseInt(userId));
   if (user) {
-    const wantToReadBooks = user.books.wishlist
+    const wantToReadBooks = (user.books.wishlist || [])
       .map((bookId) => books.find((book) => book.id === bookId))
-      .filter((book) => book !== undefined); // Filter out undefined values
+      .filter((book) => book !== undefined);
     res.status(200).json(wantToReadBooks);
   } else {
     res.status(404).send("User not found");
@@ -436,7 +462,7 @@ app.get("/users/:userId/books/SuggestionsforYou", (req, res) => {
 
   if (user) {
     // suggestions based on user currently reading books
-    const currentlyReadingGenres = user.books.currentlyReading
+    const currentlyReadingGenres = (user.books.currentlyReading || [])
       .map((bookId) => {
         const book = books.find((book) => book.id === bookId);
         return book ? book.genres : [];
