@@ -6,6 +6,9 @@ import SearchComponent from "../components/SearchComponent"; // Adjust the impor
 import BookShelf from "../components/bookshelf";
 
 // TODO: Render books on screen
+// TODO: Clicking on book, go to that book's page
+// TODO: Finish search stuff
+// Understand Ellis' search component
 const BookSearchPage = ({ loggedInUser, setLoggedInUser, onSearch }) => { 
 
   const [profile, setProfile] = useState(null);
@@ -37,7 +40,6 @@ const BookSearchPage = ({ loggedInUser, setLoggedInUser, onSearch }) => {
     }
   };
 
-  
   
   
   const handleSearch = (searchTerm) => {
