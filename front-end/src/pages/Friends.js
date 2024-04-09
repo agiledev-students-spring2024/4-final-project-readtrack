@@ -7,9 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Friends = ({ loggedInUser, setLoggedInUser }) => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
-  console.log("friends: " + loggedInUser);
-  console.log("profile: " + profile);
-
+  
   useEffect(() => {
     if (loggedInUser) {
       fetch(`http://localhost:3001/users/${loggedInUser.id}`)

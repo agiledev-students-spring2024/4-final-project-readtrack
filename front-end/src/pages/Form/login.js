@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = ({ setLoggedInUser }) => {
+const Login = ({ registeredUser, setLoggedInUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -37,7 +37,10 @@ const Login = ({ setLoggedInUser }) => {
         email,
         password,
       });
-      const user = response.data;
+      const { user, token } = response.data;
+      localStorage.setItem("loggedInUser", JSON.stringify(user.id));
+      localStorage.setItem('token', token); // store token in local storage
+
       setLoggedInUser(user);
       navigate('/mainHome');
     } catch (error) {
@@ -57,6 +60,7 @@ const Login = ({ setLoggedInUser }) => {
       </div>
       <br />
       {loginError && <div className="errorLabel">{loginError}</div>}
+      {<div className="errorLabel">{registeredUser}</div>}
       <div className='flex flex-col items-start justify-center'>
         <input
           value={email}

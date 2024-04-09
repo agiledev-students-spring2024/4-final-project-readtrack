@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/header";
 import BookShelf from "../components/bookshelf";
 
-const MainHome = () => {
+const MainHome = ({ loggedInUser, setLoggedInUser }) => {
     const [currentReads, setCurrentReads] = useState([]);
     const [wantToRead, setWantToRead] = useState([]);
     const [pastReads, setPastReads] = useState([]);
@@ -10,19 +10,25 @@ const MainHome = () => {
     const [topReads, setTopReads] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
 
-    // Retrieve the loggedInUser from localStorage
-    const [loggedInUser, setLoggedInUser] = useState(null);
+   
 
     useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
-        setLoggedInUser(storedUser);
-    }, []);
-    console.log("Logged in user:", loggedInUser);
+        const storedUserJSON = localStorage.getItem("loggedInUser");
+        // localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+        if (storedUserJSON && storedUserJSON !== "undefined" && !loggedInUser) {
+            const storedUser = JSON.parse(storedUserJSON);
+            setLoggedInUser(storedUser);
+        }
+    }, [loggedInUser]);
+
+
 
     useEffect(() => {
-        // Define an async function to fetch books
         const fetchBooks = async () => {
-            if (!loggedInUser) return; // return early if loggedInUser -> null
+            if (!loggedInUser) return; // Return early if loggedInUser is null
+
+            // Retrieve the token from local storage
+            const token = localStorage.getItem('token');
 
             const urls = [
                 `http://localhost:3001/users/${loggedInUser.id}/books/currentReads`,
@@ -34,15 +40,20 @@ const MainHome = () => {
             ];
 
             try {
-                // Map each URL to a fetch request and then pass all promises to Promise.all
                 const allRequests = urls.map((url) =>
-                    fetch(url).then((res) => res.json())
+                    fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                    }).then((res) => res.json())
                 );
 
                 const [
                     currentReadsData,
-                    wantToRead,
-                    pastReads,
+                    wantToReadData,
+                    pastReadsData,
                     friendsReadsData,
                     topReadsData,
                     suggestionsData,
@@ -50,25 +61,21 @@ const MainHome = () => {
 
                 // Update state with the fetched data
                 setCurrentReads(currentReadsData);
-                setWantToRead(wantToRead);
-                setPastReads(pastReads);
+                setWantToRead(wantToReadData);
+                setPastReads(pastReadsData);
                 setFriendsReads(friendsReadsData);
                 setTopReads(topReadsData);
                 setSuggestions(suggestionsData);
-
-                console.log("Current Reads:", currentReadsData[0]);
-                // Handle additional data similarly
             } catch (error) {
                 console.error("Error fetching book data:", error);
             }
         };
 
-        // Call the async fetch function
         if (loggedInUser) {
-            // Ensure there's a current user ID before fetching
             fetchBooks();
         }
     }, [loggedInUser]);
+
 
 
     return (
