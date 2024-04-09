@@ -14,8 +14,6 @@ const jwt = require('jsonwebtoken');
 
 
 try {
-  console.log(process.env.URI)
-  console.log(process.env.JWT_SECRET)
   mongoose.connect(process.env.URI)
   console.log("Connected to MongoDB")
 }
@@ -222,7 +220,6 @@ function authenticateToken(req, res, next) {
   if (!token) {
     return res.status(401).send("No token provided");
   }
-
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
       return res.status(403).send("Invalid token");

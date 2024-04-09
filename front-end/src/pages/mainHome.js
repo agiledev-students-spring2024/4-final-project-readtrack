@@ -10,8 +10,7 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
     const [topReads, setTopReads] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
 
-    // console.log(localStorage.getItem("loggedInUser"));
-    // console.log(localStorage.getItem("token"));
+   
 
     useEffect(() => {
         const storedUserJSON = localStorage.getItem("loggedInUser");
@@ -23,7 +22,6 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
     }, [loggedInUser]);
 
 
-    // console.log("Logged in user:", loggedInUser);
 
     useEffect(() => {
         const fetchBooks = async () => {

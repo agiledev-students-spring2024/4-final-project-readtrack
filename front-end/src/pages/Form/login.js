@@ -40,8 +40,7 @@ const Login = ({ registeredUser, setLoggedInUser }) => {
       const { user, token } = response.data;
       localStorage.setItem("loggedInUser", JSON.stringify(user.id));
       localStorage.setItem('token', token); // store token in local storage
-      // console.log("loggedInUser id: ", localStorage.getItem("loggedInUser"));
-      // console.log("login token: ", localStorage.getItem("token"));
+
       setLoggedInUser(user);
       navigate('/mainHome');
     } catch (error) {
