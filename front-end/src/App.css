@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .btn {
-  @apply px-4 py-2 bg-goodreads-darkblue text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
+  @apply px-4 py-2 bg-goodreads-lightgray text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
 }
 
 .btn-sm {
-  @apply px-1 py-1 text-xs bg-goodreads-darkblue text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
+  @apply px-1 py-1 text-xs bg-goodreads-lightgray text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
 }
 
 .App {
@@ -56,7 +56,6 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #e9e5cd;
 }
 
 .titleContainer {

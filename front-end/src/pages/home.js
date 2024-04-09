@@ -6,13 +6,13 @@ const Home = ({ loggedInUser }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="mainContainer">
+    <div className="mainContainer bg-goodreads-white">
       <div className={"titleContainer"}>
         <div className={"appIcon"}>
           <img src={appIcon} alt="icon" className="w-20 h-20" />
         </div>
-        <div className="text-goodreads-darkbrown">Welcome</div>
-        <div className="text-2xl text-goodreads-brown">to readTrack!</div>
+        <div className="text-goodreads-black">Welcome</div>
+        <div className="text-2xl text-goodreads-black">to readTrack!</div>
         <div className="mt-4"></div>
       </div>
       <div className="flex flex-col space-y-4">
