@@ -13,57 +13,59 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
     useEffect(() => {
         if (loggedInUser) {
-            fetch(`http://localhost:3001/users/${loggedInUser.id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setProfile(data);
-                })
-                .catch((error) => {
-                    console.error("Error fetching user profile:", error);
-                });
+            const token = localStorage.getItem('token');
+            if (!token) {
+                // Token not found, redirect to login page
+                navigate('/login');
+                return;
+            }
 
-            // Fetch current reads books
-            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/currentReads`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setCurrentReads(data);
-                })
-                .catch((error) => {
-                    console.error("Error fetching current reads:", error);
-                });
+            const fetchUserProfile = async () => {
+                try {
+                    const response = await fetch(`http://localhost:3001/users/${loggedInUser.id}`, {
+                        headers: {
+                            Authorization: token,
+                        },
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        setProfile(data);
+                    } else {
+                        console.error('Error fetching user profile:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error fetching user profile:', error);
+                }
+            };
 
-            // Fetch want to read books
-            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/WanttoRead`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setWantToRead(data);
-                })
-                .catch((error) => {
-                    console.error("Error fetching want to read:", error);
-                });
+            const fetchBooks = async (endpoint, setBooks) => {
+                try {
+                    const response = await fetch(`http://localhost:3001/users/${loggedInUser.id}/books/${endpoint}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        setBooks(data);
+                    } else {
+                        console.error(`Error fetching ${endpoint}:`, response.status);
+                    }
+                } catch (error) {
+                    console.error(`Error fetching ${endpoint}:`, error);
+                }
+            };
 
-            // Fetch past reads books
-            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/PastReads`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setPastReads(data);
-                })
-                .catch((error) => {
-                    console.error("Error fetching past reads:", error);
-                });
-            // Fetch favorite books
-            fetch(`http://localhost:3001/users/${loggedInUser.id}/books/favorites`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setFavorites(data);
-                })
-                .catch((error) => {
-                    console.error("Error fetching past reads:", error);
-                });
+            fetchUserProfile();
+            fetchBooks('WanttoRead', setWantToRead);
+            fetchBooks('PastReads', setPastReads);
+            fetchBooks('favorites', setFavorites);
         }
-    }, [loggedInUser]);
+    }, [loggedInUser, navigate]);
 
     const handleLogout = () => {
+        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("token");
         setLoggedInUser(null);
         navigate("/");
     };

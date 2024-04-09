@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SignUpPage = ({ setLoggedInUser, loggedInUser }) => {
+const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullname: '',
@@ -36,10 +36,15 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser }) => {
       })
       .then(data => {
         console.log('User registered:', data);
-        setLoggedInUser(data); // update loggedInUser state in App.js
+        setLoggedInUser(data.user); // Update loggedInUser state with the user object
+        setRegisteredUser("Please login to continue.");
         navigate('/mainHome');
       })
-      .catch(error => console.error('Error registering user:', error));
+      .catch(error => {
+        console.error('Error registering user:', error);
+        // Display an error message to the user
+        alert('Error registering user. Please try again.');
+      });
   };
 
   // redirect to profile page if user is already logged in
