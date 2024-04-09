@@ -72,9 +72,11 @@ function App() {
         <Route
           path="/search"
           element={
-            <Layout>
-              <BookSearchPage />
-            </Layout>
+            <ProtectedRoute loggedInUser={loggedInUser}>
+              <Layout>
+                <BookSearchPage loggedInUser={loggedInUser} />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
