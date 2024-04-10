@@ -29,6 +29,20 @@ const friendsReading = [
     bookTitle: "To Kill a Mockingbird",
     bookAuthor: "Harper Lee",
   },
+  {
+    id: 4,
+    friendImage: "https://picsum.photos/150",
+    friendName: "a",
+    bookTitle: "aaa",
+    bookAuthor: "aaa",
+  },
+  {
+    id: 5,
+    friendImage: "https://picsum.photos/150",
+    friendName: "bbb",
+    bookTitle: "BBBBBbbbbb",
+    bookAuthor: "boboobobooboooo",
+  },
 
   // ... Add more dummy data as needed
 ];
@@ -48,29 +62,36 @@ const FriendShelf = ({ friendsList = friendsReading }) => {
   };
 
   return (
-    <div className="flex space-x-4 overflow-x-auto p-4 bg-white shadow sm:rounded-lg my-4">
+    <div className="flex align-middle flex-wrap p-0">
       {friendsList.map((friend) => (
-        <div
-          onClick={() => openPopup(friend)}
-          key={friend.id}
-          className="w-40 flex flex-col items-center space-y-2 p-4 border border-gray-200 rounded-lg bg-gray-50 hover:shadow-lg transition duration-200 ease-in-out"
-        >
-          <img
-            src={friend.friendImage}
-            alt={`Avatar of ${friend.friendName}`}
-            className="w-24 h-24 object-cover rounded-full border-4 border-white shadow"
-          />
-          <h3 className="text-md font-semibold text-gray-900 truncate">
-            {friend.friendName}
-          </h3>
-          <p className="text-sm font-medium text-gray-800 truncate">
-            {friend.bookTitle}
-          </p>
-          <p className="text-xs text-gray-600 truncate">{friend.bookAuthor}</p>
+        <div className="w-1/4 h-38">
+          <div
+            onClick={() => openPopup(friend)}
+            key={friend.id}
+            // className="flex items-center flex-col p-3 border border-gray-950"
+            className="flex items-center flex-col p-3"
+          >
+            <img
+              src={friend.friendImage}
+              alt={`Avatar of ${friend.friendName}`}
+              className="w-full h-auto rounded-2xl"
+            />
+            <div className="w-46 overflow-hidden text-left">
+              <h3 className="overflow-hidden overflow-ellipsis whitespace-nowrap text-left font-cormorantGaramondMedium">
+                {friend.friendName}
+              </h3>
+              <p className="overflow-hidden overflow-ellipsis whitespace-nowrap text-left font-cormorantGaramondMedium">
+                {friend.bookTitle}
+              </p>
+            </div>
+          </div>
         </div>
       ))}
       {isPopupOpen && (
-        <div className="absolute m-0 top-0 left-0 right-0 h-full flex justify-center items-center backdrop-blur-sm">
+        <div
+          className="absolute m-0 top-0 left-0 right-0 h-full flex justify-center items-center backdrop-blur-sm"
+          onClick={closePopup}
+        >
           <div className="flex flex-col justify-center items-center rounded-lg friendPreview z-10 top-14 left-1/6 flex w-4/6 h-4/5 bg-white fixed">
             <h1 className="font-semibold text-3xl text-gray-900">{`${popupFriendName.friendName} is reading...`}</h1>
             {/* include links to the friend's profile as well as to the book's page */}
@@ -83,12 +104,12 @@ const FriendShelf = ({ friendsList = friendsReading }) => {
             <h1 className="text-2xl text-gray-600">{`${popupFriendName.bookAuthor}`}</h1>
 
             <div>
-              <button
+              {/* <button
                 className="border m-12 border-zinc-900 p-2 rounded-lg"
                 onClick={closePopup}
               >
                 Close
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
