@@ -57,26 +57,26 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
       <div className="px-8 py-6 mt-4 text-left bg-white">
         <h3 className="text-2xl font-bold text-center">Create Account</h3>
         <form onSubmit={handleSubmit}>
-          <div className="mt-4">
-            <div>
+          <div className="mt-4 ">
+            <div className='mb-4'>
               <label className="block" htmlFor="fullname">Full Name</label>
               <input
                 type="text"
                 placeholder="Full Name"
                 name="fullname"
                 onChange={handleChange}
-                className="w-full px-4 py-2 mt-2 border rounded-md"
+                className="w-full px-2 py-2 mt-2 border rounded-md"
                 value={formData.fullname}
               />
             </div>
-            <div>
+            <div className='mb-4'>
               <label className="block" htmlFor="username">Username</label>
               <input
                 type="text"
                 placeholder="Username"
                 name="username"
                 onChange={handleChange}
-                className="w-full px-4 py-2 mt-2 border rounded-md"
+                className="w-full px-2 py-2 mt-2 border rounded-md"
                 value={formData.username}
               />
             </div>
@@ -87,27 +87,31 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
                 placeholder="Email"
                 name="email"
                 onChange={handleChange}
-                className="w-full px-4 py-2 mt-2 border rounded-md"
+                className="w-full px-2 py-2 mt-2 border rounded-md"
                 value={formData.email}
               />
             </div>
-            <div className="mt-4">
+            <div className="mt-4 mb-4">
               <label className="block" htmlFor="password">Password</label>
               <input
                 type="password"
                 placeholder="Password"
                 name="password"
                 onChange={handleChange}
-                className="w-full px-4 py-2 mt-2 border rounded-md"
+                className="w-full px-2 py-2 mt-2 border rounded-md"
                 value={formData.password}
               />
             </div>
             <div className="flex items-baseline justify-between">
-              <button className="btn">Sign Up</button>
-              <a href="/login" className="text-sm text-blue-600 hover:underline">
-                Already have an account? Login
-              </a>
-            </div>
+              {/* made the button blue, if this goes against our theme we can revert i guess */}
+    <button className=" bg-blue-500 text-white font-bold py-2 px-4 rounded inline-flex items-center hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:shadow-outline">
+        Sign Up
+    </button>
+    <a href="/login" className="text-blue-600 hover:underline pl-2">
+        Already have an account? Login
+    </a>
+</div>
+
           </div>
         </form>
       </div>
