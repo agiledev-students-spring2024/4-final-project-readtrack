@@ -4,22 +4,22 @@
 
 @font-face {
   font-family: "Oswald";
-  src: url("\\fonts\\Oswald\\Oswald-VariableFont_wght.ttf");
+  src: url('fonts/Cormorant_Garamond/CormorantGaramond-Bold.ttf')
 }
 
 @font-face {
   font-family: "Cormorant_Garamond_Medium";
-  src: url("\\fonts\\Cormorant_Garamond\\CormorantGaramond-Medium.ttf");
+  src: url("fonts/Cormorant_Garamond/CormorantGaramond-Medium.ttf");
 }
 
 @font-face {
   font-family: "Cormorant_Garamond_Semibold";
-  src: url("\\fonts\\Cormorant_Garamond\\CormorantGaramond-SemiBold.ttf");
+  src: url("fonts/Cormorant_Garamond/CormorantGaramond-SemiBold.ttf");
 }
 
 @font-face {
   font-family: "PT_Serif_Caption";
-  src: url("\\fonts\\PT_Serif_Caption\\PTSerifCaption-Regular.ttf");
+  src: url("fonts/PT_Serif_Caption/PTSerifCaption-Regular.ttf");
 }
 
 .btn {
@@ -125,7 +125,7 @@
   justify-content: center;
 }
 
-.inputContainer > .errorLabel {
+.inputContainer>.errorLabel {
   color: red;
   font-size: 12px;
 }
