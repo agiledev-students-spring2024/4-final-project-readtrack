@@ -3,6 +3,15 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
+      fontFamily: {
+        oswald: ["Oswald", "sans-serif"],
+        cormorantGaramondMedium: ["Cormorant_Garamond_Medium", "sans-serif"],
+        cormorantGaramondSemibold: [
+          "Cormorant_Garamond_Semibold",
+          "sans-serif",
+        ],
+        pTSerifCaption: ["PT_Serif_Caption", "sans-serif"],
+      },
       colors: {
         goodreads: {
           white: "#FFFFFF",
@@ -11,12 +20,11 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(to bottom, #003049, #669BBC)',
+        "custom-gradient": "linear-gradient(to bottom, #003049, #669BBC)",
       },
       outline: {
-        lightgray: '2px solid #D9D9D9',
-      }
-
+        lightgray: "2px solid #D9D9D9",
+      },
     },
   },
   plugins: [],
