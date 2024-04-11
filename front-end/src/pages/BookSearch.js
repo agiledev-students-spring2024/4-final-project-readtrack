@@ -1,5 +1,7 @@
 // BookSearch.js
 import React from "react";
+// import SearchHeader from "../components/searchHeader";
+
 import Header from "../components/header";
 import { useEffect, useState } from "react";
 import SearchComponent from "../components/SearchComponent"; // Adjust the import path as necessary
@@ -74,19 +76,19 @@ const BookSearchPage = ({ loggedInUser, setLoggedInUser, onSearch }) => {
     fetch(searchUrl)
       .then((response) => response.json())
       .then((data) => {
-       setBooks(data)
-
+        setBooks(data);
       });
       console.log(books)
       */
   };
-  
 
   return (
-    
-    <div>
-      <Header title="Search" />
-      
+    <div className=" ">
+      {/* <SearchHeader */}
+      <Header
+        className="font-cormorantGaramondSemibold text-goodreads-black"
+        title={`Search`}
+      />
       <SearchComponent onSearch={handleSearch} />
       {searchPerformed ? (
         // ok so use the search handling thing to get the books that have that in the title
