@@ -29,6 +29,20 @@ const friendsReading = [
     bookTitle: "To Kill a Mockingbird",
     bookAuthor: "Harper Lee",
   },
+  {
+    id: 4,
+    friendImage: "https://picsum.photos/150",
+    friendName: "a",
+    bookTitle: "aaa",
+    bookAuthor: "aaa",
+  },
+  {
+    id: 5,
+    friendImage: "https://picsum.photos/150",
+    friendName: "bbb",
+    bookTitle: "BBBBBbbbbb",
+    bookAuthor: "boboobobooboooo",
+  },
 
   // ... Add more dummy data as needed
 ];
@@ -48,7 +62,7 @@ const FriendShelf = ({ friendsList = friendsReading }) => {
   };
 
   return (
-    <div className="flex space-x-4 overflow-x-auto p-4 bg-white shadow sm:rounded-lg my-4">
+    <div className="flex align-middle flex-wrap p-0">
       {friendsList.map((friend) => (
         <div className="w-1/4 h-38">
           <div
@@ -96,12 +110,12 @@ const FriendShelf = ({ friendsList = friendsReading }) => {
             <h1 className="text-2xl text-gray-600 font-cormorantGaramondMedium">{`${popupFriendName.bookAuthor}`}</h1>
 
             <div>
-              <button
+              {/* <button
                 className="border m-12 border-zinc-900 p-2 rounded-lg"
                 onClick={closePopup}
               >
                 Close
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
