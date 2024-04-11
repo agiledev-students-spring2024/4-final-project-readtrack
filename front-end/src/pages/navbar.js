@@ -36,7 +36,7 @@ const NavItem = ({ name, to, iconPaths }) => (
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      strokeWidth="1"
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
@@ -44,11 +44,10 @@ const NavItem = ({ name, to, iconPaths }) => (
         <path key={index} d={path} />
       ))}
     </svg>
-    <span>{name}</span>
   </Link>
 );
 const Navbar = () => (
-  <nav className="bg-goodreads-darkblue text-white p-4 fixed bottom-0 inset-x-0 flex justify-between text-xs md:text-sm ">
+  <nav className="bg-white text-goodreads-black p-4 fixed bottom-0 inset-x-0 flex justify-around text-xs md:text-sm rounded-t-xl">
     {NAV_ITEMS.map((item, index) => (
       <NavItem key={index} {...item} />
     ))}
