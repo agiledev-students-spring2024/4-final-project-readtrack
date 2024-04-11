@@ -6,14 +6,19 @@ const Home = ({ loggedInUser }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="mainContainer">
+    <div className="mainContainer bg-goodreads-white">
       <div className={"titleContainer"}>
         <div className={"appIcon"}>
           <img src={appIcon} alt="icon" className="w-20 h-20" />
+          <div className="mt-8"></div>
         </div>
-        <div className="text-goodreads-darkbrown">Welcome</div>
-        <div className="text-2xl text-goodreads-brown">to readTrack!</div>
-        <div className="mt-4"></div>
+        <div className="text-goodreads-black font-pTSerifCaption font-thin">
+          Welcome
+        </div>
+        <div className="text-2xl text-goodreads-black font-pTSerifCaption font-light">
+          to ReadTrack!
+        </div>
+        <div className="mt-8"></div>
       </div>
       <div className="flex flex-col space-y-4">
         {loggedInUser ? (
@@ -26,13 +31,13 @@ const Home = ({ loggedInUser }) => {
         ) : (
           <>
             <input
-              className="btn"
+              className="homeBtn font-pTSerifCaption font-light" // fix the boldness
               type="button"
               onClick={() => navigate("/login")}
               value="Log in"
             />
             <input
-              className="btn"
+              className="homeBtn font-pTSerifCaption font-light" // fix the boldness
               type="button"
               onClick={() => navigate("/signup")}
               value="Sign up"

@@ -24,20 +24,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import ProfilePage from "./pages/Form/profile";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(() => {
-    const storedUser = localStorage.getItem("loggedInUser");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [loggedInUser, setLoggedInUser] = useState();
+  const [registeredUser, setRegisteredUser] = useState();
 
-  useEffect(() => {
-    if (loggedInUser) {
-      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-    } else {
-      localStorage.removeItem("loggedInUser");
-    }
-  }, [loggedInUser]);
-
-  
 
   function AppRoutes() {
     return (
@@ -46,7 +35,7 @@ function App() {
           path="/"
           element={
             <Layout>
-              <Home loggedInUser={loggedInUser} />
+              <Home loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
             </Layout>
           }
         />
@@ -54,7 +43,10 @@ function App() {
           path="/login"
           element={
             <Layout>
-              <Login setLoggedInUser={setLoggedInUser} />
+              <Login
+                setLoggedInUser={setLoggedInUser}
+                registeredUser={registeredUser}
+              />
             </Layout>
           }
         />
@@ -63,6 +55,7 @@ function App() {
           element={
             <Layout>
               <SignUpPage
+                setRegisteredUser={setRegisteredUser}
                 setLoggedInUser={setLoggedInUser}
                 loggedInUser={loggedInUser}
               />
@@ -85,7 +78,7 @@ function App() {
 
             <ProtectedRoute loggedInUser={loggedInUser}>
               <Layout>
-                <MainHome loggedInUser={loggedInUser} />
+                <MainHome loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
               </Layout>
             </ProtectedRoute>
           }

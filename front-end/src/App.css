@@ -2,12 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Oswald";
+  src: url('fonts/Cormorant_Garamond/CormorantGaramond-Bold.ttf')
+}
+
+@font-face {
+  font-family: "Cormorant_Garamond_Medium";
+  src: url("fonts/Cormorant_Garamond/CormorantGaramond-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Cormorant_Garamond_Semibold";
+  src: url("fonts/Cormorant_Garamond/CormorantGaramond-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "PT_Serif_Caption";
+  src: url("fonts/PT_Serif_Caption/PTSerifCaption-Regular.ttf");
+}
+
 .btn {
-  @apply px-4 py-2 bg-goodreads-darkblue text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
+  @apply px-4 py-2 bg-goodreads-lightgray text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
+}
+
+.homeBtn {
+  @apply px-10 py-2 bg-goodreads-lightgray text-black rounded-3xl;
+  /* background-color: lightgray; */
 }
 
 .btn-sm {
-  @apply px-1 py-1 text-xs bg-goodreads-darkblue text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
+  @apply px-1 py-1 text-xs bg-goodreads-lightgray text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
 }
 
 .App {
@@ -56,7 +81,6 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #e9e5cd;
 }
 
 .titleContainer {

@@ -3,10 +3,14 @@
         "start": "concurrently \"npm run start --prefix front-end\" \"npm run start --prefix back-end\""
     },
     "dependencies": {
-        "axios": "^1.6.8"
+        "axios": "^1.6.8",
+        "dotenv": "^16.4.5",
+        "jsonwebtoken": "^9.0.2",
+        "mongodb": "^6.5.0"
     },
     "devDependencies": {
         "chai": "^4.4.1",
-        "chai-http": "^4.4.0"
+        "chai-http": "^4.4.0",
+        "concurrently": "^8.2.2"
     }
 }

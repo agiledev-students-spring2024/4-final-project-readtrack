@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 const Friends = ({ loggedInUser, setLoggedInUser }) => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
-  console.log("friends: " + loggedInUser);
-  console.log("profile: " + profile);
 
   useEffect(() => {
     if (loggedInUser) {
@@ -33,9 +31,12 @@ const Friends = ({ loggedInUser, setLoggedInUser }) => {
   }
 
   return (
-    <div className="displayFriends">
-      <Header title={`${profile.fullname}'s Friend List`} />
-      <div className="flex min-h-screen  flex-col bg-custom-gradient outline-4 outline-goodreads-darkbrown w-full">
+    <div className="">
+      <Header
+        className="font-cormorantGaramondSemibold text-goodreads-black"
+        title={`Friends`}
+      />
+      <div className="container mx-auto p-4">
         <FriendShelf />
       </div>
     </div>

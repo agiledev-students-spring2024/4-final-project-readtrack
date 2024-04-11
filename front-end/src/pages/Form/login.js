@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Login = ({ setLoggedInUser }) => {
+const Login = ({ registeredUser, setLoggedInUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -37,7 +37,10 @@ const Login = ({ setLoggedInUser }) => {
         email,
         password,
       });
-      const user = response.data;
+      const { user, token } = response.data;
+      localStorage.setItem("loggedInUser", JSON.stringify(user.id));
+      localStorage.setItem('token', token); // store token in local storage
+
       setLoggedInUser(user);
       navigate('/mainHome');
     } catch (error) {
@@ -51,18 +54,19 @@ const Login = ({ setLoggedInUser }) => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center h-lvh bg-[#e9e5cd]'>
+    <div className='bg-goodreads-white flex flex-col items-center justify-center h-lvh'>
       <div className='flex flex-col text-[64px] font-bold items-center justify-center'>
         <div>Login</div>
       </div>
       <br />
       {loginError && <div className="errorLabel">{loginError}</div>}
+      {<div className="errorLabel">{registeredUser}</div>}
       <div className='flex flex-col items-start justify-center'>
         <input
           value={email}
           placeholder="Enter your email here"
           onChange={(ev) => setEmail(ev.target.value)}
-          className='h-[48px] w-[300px] text-lg rounded-lg pl-2'
+          className='border border-gray-600 h-[48px] w-[300px] text-lg rounded-lg pl-2'
         />
         <label className="errorLabel">{emailError}</label>
       </div>
@@ -73,13 +77,13 @@ const Login = ({ setLoggedInUser }) => {
           value={password}
           placeholder="Enter your password here"
           onChange={(ev) => setPassword(ev.target.value)}
-          className='h-[48px] w-[300px] text-lg rounded-lg pl-2'
+          className='border border-gray-600 h-[48px] w-[300px] text-lg rounded-lg pl-2'
         />
         <label className="errorLabel">{passwordError}</label>
       </div>
       <br />
       <div className='flex flex-col items-start justify-center'>
-        <button className='bg-[rgba(51,_51,_51,_0.05)] rounded-[8px] cursor-pointer text-[18px] font-medium leading-[20px] px-[20px] py-[10px] text-center' onClick={handleLogin}>
+        <button className='border border-gray-600 bg-[rgba(51,_51,_51,_0.05)] hover:bg-[rgba(51,_51,_51,_0.2)] rounded-[8px] cursor-pointer text-[18px] font-medium leading-[20px] px-[20px] py-[10px] text-center' onClick={handleLogin}>
           Log in
         </button>
       </div>
