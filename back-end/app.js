@@ -10,6 +10,7 @@ app.use(cors());
 // the following are used for authentication with JSON Web Tokens
 const mongoose = require("mongoose")
 const jwt = require('jsonwebtoken');
+const userController = require('./src/api/controllers/userController')
 
 
 
@@ -296,10 +297,8 @@ app.post("/users/login", async (req, res) => {
   }
 });
 
-// Getting all Users
-app.get("/users", (req, res) => {
-  res.status(200).json(mockUsers);
-});
+// Testing using controller in app.js
+app.get('/users' , userController.getAllUsers)
 
 // Getting Users by their id
 app.get("/users/:id", (req, res) => {
@@ -510,5 +509,6 @@ app.get("/books/:title", (req, res) => {
     res.status(404).send("Book not found");
   }
 });
+
 
 module.exports = app;
