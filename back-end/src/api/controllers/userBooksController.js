@@ -40,4 +40,73 @@ catch(error)
 
 }
 }
-// TODO: implement getCurrentUserBooks , getWantToRead , getFavorites , getPastReads 
+exports.getCurrentUserBooks = async (req, res) =>
+{
+const {userId} = req.params
+try{
+  const user = await User.findById(userId).populate('books.currentlyreading')
+  if(!user)
+  {
+    return res.status(404).send('User not found')
+  }
+  res.status(200).json(user.books.currentlyreading)
+}
+catch(error)
+{
+  console.error("Failed to retrieve user books:", error);
+  res.status(500).send("Error retrieving user books");
+}
+}
+exports.getWantToRead = async (req, res) =>
+{
+const {userId} = req.params
+try{
+  const user = await User.findById(userId).populate('books.wishlist')
+  if(!user)
+  {
+    return res.status(404).send('User not found')
+  }
+  res.status(200).json(user.books.wishlist)
+}
+catch(error)
+{
+  console.error("Failed to retrieve user books:", error);
+  res.status(500).send("Error retrieving user books");
+}
+}
+// get favorites
+exports.getFavorites = async (req, res) =>
+{
+const {userId} = req.params
+try{
+  const user = await User.findById(userId).populate('books.favorites')
+  if(!user)
+  {
+    return res.status(404).send('User not found')
+  }
+  res.status(200).json(user.books.favorites)
+}
+catch(error)
+{
+  console.error("Failed to retrieve user books:", error);
+  res.status(500).send("Error retrieving user books");
+}
+}
+// get past reads
+exports.getPastReads = async (req, res) =>
+{
+const {userId} = req.params
+try{
+  const user = await User.findById(userId).populate('books.finishedReading')
+  if(!user)
+  {
+    return res.status(404).send('User not found')
+  }
+  res.status(200).json(user.books.finishedReading)
+}
+catch(error)
+{
+  console.error("Failed to retrieve user books:", error);
+  res.status(500).send("Error retrieving user books");
+}
+}
