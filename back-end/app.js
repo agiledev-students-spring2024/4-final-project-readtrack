@@ -10,7 +10,14 @@ const userRoutes = require('./src/api/routes/userRoutes'); // Adjust the path as
 const app = express();
 
 // Apply middleware
-app.use(cors());
+// app.use(cors());
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 dotenv.config();
 
