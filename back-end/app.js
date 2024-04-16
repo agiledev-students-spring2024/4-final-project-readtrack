@@ -19,11 +19,17 @@ mongoose.connect(process.env.URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-.then(() => console.log('Successfully connected to MongoDB.'))
-.catch(error => console.error('MongoDB connection error:', error));
+    .then(() => console.log('Successfully connected to MongoDB.'))
+    .catch(error => console.error('MongoDB connection error:', error));
 
 // Use routes
-app.use('/', userRoutes); // This will handle all user and user book routes
+app.use((req, res, next) => {
+    console.log('Incoming request:', req.method, req.path, req.body);
+    next();
+});
+
+app.use('/api', userRoutes);
+
 
 // Default route for testing the server
 app.get('/', (req, res) => {
@@ -35,7 +41,6 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send({ error: 'Something broke!' });
 });
-
 
 
 module.exports = app;
