@@ -11,8 +11,6 @@ app.use(cors());
 const mongoose = require("mongoose")
 const jwt = require('jsonwebtoken');
 
-
-
 try {
   mongoose.connect(process.env.URI)
   console.log("Connected to MongoDB")
@@ -20,7 +18,6 @@ try {
 catch (error) {
   console.log(error)
 }
-
 
 async function hashPassword(password) {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
