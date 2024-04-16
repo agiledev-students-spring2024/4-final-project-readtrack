@@ -7,7 +7,7 @@ const Header = ({ title }) => {
       <h1 className="text-4xl pb-2 text-goodreads-black font-cormorantGaramondSemibold">
         {title}
       </h1>
-      <hr className="w-full border-t-2 border-goodreads-lightgray" />
+      <hr className="w-full border-t-2 border-goodreads-linegray" />
     </div>
   );
 };
