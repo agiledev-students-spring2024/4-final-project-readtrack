@@ -1,6 +1,7 @@
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+require('dotenv').config();
 // maybe use : const { validationResult } = require('express-validator');
 // Function to hash passwords, consider moving to a utility file if used elsewhere
 const saltRounds = 10;
@@ -26,7 +27,7 @@ exports.register = async (req, res) => {
     await newUser.save();
     const token = jwt.sign(
       { user_id: newUser._id, email },
-      process.env.TOKEN_KEY,
+      process.env.JWT_SECRET,
       { expiresIn: "4h" }
     );
     res.status(201).json({
@@ -47,16 +48,18 @@ exports.register = async (req, res) => {
 
 // user login
 exports.login = async (req, res) => {
+  console.log("req.body: ", req.body)
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email })
+    console.log("User: ", user)
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
         { user_id: user._id, email },
-        process.env.TOKEN_KEY,
+        process.env.JWT_SECRET,
         { expiresIn: "4h" }
       );
       return res.status(200).json({
