@@ -26,12 +26,13 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const token = localStorage.getItem('token');
         try {
-            console.log('loggedInUser.id editProfile:', loggedInUser)
-            const response = await fetch(`http://localhost:3001/users/update/${loggedInUser.id}`, {
+            console.log('loggedInUser.id editProfile:', loggedInUser._id)
+            const response = await fetch(`http://localhost:3001/api/users/update/${loggedInUser._id}`, {
                 method: 'PUT',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
