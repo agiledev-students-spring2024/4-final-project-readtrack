@@ -33,21 +33,29 @@ const Login = ({ registeredUser, setLoggedInUser }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/api/login', {
-        email,
-        password,
+      const response = await fetch('http://localhost:3001/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
 
-      const { user, token } = response.data;
-      console.log("user.id: ", user.id)
-      localStorage.setItem("loggedInUser", JSON.stringify(user.id));
-      localStorage.setItem('token', token); // store token in local storage
-
-      setLoggedInUser(user);
-      navigate('/mainHome');
+      if (response.ok) {
+        const { user, token } = await response.json();
+        console.log('user: ', user);
+        console.log('user.id: ', user.id);
+        localStorage.setItem('loggedInUser', JSON.stringify(user.id));
+        localStorage.setItem('token', token);
+        setLoggedInUser(user);
+        navigate('/mainHome');
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
     } catch (error) {
       console.error('Login failed:', error);
-      if (error.response && error.response.status === 401) {
+      if (error.message === 'Invalid credentials') {
         setLoginError('Invalid email or password');
       } else {
         setLoginError('An error occurred during login');

@@ -23,10 +23,14 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
             const fetchUserProfile = async () => {
                 try {
                     const response = await fetch(`http://localhost:3001/api/users/${loggedInUser.id}`, {
+                        method: 'GET',
                         headers: {
-                            Authorization: token,
+                            'Authorization': `Bearer ${token}`,
                         },
                     });
+                    // console.log("token in fetchUserProfile: ", token)
+                    // console.log("response in fetchUserProfile: ", response)
+
                     if (response.ok) {
                         const data = await response.json();
                         setProfile(data);
@@ -41,6 +45,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
             const fetchBooks = async (endpoint, setBooks) => {
                 try {
                     const response = await fetch(`http://localhost:3001/api/users/${loggedInUser.id}/books/${endpoint}`, {
+                        method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${token}`
                         },
