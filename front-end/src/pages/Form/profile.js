@@ -22,7 +22,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
             const fetchUserProfile = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3001/users/${loggedInUser.id}`, {
+                    const response = await fetch(`http://localhost:3001/api/users/${loggedInUser.id}`, {
                         headers: {
                             Authorization: token,
                         },
@@ -40,7 +40,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
             const fetchBooks = async (endpoint, setBooks) => {
                 try {
-                    const response = await fetch(`http://localhost:3001/users/${loggedInUser.id}/books/${endpoint}`, {
+                    const response = await fetch(`http://localhost:3001/api/users/${loggedInUser.id}/books/${endpoint}`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         },

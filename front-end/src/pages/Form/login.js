@@ -33,11 +33,13 @@ const Login = ({ registeredUser, setLoggedInUser }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/users/login', {
+      const response = await axios.post('http://localhost:3001/api/login', {
         email,
         password,
       });
+
       const { user, token } = response.data;
+      console.log("user.id: ", user.id)
       localStorage.setItem("loggedInUser", JSON.stringify(user.id));
       localStorage.setItem('token', token); // store token in local storage
 
