@@ -39,14 +39,17 @@ exports.register = async (req, res) => {
       token,
     });
   } catch (error) {
+    console.error("Registration error:", error);
     res.status(500).send("Server error during registration.");
   }
 };
+
+
 // user login
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({email})
+    const user = await User.findOne({ email })
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -72,72 +75,71 @@ exports.login = async (req, res) => {
     res.status(500).send("Server error during login.");
   }
 }
+
 // logout controller
 exports.logout = async (req, res) => {
   res.status(200).send("User logged out");
 }
+
 exports.updateUser = async (req, res) => {
-  const {id} = req.params;
-  const {fullname, username, email} = req.body 
-  try{
+  const { id } = req.params;
+  const { fullname, username, email } = req.body
+  try {
     // find user and update it
-    const updatedUser = await User.findByIdAndUpdate(id , {fullname , username , email} , {new: true})
-    if(!updatedUser)
-    {
+    const updatedUser = await User.findByIdAndUpdate(id, { fullname, username, email }, { new: true })
+    if (!updatedUser) {
       return res.status(404).send("User not found")
     }
     updatedUser.password = undefined;
     res.status(200).json(updatedUser)
 
   }
-  catch(error)
-  {
+  catch (error) {
     console.error(error)
     res.status(500).send("error updating user")
   }
 }
+
 exports.deleteUser = async (req, res) => {
-  const {id} = req.params;
-  try{
+  const { id } = req.params;
+  try {
     const deletedUser = await User.findByIdAndDelete(id)
-    if(!deletedUser)
-    {
+    if (!deletedUser) {
       return res.status(404).send("User not found")
     }
     res.status(200).send("User deleted")
   }
-  catch(error)
-  {
+  catch (error) {
     console.error(error)
     res.status(500).send("error deleting user")
   }
 }
+
 // get a user
 exports.getUser = async (req, res) => {
-  const {id} = req.params;
-  try{
+  const { id } = req.params;
+  try {
     const user = await User.findById(id)
-    if(!user)
-    {
+    if (!user) {
       return res.status(404).send("User not found")
     }
     user.password = undefined;
     res.status(200).json(user)
   }
-  catch(error)
-  {
+  catch (error) {
     console.error(error)
     res.status(500).send("error getting user")
   }
 }
+
 // get all users
-exports.getAllUsers = async (req , res) => {
-  try{
-    const users =  await User.find({}).select('-password');
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({}).select('-password');
     res.status(200).json(users)
   }
-  catch(error){
-    console.error("Failed to retrieve users" , error)
+  catch (error) {
+    console.error("Failed to retrieve users", error)
     res.status(500).send("Error retrieving users")
   }
 
