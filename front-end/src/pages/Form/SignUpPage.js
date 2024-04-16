@@ -16,7 +16,7 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/register', {
+    fetch('http://localhost:3001/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -104,13 +104,13 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
             </div>
             <div className="flex items-baseline justify-between">
               {/* made the button blue, if this goes against our theme we can revert i guess */}
-    <button className=" bg-blue-500 text-white font-bold py-2 px-4 rounded inline-flex items-center hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:shadow-outline">
-        Sign Up
-    </button>
-    <a href="/login" className="text-blue-600 hover:underline pl-2">
-        Already have an account? Login
-    </a>
-</div>
+              <button className=" bg-blue-500 text-white font-bold py-2 px-4 rounded inline-flex items-center hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:shadow-outline">
+                Sign Up
+              </button>
+              <a href="/login" className="text-blue-600 hover:underline pl-2">
+                Already have an account? Login
+              </a>
+            </div>
 
           </div>
         </form>
