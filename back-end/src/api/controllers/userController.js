@@ -32,7 +32,7 @@ exports.register = async (req, res) => {
     );
     res.status(201).json({
       user: {
-        id: newUser._id,
+        _id: newUser._id,
         fullname: newUser.fullname,
         username: newUser.username,
         email: newUser.email,
@@ -64,7 +64,7 @@ exports.login = async (req, res) => {
       );
       return res.status(200).json({
         user: {
-          id: user._id,
+          _id: user._id,
           fullname: user.fullname,
           username: user.username,
           email: user.email,
@@ -85,6 +85,7 @@ exports.logout = async (req, res) => {
 }
 
 exports.updateUser = async (req, res) => {
+  console.log("in update user")
   const { id } = req.params;
   const { fullname, username, email } = req.body
   try {

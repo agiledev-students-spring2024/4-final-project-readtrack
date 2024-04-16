@@ -31,10 +31,10 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
             const token = localStorage.getItem('token');
 
             const urls = [
-                `http://localhost:3001/api/users/${loggedInUser.id}/books/currentReads`,
-                `http://localhost:3001/api/users/${loggedInUser.id}/books/friendsReads`,
-                `http://localhost:3001/api/users/${loggedInUser.id}/books/topReads`,
-                `http://localhost:3001/api/users/${loggedInUser.id}/books/suggestions`,
+                `http://localhost:3001/api/users/${loggedInUser._id}/books/currentReads`,
+                `http://localhost:3001/api/users/${loggedInUser._id}/books/friendsReads`,
+                `http://localhost:3001/api/users/${loggedInUser._id}/books/topReads`,
+                `http://localhost:3001/api/users/${loggedInUser._id}/books/suggestions`,
             ];
 
 
