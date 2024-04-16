@@ -125,9 +125,13 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                 </div>
             </div>
             <div className="mt-5 space-y-4">
-                <BookShelf title="Favorites" books={favorites} />
+                <div className="bg-goodreads-lightgray">
+                    <BookShelf title="Favorites" books={favorites} />
+                </div>
                 <BookShelf title="Want to Read" books={wantToRead} />
-                <BookShelf title="Past Reads" books={pastReads} />
+                <div className="bg-goodreads-lightgray">
+                    <BookShelf title="Past Reads" books={pastReads} />
+                </div>
             </div>
         </div>
     );
