@@ -16,7 +16,7 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/users/register', {
+    fetch('http://localhost:3001/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

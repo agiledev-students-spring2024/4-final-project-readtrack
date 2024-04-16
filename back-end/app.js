@@ -15,7 +15,7 @@ app.use(express.json());
 dotenv.config();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -36,10 +36,6 @@ app.use((err, req, res, next) => {
     res.status(500).send({ error: 'Something broke!' });
 });
 
-// Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+
 
 module.exports = app;
