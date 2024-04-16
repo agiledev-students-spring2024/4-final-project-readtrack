@@ -2,23 +2,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+// const { populateDB } = require('./populateDB');
 
 // Import routes
-const userRoutes = require('./src/api/routes/userRoutes'); // Adjust the path as necessary
+const userRoutes = require('./src/api/routes/userRoutes');
 
 // Initialize the Express application
 const app = express();
 
 // Apply middleware
-// app.use(cors());
-
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 app.use(express.json());
+
 dotenv.config();
 
 // Connect to MongoDB
@@ -37,7 +36,6 @@ app.use((req, res, next) => {
 
 app.use('/api', userRoutes);
 
-
 // Default route for testing the server
 app.get('/', (req, res) => {
     res.send('Welcome to the Book API!');
@@ -49,5 +47,6 @@ app.use((err, req, res, next) => {
     res.status(500).send({ error: 'Something broke!' });
 });
 
+// populateDB();
 
 module.exports = app;

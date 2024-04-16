@@ -10,7 +10,7 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
     const [topReads, setTopReads] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
 
-   
+
 
     useEffect(() => {
         const storedUserJSON = localStorage.getItem("loggedInUser");
@@ -31,13 +31,12 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
             const token = localStorage.getItem('token');
 
             const urls = [
-                `http://localhost:3001/users/${loggedInUser.id}/books/currentReads`,
-                `http://localhost:3001/users/${loggedInUser.id}/books/WanttoRead`,
-                `http://localhost:3001/users/${loggedInUser.id}/books/PastReads`,
-                `http://localhost:3001/users/${loggedInUser.id}/books/FriendsCurrentReads`,
-                `http://localhost:3001/users/${loggedInUser.id}/books/ThisWeek'sTop10Reads`,
-                `http://localhost:3001/users/${loggedInUser.id}/books/SuggestionsforYou`,
+                `http://localhost:3001/api/users/${loggedInUser.id}/books/currentReads`,
+                `http://localhost:3001/api/users/${loggedInUser.id}/books/friendsReads`,
+                `http://localhost:3001/api/users/${loggedInUser.id}/books/topReads`,
+                `http://localhost:3001/api/users/${loggedInUser.id}/books/suggestions`,
             ];
+
 
             try {
                 const allRequests = urls.map((url) =>
@@ -47,22 +46,25 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
                             'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json'
                         },
-                    }).then((res) => res.json())
+                    }).then((res) => {
+                        if (!res.ok) {  // Check if the HTTP request was successful
+                            throw new Error('Network response was not ok');
+                        }
+                        return res.json();  // Parse JSON body of response
+                    })
                 );
+
 
                 const [
                     currentReadsData,
-                    wantToReadData,
-                    pastReadsData,
                     friendsReadsData,
                     topReadsData,
                     suggestionsData,
                 ] = await Promise.all(allRequests);
 
+
                 // Update state with the fetched data
                 setCurrentReads(currentReadsData);
-                setWantToRead(wantToReadData);
-                setPastReads(pastReadsData);
                 setFriendsReads(friendsReadsData);
                 setTopReads(topReadsData);
                 setSuggestions(suggestionsData);
@@ -85,8 +87,6 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
                     <Header title={`${loggedInUser.username}'s Homepage`} />
                     <div>
                         <BookShelf title="Current Reads" books={currentReads} />
-                        {/* <BookShelf title="Want to Read" books={wantToRead} /> moved to profile */}
-                        {/* <BookShelf title="Past Reads" books={pastReads} /> moved to profile */}
                         <BookShelf title="Friends Current Reads" books={friendsReads} />
                         <BookShelf title="This Week's Top 10 Reads" books={topReads} />
                         <BookShelf title="Suggestions for You" books={suggestions} />

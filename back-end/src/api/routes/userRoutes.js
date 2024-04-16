@@ -10,7 +10,7 @@ router.post('/login', userController.login);
 router.get('/logout', userController.logout)
 router.get('/users', authenticateToken, userController.getAllUsers)
 router.get('/users/:id', authenticateToken, userController.getUser)
-router.put('/user/:id', authenticateToken, userController.updateUser)
+router.put('/users/update/:id', authenticateToken, userController.updateUser)
 router.delete('/user/:id', authenticateToken, userController.deleteUser)
 
 // not a user route but GENERAL book search
@@ -25,6 +25,10 @@ router.get('/users/:id/books/favorites', authenticateToken, userBooksController.
 //past reads
 router.get('/users/:id/books/pastReads', authenticateToken, userBooksController.getPastReads)
 
-// TODO: starting from get friends' current reads books in app.js
+router.get('/users/:id/books/friendsReads', authenticateToken, userBooksController.getFriendsReads)
+router.get('/users/:id/books/topReads', authenticateToken, userBooksController.getTopReads)
+router.get('/users/:id/books/suggestions', authenticateToken, userBooksController.getSuggestions)
+
+router.get('/books/:bookId', authenticateToken, userBooksController.getBook)
 
 module.exports = router

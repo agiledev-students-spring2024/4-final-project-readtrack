@@ -3,13 +3,11 @@ require('dotenv').config();
 
 exports.authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
-    console.log('authHeader: ', authHeader)
     if (!authHeader) {
         return res.status(401).json({ message: "Authorization header is missing." });
     }
 
     const token = authHeader.split(' ')[1];
-    console.log('token in authenticateToken: ', token)
     if (!token) {
         return res.status(401).json({ message: "Bearer token not found." });
     }

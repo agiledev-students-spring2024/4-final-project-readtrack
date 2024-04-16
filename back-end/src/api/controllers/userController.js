@@ -48,14 +48,14 @@ exports.register = async (req, res) => {
 
 // user login
 exports.login = async (req, res) => {
-  console.log("req.body: ", req.body)
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email })
-    console.log("User: ", user)
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
+
     if (await bcrypt.compare(password, user.password)) {
       const token = jwt.sign(
         { user_id: user._id, email },
@@ -94,7 +94,7 @@ exports.updateUser = async (req, res) => {
       return res.status(404).send("User not found")
     }
     updatedUser.password = undefined;
-    res.status(200).json(updatedUser)
+    res.status(200).json({ user: updatedUser });
 
   }
   catch (error) {

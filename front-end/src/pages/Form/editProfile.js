@@ -24,21 +24,39 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3001/users/${loggedInUser.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setLoggedInUser(data);
-                navigate("/profile");
-            })
-            .catch((error) => console.error("Error updating profile:", error));
+        try {
+            console.log('loggedInUser.id editProfile:', loggedInUser)
+            const response = await fetch(`http://localhost:3001/users/update/${loggedInUser.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            console.log("body formdata thing: ", JSON.stringify(formData))
+
+            console.log('response:', response)
+
+            if (response.ok) {
+                const { user } = await response.json();
+                console.log("user in edit profile", user)
+                setLoggedInUser(user);
+                navigate('/profile');
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.message);
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error)
+        }
+
+
+
+
     };
 
     return (

@@ -36,7 +36,7 @@ const BookShelf = ({ books, title }) => {
       <div className="flex overflow-x-auto space-x-4 scrollbar-hide pr-4">
         {books.length > 0 ? (
           books.map((book) => (
-            <Link key={book.id} to={`/books/${book.id}`} className="shrink-0">
+            <Link key={book._id} to={`/books/${book._id}`} className="shrink-0">
               <img src={book.coverUrl} alt={`Cover of ${book.title}`} className="w-28 h-44" />
             </Link>
           ))

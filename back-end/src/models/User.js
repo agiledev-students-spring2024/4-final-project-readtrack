@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const bookReference = {
-    type: Schema.Types.ObjectId,
-    ref: 'Book'
+  type: Schema.Types.ObjectId,
+  ref: 'Book'
 };
 
 const userSchema = new Schema({
@@ -27,12 +27,15 @@ const userSchema = new Schema({
     required: true
   },
   // object with arrays of book references for each bookshelf , these will reference the ID's of the books
-  
+
   books: {
     currentlyReading: [bookReference],
     finishedReading: [bookReference],
     wishlist: [bookReference],
-    favorites: [bookReference]
+    favorites: [bookReference],
+    friendsReads: [bookReference],
+    topReads: [bookReference],
+    suggestions: [bookReference]
   },
   profile: {
     type: String,

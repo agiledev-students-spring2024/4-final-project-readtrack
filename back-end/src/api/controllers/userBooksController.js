@@ -22,44 +22,43 @@ exports.searchBooks = async (req, res) => {
 
 // get all books for a user
 exports.getAllUserBooks = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    // we find the user then pull the "documents" it references to get all books associated with user
-    const user = await User.findById(id).populate('books.currentlyreading books.finishedReading books.wishlist books.favorites')
+    const user = await User.findById(id).populate('books.currentlyReading books.finishedReading books.wishlist books.favorites');
     if (!user) {
-      return res.status(404).send('User not found')
+      return res.status(404).send('User not found');
     }
-    res.status(200).json(user.books) // return all books associated with user (might need to structure differently)
-
-  }
-  catch (error) {
+    res.status(200).json(user.books);  // Returning the structured books object
+  } catch (error) {
     console.error("Failed to retrieve user books:", error);
     res.status(500).send("Error retrieving user books");
-
   }
-}
+};
+
 
 // get current reads
 exports.getCurrentUserBooks = async (req, res) => {
-  const { userId } = req.params
+  console.log("gets to getCurrentUserBooks")
+  const { id } = req.params;
   try {
-    const user = await User.findById(userId).populate('books.currentlyreading')
+    const user = await User.findById(id).populate('books.currentlyReading');
+    // console.log("user current reads in getCurrentUserBooks: ", user.books.currentlyReading)
     if (!user) {
-      return res.status(404).send('User not found')
+      return res.status(404).send('User not found');
     }
-    res.status(200).json(user.books.currentlyreading)
-  }
-  catch (error) {
-    console.error("Failed to retrieve user books:", error);
+    res.status(200).json(user.books.currentlyReading);
+  } catch (error) {
+    console.error("Failed to retrieve currently reading books:", error);
     res.status(500).send("Error retrieving user books");
   }
-}
+};
+
 
 // get want to read
 exports.getWantToRead = async (req, res) => {
-  const { userId } = req.params
+  const { id } = req.params
   try {
-    const user = await User.findById(userId).populate('books.wishlist')
+    const user = await User.findById(id).populate('books.wishlist')
     if (!user) {
       return res.status(404).send('User not found')
     }
@@ -73,9 +72,9 @@ exports.getWantToRead = async (req, res) => {
 
 // get favorites
 exports.getFavorites = async (req, res) => {
-  const { userId } = req.params
+  const { id } = req.params
   try {
-    const user = await User.findById(userId).populate('books.favorites')
+    const user = await User.findById(id).populate('books.favorites')
     if (!user) {
       return res.status(404).send('User not found')
     }
@@ -89,9 +88,9 @@ exports.getFavorites = async (req, res) => {
 
 // get past reads
 exports.getPastReads = async (req, res) => {
-  const { userId } = req.params
+  const { id } = req.params
   try {
-    const user = await User.findById(userId).populate('books.finishedReading')
+    const user = await User.findById(id).populate('books.finishedReading')
     if (!user) {
       return res.status(404).send('User not found')
     }
@@ -102,3 +101,60 @@ exports.getPastReads = async (req, res) => {
     res.status(500).send("Error retrieving user books");
   }
 }
+
+exports.getFriendsReads = async (req, res) => {
+  const { id } = req.params
+  try {
+    const user = await User.findById(id).populate('books.friendsReads')
+    if (!user) {
+      return res.status(404).send('User not found')
+    }
+    res.status(200).json(user.books.friendsReads)
+  }
+  catch (error) {
+    console.error("Failed to retrieve user books:", error);
+    res.status(500).send("Error retrieving user books");
+  }
+}
+
+exports.getTopReads = async (req, res) => {
+  const { id } = req.params
+  try {
+    const user = await User.findById(id).populate('books.topReads')
+    if (!user) {
+      return res.status(404).send('User not found')
+    }
+    res.status(200).json(user.books.topReads)
+  }
+  catch (error) {
+    console.error("Failed to retrieve user books:", error);
+    res.status(500).send("Error retrieving user books");
+  }
+}
+
+exports.getSuggestions = async (req, res) => {
+  const { id } = req.params
+  try {
+    const user = await User.findById(id).populate('books.suggestions')
+    if (!user) {
+      return res.status(404).send('User not found')
+    }
+    res.status(200).json(user.books.suggestions)
+  }
+  catch (error) {
+    console.error("Failed to retrieve user books:", error);
+    res.status(500).send("Error retrieving user books");
+  }
+}
+
+exports.getBook = async (req, res) => {
+  const { bookId } = req.params
+
+  try {
+    const book = await Book.findById(bookId);
+    res.status(200).json(book);
+  } catch (error) {
+    console.error("Failed to retrieve book:", error);
+    res.status(500).send("Error retrieving book");
+  }
+};

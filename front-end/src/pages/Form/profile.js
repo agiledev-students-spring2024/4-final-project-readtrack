@@ -4,7 +4,6 @@ import BookShelf from "../../components/bookshelf";
 
 const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     const [profile, setProfile] = useState(null);
-    const [currentReads, setCurrentReads] = useState([]);
     const [wantToRead, setWantToRead] = useState([]);
     const [pastReads, setPastReads] = useState([]);
     const [favorites, setFavorites] = useState([]);
@@ -12,6 +11,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     const placeholder = "https://images.unsplash.com/photo-1526800544336-d04f0cbfd700?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     useEffect(() => {
+        console.log("loggedInUser.id: ", loggedInUser.id)
         if (loggedInUser) {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -28,8 +28,6 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                             'Authorization': `Bearer ${token}`,
                         },
                     });
-                    // console.log("token in fetchUserProfile: ", token)
-                    // console.log("response in fetchUserProfile: ", response)
 
                     if (response.ok) {
                         const data = await response.json();
@@ -62,9 +60,9 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
             };
 
             fetchUserProfile();
-            fetchBooks('WanttoRead', setWantToRead);
-            fetchBooks('PastReads', setPastReads);
             fetchBooks('favorites', setFavorites);
+            fetchBooks('wantToRead', setWantToRead);
+            fetchBooks('pastReads', setPastReads);
         }
     }, [loggedInUser, navigate]);
 
