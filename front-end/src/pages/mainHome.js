@@ -87,7 +87,7 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
                     <Header title={`${loggedInUser.username}'s Homepage`} />
                     <div>
                         <BookShelf title="Current Reads" books={currentReads} />
-                        <BookShelf title="Friends Current Reads" books={friendsReads} />
+                        {/* <BookShelf title="Friends Current Reads" books={friendsReads} /> */}
                         <BookShelf title="This Week's Top 10 Reads" books={topReads} />
                         <BookShelf title="Suggestions for You" books={suggestions} />
                     </div>
