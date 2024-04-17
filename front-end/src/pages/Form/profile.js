@@ -4,7 +4,6 @@ import BookShelf from "../../components/bookshelf";
 
 const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     const [profile, setProfile] = useState(null);
-    const [currentReads, setCurrentReads] = useState([]);
     const [wantToRead, setWantToRead] = useState([]);
     const [pastReads, setPastReads] = useState([]);
     const [favorites, setFavorites] = useState([]);
@@ -12,6 +11,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     const placeholder = "https://images.unsplash.com/photo-1526800544336-d04f0cbfd700?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     useEffect(() => {
+        console.log("loggedInUser.id: ", loggedInUser._id)
         if (loggedInUser) {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -22,11 +22,13 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
             const fetchUserProfile = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3001/users/${loggedInUser.id}`, {
+                    const response = await fetch(`http://localhost:3001/api/users/${loggedInUser._id}`, {
+                        method: 'GET',
                         headers: {
-                            Authorization: token,
+                            'Authorization': `Bearer ${token}`,
                         },
                     });
+
                     if (response.ok) {
                         const data = await response.json();
                         setProfile(data);
@@ -40,7 +42,8 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
             const fetchBooks = async (endpoint, setBooks) => {
                 try {
-                    const response = await fetch(`http://localhost:3001/users/${loggedInUser.id}/books/${endpoint}`, {
+                    const response = await fetch(`http://localhost:3001/api/users/${loggedInUser._id}/books/${endpoint}`, {
+                        method: 'GET',
                         headers: {
                             'Authorization': `Bearer ${token}`
                         },
@@ -57,9 +60,9 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
             };
 
             fetchUserProfile();
-            fetchBooks('WanttoRead', setWantToRead);
-            fetchBooks('PastReads', setPastReads);
             fetchBooks('favorites', setFavorites);
+            fetchBooks('wantToRead', setWantToRead);
+            fetchBooks('pastReads', setPastReads);
         }
     }, [loggedInUser, navigate]);
 
@@ -137,10 +140,11 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
 
             <div className="mt-5 space-y-4">
+
                 <div className="bg-goodreads-lightgray">
                     <BookShelf title="Favorites" books={favorites} />
                 </div>
-                <BookShelf title="Want to Read" books={wantToRead} />
+                <BookShelf title="Wishlist" books={wantToRead} />
                 <div className="bg-goodreads-lightgray">
                     <BookShelf title="Past Reads" books={pastReads} />
                 </div>

@@ -11,6 +11,10 @@ const SearchComponent = ({ onSearch }) => {
     e.preventDefault();
     onSearch(searchTerm);
   };
+  const handleViewAll = (e) => {
+    e.preventDefault();
+    onSearch(""); 
+  };
 
   return (
     <div className="flex justify-center items-center p-4 ">
@@ -25,8 +29,18 @@ const SearchComponent = ({ onSearch }) => {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <button className="btn" type="submit ">
+          <button
+            className="btn flex-1 min-w-[100px] px-4 py-2 text-white bg-teal-500 hover:bg-teal-700 transition-colors duration-150 ease-in-out"
+            type="submit"
+          >
+
             Search
+          </button>
+          <button
+            className="btn flex-1 min-w-[100px] ml-2 px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 transition-colors duration-150 ease-in-out"
+            onClick={handleViewAll}
+          >
+            View All
           </button>
         </div>
       </form>

@@ -38,16 +38,13 @@ const BookShelf = ({ books, title, subtitle }) => {
       </h2>
       <h3 className="text-sm text-goodreads-black font-cormorantGaramondSemibold align-middle pb-2">{subtitle}</h3>
       <div className="flex overflow-x-auto space-x-4 scrollbar-hide pr-4">
-        {books.length > 0
-          ? books.map((book) => (
-            <Link key={book.id} to={`/books/${book.id}`} className="shrink-0">
-              <img
-                src={book.coverUrl}
-                alt={`Cover of ${book.title}`}
-                className="w-28 h-44"
-              />
+        {books.length > 0 ? (
+          books.map((book) => (
+            <Link key={book._id} to={`/books/${book._id}`} className="shrink-0">
+              <img src={book.coverUrl} alt={`Cover of ${book.title}`} className="w-28 h-44" />
+
             </Link>
-          ))
+          )))
           : dummyBooks.map((dummyBook) => (
             <Link key={dummyBook.id} to="/search" className="shrink-0">
               <img

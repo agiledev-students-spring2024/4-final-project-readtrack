@@ -48,7 +48,7 @@ const FriendProfile = () => {
       {/* PROFILE BODY */}
       <div>
         <BookShelf title="Current Reads" />
-        <BookShelf title="Want to Read" />
+        <BookShelf title="Wishlist" />
         <BookShelf title="Past Reads" />
       </div>
     </div>

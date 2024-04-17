@@ -54,35 +54,22 @@ const BookSearchPage = ({ loggedInUser, setLoggedInUser,  onSearch }) => {
   
   const handleSearch = (searchTerm) => {
 
-    // filters all books
-    fetch(`http://localhost:3001/books`)
-      .then(response => response.json())
-      .then (data => {
-        const searchResults = data.filter((books) => 
-          books.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setBooks(searchResults);
-        setSearchPerformed(true);
-      })
-      .catch((error) => {
-        console.error("Error searching books:", error);
-      })
-
-    // filter books
-    // put the filtered books into a bookshelf that is able to be displayed
-
-    /*
-    Ellis' work:
-
     // Call the API to search for books 
-    const searchUrl =`http://localhost:3001/books/${searchTerm}`;
-    fetch(searchUrl)
-      .then((response) => response.json())
+    const searchUrl = `http://localhost:3001/api/books/search?query=${encodeURIComponent(searchTerm)}`;
+      fetch(searchUrl)
+      .then((response) => {
+        if(!response.ok) {
+          throw new Error('Failed to retrieve search results');
+        }
+        return response.json();
+      })
       .then((data) => {
-        setBooks(data);
+       setBooks(data)
+
       });
       console.log(books)
-      */
+      
+    
   };
 
   return (

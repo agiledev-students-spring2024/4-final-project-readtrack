@@ -10,7 +10,7 @@ const Friends = ({ loggedInUser, setLoggedInUser }) => {
 
   useEffect(() => {
     if (loggedInUser) {
-      fetch(`http://localhost:3001/users/${loggedInUser.id}`)
+      fetch(`http://localhost:3001/api/users/${loggedInUser._id}`)
         .then((response) => response.json())
         .then((data) => {
           setProfile(data);

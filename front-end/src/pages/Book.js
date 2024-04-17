@@ -10,10 +10,24 @@ const BookPage = ({ loggedInUser }) => {
     const [book, setBook] = useState(null);
     const { bookId } = useParams();
 
+
     useEffect(() => {
-        if (bookId) {
-            fetch(`http://localhost:3001/books/${bookId}`)
-                .then(response => response.json())
+        const token = localStorage.getItem('token');
+
+        if (bookId && token) {
+            fetch(`http://localhost:3001/api/books/${bookId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not okay');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     setBook(data);
                 })
@@ -48,9 +62,9 @@ const BookPage = ({ loggedInUser }) => {
                         <p className="mb-4"><span className="font-semibold">First Published:</span> {book.publishedDate || 'Unknown'}</p>
                         {loggedInUser && (
                             <div className="grid grid-cols-3 gap-4">
-                                <CurrentlyReading userId={loggedInUser.id} bookId={bookId} />
-                                <ReadingFinished userId={loggedInUser.id} bookId={bookId} />
-                                <ReadingWishlist userId={loggedInUser.id} bookId={bookId} />
+                                <CurrentlyReading userId={loggedInUser._id} bookId={bookId} />
+                                <ReadingFinished userId={loggedInUser._id} bookId={bookId} />
+                                <ReadingWishlist userId={loggedInUser._id} bookId={bookId} />
                             </div>
                         )}
                         <div className="pt-4">
