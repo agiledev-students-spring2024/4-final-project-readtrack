@@ -31,4 +31,10 @@ router.get('/users/:id/books/suggestions', authenticateToken, userBooksControlle
 
 router.get('/books/:bookId', authenticateToken, userBooksController.getBook)
 
+// Nested routes for user's books
+router.post('/users/:id/currentlyReading', authenticateToken, userBooksController.addBookToCurrentlyReading)
+router.post('/users/:id/finishedReading', authenticateToken, userBooksController.addBookToFinishedReading)
+// wishlist
+router.post('/users/:id/wishlist', authenticateToken, userBooksController.addBookToWishlist)
+
 module.exports = router
