@@ -50,7 +50,7 @@ const NavItem = ({ name, to, iconPaths }) => (
   </Link>
 );
 const Navbar = () => (
-  <nav className="bg-white text-goodreads-black p-4 fixed bottom-0 inset-x-0 flex justify-around text-xs md:text-sm rounded-t-xl">
+  <nav className="border-2 border-[#D9D9D9] bg-white text-goodreads-black p-4 fixed bottom-0 inset-x-0 flex justify-around text-xs md:text-sm rounded-t-xl">
     {NAV_ITEMS.map((item, index) => (
       <NavItem key={index} {...item} />
     ))}

@@ -17,6 +17,7 @@ module.exports = {
           white: "#FFFFFF",
           lightgray: "#D9D9D9",
           black: "#000000",
+          linegray: "#AAA8A8",
         },
       },
       backgroundImage: {

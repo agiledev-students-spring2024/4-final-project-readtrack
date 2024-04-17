@@ -9,16 +9,19 @@ import BookShelf from "../components/bookshelf";
 
 // Dummy data lives: in books in back-end app.js
 
+//!! READD LOGGEDINUSER
+
 // TODO: Render books on screen
 // TODO: Clicking on book, go to that book's page
 // TODO: Finish search stuff
 // Understand Ellis' search component
-const BookSearchPage = ({ loggedInUser, setLoggedInUser, onSearch }) => { 
+const BookSearchPage = ({ loggedInUser, setLoggedInUser,  onSearch }) => {
 
   const [profile, setProfile] = useState(null);
   const [topReads, setTopReads] = useState([]);
   const [books, setBooks] = useState([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
+
 
   useEffect(() => {
     if (loggedInUser) {

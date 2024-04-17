@@ -79,55 +79,71 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     }
 
     return (
-        <div className="container mx-auto p-4">
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-                <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
-                    <div className="flex items-center">
+        <div className="bg-white container mx-auto p-4">
+
+
+            <div className="block text-left">
+                <h2 className="pt-5 text-4xl/[40px] tracking-wide pb-2 text-goodreads-black font-cormorantGaramondSemibold">
+                    {profile.username}</h2>
+            </div>
+            <div className="sm:px-10 flex-nowrap">
+                <div className="flex items-center">
+                    <div>
                         <img
                             src={placeholder}
                             alt="Profile"
                             className="w-20 h-20 object-cover rounded-full border-2 border-gray-300 mr-4"
                         />
-                        <div>
-                            <h3 className="text-lg leading-6 font-medium text-gray-900">
-                                {profile.fullname}
-                            </h3>
-                            <p className="text-sm text-gray-500">@{profile.username}</p>
-                            <p className="text-sm font-semibold text-gray-700 mt-1">{profile.friendCount} Friends</p>
-                        </div>
+                        <p className="pt-3 pr-12 text-lg text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
                     </div>
-                    <div className="flex flex-col items-end">
-                        <Link
-                            to="/edit-profile"
-                            className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md mb-2"
-                        >
-                            Edit Profile
-                        </Link>
-                        <button
-                            onClick={handleLogout}
-                            className="text-sm bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md"
-                        >
-                            Log out
-                        </button>
+                    <div>
+                        <p className="px-8 text-sm text-gray-500">Book Read</p>
+                    </div>
+                    <div>
+                        <p className="px-8 text-sm font-semibold text-gray-700 mt-1">{profile.friendCount}</p>
+                        <p className="px-8 text-sm font-semibold text-gray-700 mt-1"> Friends</p>
                     </div>
                 </div>
-                <div className="border-t border-gray-200">
+                <div>
                     <dl>
-                        <div className="bg-gray-50 px-4 py-5 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">
-                                Bio
-                            </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <div>
+                            <dd className="pr-8 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                 {profile.bio || "This user prefers to keep an air of mystery about them."}
                             </dd>
                         </div>
                     </dl>
                 </div>
+
+                <div className="pt-2 flex justify-end">
+                    <div>
+                        <Link
+                            to="/edit-profile"
+                            className="text-sm text-goodreads-black font-cormorantGaramondSemibold rounded-md mb-2 border border-[#000000] px-3"
+                        >
+                            Edit Profile
+                        </Link>
+                    </div>
+                    <div>
+                        <button
+                            onClick={handleLogout}
+                            className="text-sm text-goodreads-black font-cormorantGaramondSemibold rounded-md mb-2 border border-[#000000] px-3"
+                        >
+                            Log out
+                        </button>
+                    </div>
+                </div>
+                <hr className="w-full border-t-2 border-goodreads-linegray" />
             </div>
+
+
             <div className="mt-5 space-y-4">
-                <BookShelf title="Favorites" books={favorites} />
+                <div className="bg-goodreads-lightgray">
+                    <BookShelf title="Favorites" books={favorites} />
+                </div>
                 <BookShelf title="Want to Read" books={wantToRead} />
-                <BookShelf title="Past Reads" books={pastReads} />
+                <div className="bg-goodreads-lightgray">
+                    <BookShelf title="Past Reads" books={pastReads} />
+                </div>
             </div>
         </div>
     );
