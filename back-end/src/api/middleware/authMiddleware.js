@@ -21,7 +21,8 @@ exports.authenticateToken = (req, res, next) => {
             return res.status(403).json({ message });
         }
 
-        req.user = decodedToken;
+        req.user = decodedToken.user_id;
+        
         next();
     });
 };
