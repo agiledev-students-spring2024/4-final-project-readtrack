@@ -24,8 +24,21 @@ import ProtectedRoute from "./ProtectedRoute";
 import ProfilePage from "./pages/Form/profile";
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState();
-  const [registeredUser, setRegisteredUser] = useState();
+  const [loggedInUser, setLoggedInUser] = useState(null);  // Initialize to null or a default object
+  const [registeredUser, setRegisteredUser] = useState(null);
+
+  useEffect(() => {
+    // Optionally initialize loggedInUser from local storage or an API call
+    const storedUser = localStorage.getItem('loggedInUser');
+    if (storedUser) {
+      setLoggedInUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Update localStorage when loggedInUser changes
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+  }, [loggedInUser]);
 
 
   function AppRoutes() {
@@ -82,25 +95,24 @@ function App() {
           }
         />
         <Route
-          path="/edit-profile"
-          element={
-            <ProtectedRoute loggedInUser={loggedInUser}>
-              <Layout>
-                {" "}
-                <EditProfile
-                  loggedInUser={loggedInUser}
-                  setLoggedInUser={setLoggedInUser}
-                />{" "}
-              </Layout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path="/profile"
           element={
             <ProtectedRoute loggedInUser={loggedInUser}>
               <Layout>
                 <ProfilePage
+                  loggedInUser={loggedInUser}
+                  setLoggedInUser={setLoggedInUser}
+                />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <ProtectedRoute loggedInUser={loggedInUser}>
+              <Layout>
+                <EditProfile
                   loggedInUser={loggedInUser}
                   setLoggedInUser={setLoggedInUser}
                 />

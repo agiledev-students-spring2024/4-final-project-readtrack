@@ -2,6 +2,9 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const app = require("../app.js");
 const expect = chai.expect;
+const {authenticateToken} = require('../src/api/middleware/authMiddleware.js')
+const jwt = require("jsonwebtoken");
+
 
 chai.use(chaiHttp);
 
@@ -20,6 +23,49 @@ describe('Name', () => {
     })
 })
 */
+
+// Helper function to generate a token for testing
+function generateToken(payload) {
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });  // Adjust the expiresIn as needed
+}
+
+describe("User Routes - Protected", () => {
+  const validToken = generateToken({ id: "user1", role: "user" }); // Ensure the token generation logic aligns with your auth requirements
+  const invalidToken = "someInvalidToken";
+
+  it("should allow access to user details with a valid token", (done) => {
+    chai.request(app)
+      .get("/api/user/1") // Example ID, adjust as necessary
+      .set('Authorization', `Bearer ${validToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an("object");
+        done();
+      });
+  });
+
+  it("should deny access to user details with an invalid token", (done) => {
+    chai.request(app)
+      .get("/api/user/1") // Using the same user ID as above
+      .set('Authorization', `Bearer ${invalidToken}`)
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        done();
+      });
+  });
+
+  it("should deny access to user details without a token", (done) => {
+    chai.request(app)
+      .get("/api/user/1")
+      .end((err, res) => {
+        expect(res).to.have.status(401);
+        done();
+      });
+  });
+});
+
+
+  
 
 describe("Login & Signup", () => {
     
