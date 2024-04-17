@@ -14,7 +14,7 @@ router.put('/users/update/:id', authenticateToken, userController.updateUser)
 router.delete('/user/:id', authenticateToken, userController.deleteUser)
 
 // not a user route but GENERAL book search
-router.get('/books/search', authenticateToken, userBooksController.searchBooks)
+router.get('/books/search', userBooksController.searchBooks)
 //Nested routes for users books
 router.get('/users/:id/books', authenticateToken, userBooksController.getAllUserBooks)
 router.get('/users/:id/books/currentReads', authenticateToken, userBooksController.getCurrentUserBooks)
