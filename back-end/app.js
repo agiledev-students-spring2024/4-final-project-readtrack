@@ -47,6 +47,10 @@ app.use((err, req, res, next) => {
     res.status(500).send({ error: 'Something broke!' });
 });
 
+app.all('*', (req, res) => {
+    res.status(404).send('No API route found for this path');
+  });
+  
 // populateDB();
 
 module.exports = app;
