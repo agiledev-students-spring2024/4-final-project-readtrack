@@ -17,6 +17,21 @@ async function updateUserBookList(userId, bookId, listType) {
     throw error; // Re-throw to handle in the calling function
   }
 }
+async function removeBookFromUserList(userId, bookId, listType) {
+  try {
+    const update = { $pull: { [`books.${listType}`]: bookId } };
+    const updatedUser = await User.findByIdAndUpdate(userId, update, {
+      new: true, // Return the modified document rather than the original
+    });
+    if (!updatedUser) {
+      throw new Error("User not found");
+    }
+    return updatedUser
+  } catch (error) {
+    console.error("Error updating user book list:", error);
+    throw error; // Re-throw to handle in the calling function
+  }
+}
 
 //utility function to validate if a book exists
 
@@ -192,6 +207,50 @@ exports.addBookToCurrentlyReading = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+exports.removeBookFromCurrentlyReading = async (req, res) => {
+  const userId = req.user;
+  const { bookId } = req.body; // Assuming bookId is sent in the body
+
+  try {
+    const user = await removeBookFromUserList(userId, bookId, "currentlyReading");
+    res.status(200).json(user);
+  } catch (error) {
+    if(error.message === 'User not found') {
+      res.status(404).send('User not found');
+    }
+      res.status(500).send('Error updating currently reading list');
+  }
+};
+exports.removeBookFromFinishedReading = async (req, res) => {
+  const userId = req.user;
+  const { bookId } = req.body; // Assuming bookId is sent in the body
+
+  try {
+    const user = await removeBookFromUserList(userId, bookId, "finishedReading");
+    res.status(200).json(user);
+  } catch (error) {
+    if(error.message === 'User not found') {
+      res.status(404).send('User not found');
+    }
+      res.status(500).send('Error updating finished reading list');
+  }
+}
+exports.removeBookFromWishlist = async (req, res) => {
+  const userId = req.user;
+  const { bookId } = req.body; // Assuming bookId is sent in the body
+
+  try {
+    const user = await removeBookFromUserList(userId, bookId, "wishlist");
+    res.status(200).json(user);
+  } catch (error) {
+    if(error.message === 'User not found') {
+      res.status(404).send('User not found');
+    }
+      res.status(500).send('Error updating wishlist');
+  }
+}
+
 
 // Controller to add a book to finished reading
 exports.addBookToFinishedReading = async (req, res) => {
