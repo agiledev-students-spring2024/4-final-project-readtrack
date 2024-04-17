@@ -19,9 +19,10 @@ const SearchComponent = ({ onSearch }) => {
   return (
     <div className="flex justify-center items-center p-4 ">
       <form className="w-full max-w-sm" onSubmit={handleSearchSubmit}>
-        <div className="flex items-center border-b border-teal-500 py-2">
+        <div className="flex items-center">
           <input
-            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+            className="appearance-none bg-transparent border border-goodreads-lightgray w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none rounded-xl"
+            // border-none
             type="text"
             placeholder="Search for books..."
             aria-label="Book search"
@@ -32,6 +33,7 @@ const SearchComponent = ({ onSearch }) => {
             className="btn flex-1 min-w-[100px] px-4 py-2 text-white bg-teal-500 hover:bg-teal-700 transition-colors duration-150 ease-in-out"
             type="submit"
           >
+
             Search
           </button>
           <button

@@ -81,15 +81,20 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
 
 
     return (
-        <div className="bg-goodread-white">
+        <div className="bg-goodreads-lightgray">
             {loggedInUser ? (
                 <>
                     <Header title={`${loggedInUser.username}'s Homepage`} />
                     <div>
-                        <BookShelf title="Current Reads" books={currentReads} />
-                        {/* <BookShelf title="Friends Current Reads" books={friendsReads} /> */}
-                        <BookShelf title="This Week's Top 10 Reads" books={topReads} />
-                        <BookShelf title="Suggestions for You" books={suggestions} />
+
+                        <BookShelf title="Current Reads" books={currentReads} subtitle="Your Rotation" />
+//                         <div className="bg-goodreads-white">
+//                             <BookShelf title="Friends Current Reads" books={friendsReads} subtitle="See what your friends are reading" />
+//                         </div>
+                        <BookShelf title="This Week's Top 10 Reads" books={topReads} subtitle="See what's popular" />
+                        <div className="bg-goodreads-white">
+                            <BookShelf title="Suggestions for You" books={suggestions} subtitle="Based on your interests" />
+                        </div>
                     </div>
                 </>
             ) : (
