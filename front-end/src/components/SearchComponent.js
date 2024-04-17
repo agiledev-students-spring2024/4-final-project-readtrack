@@ -13,7 +13,7 @@ const SearchComponent = ({ onSearch }) => {
   };
   const handleViewAll = (e) => {
     e.preventDefault();
-    onSearch(""); // Assuming the backend treats empty string as 'fetch all'
+    onSearch(""); 
   };
 
   return (
