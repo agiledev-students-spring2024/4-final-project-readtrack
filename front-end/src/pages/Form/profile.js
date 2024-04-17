@@ -129,7 +129,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
             </div>
             <div className="mt-5 space-y-4">
                 <BookShelf title="Favorites" books={favorites} />
-                <BookShelf title="Want to Read" books={wantToRead} />
+                <BookShelf title="Wishlist" books={wantToRead} />
                 <BookShelf title="Past Reads" books={pastReads} />
             </div>
         </div>
