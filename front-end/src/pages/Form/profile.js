@@ -116,24 +116,20 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                         </div>
                     </dl>
                 </div>
-
+                
                 <div className="pt-2 flex justify-end">
-                    <div>
-                        <Link
-                            to="/edit-profile"
-                            className="text-sm text-goodreads-black font-cormorantGaramondSemibold rounded-md mb-2 border border-[#000000] px-3"
-                        >
-                            Edit Profile
-                        </Link>
-                    </div>
-                    <div>
-                        <button
-                            onClick={handleLogout}
-                            className="text-sm text-goodreads-black font-cormorantGaramondSemibold rounded-md mb-2 border border-[#000000] px-3"
-                        >
-                            Log out
-                        </button>
-                    </div>
+                    <Link
+                        to="/edit-profile"
+                        className="text-sm text-goodreads-black font-cormorantGaramondSemibold bg-goodreads-lightgray rounded-md mb-2 border border-goodreads-black mx-2 px-3"
+                    >
+                        Edit Profile
+                    </Link>
+                    <button
+                        onClick={handleLogout}
+                        className="text-sm text-goodreads-black font-cormorantGaramondSemibold bg-goodreads-lightgray rounded-md mb-2 border border-goodreads-black px-3"
+                    >
+                        Log Out
+                    </button>
                 </div>
                 <hr className="w-full border-t-2 border-goodreads-linegray" />
             </div>
