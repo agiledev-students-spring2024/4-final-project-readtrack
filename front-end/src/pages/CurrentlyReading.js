@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-function CurrentlyReading({ userId, bookId }) {
-  const [bookAdded, setBookAdded] = useState(false);
+function CurrentlyReading({ userId, bookId, isAdded }) {
+  // Initialize the bookAdded state based on the isAdded prop
+  const [bookAdded, setBookAdded] = useState(isAdded);
 
   function UpdateCurrentlyReading() {
     const token = localStorage.getItem("token");
-    const url = `http://localhost:3001/api/users/${userId}/currentlyReading`;
     const method = bookAdded ? "DELETE" : "POST";
-    setBookAdded(!bookAdded);
-    fetch(url, {
+
+    fetch(`http://localhost:3001/api/users/${userId}/currentlyReading`, {
       method: method,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -17,8 +17,9 @@ function CurrentlyReading({ userId, bookId }) {
       body: JSON.stringify({ bookId }),
     })
       .then((response) => {
-        if (!response.ok)
+        if (!response.ok) {
           throw new Error("Failed to update currently reading list");
+        }
         return response.json();
       })
       .then(() => {
@@ -31,7 +32,6 @@ function CurrentlyReading({ userId, bookId }) {
 
   return (
     <button className="btn-sm" onClick={UpdateCurrentlyReading}>
-      {/* Add to Finished Books */}
       {bookAdded ? "Remove from Currently Reading" : "Add to Currently Reading"}
     </button>
   );
