@@ -44,7 +44,7 @@ const BookShelf = ({ books, title, subtitle }) => {
               <img src={book.coverUrl} alt={`Cover of ${book.title}`} className="w-28 h-44" />
 
             </Link>
-          ))
+          )))
           : dummyBooks.map((dummyBook) => (
             <Link key={dummyBook.id} to="/search" className="shrink-0">
               <img
