@@ -100,7 +100,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                         <p className="pt-3 pr-12 text-lg text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
                     </div>
                     <div>
-                        <p className="px-8 text-sm text-gray-500">Book Read</p>
+                        <p className="px-8 text-sm text-gray-500">Books Read</p>
                     </div>
                     <div>
                         <p className="px-8 text-sm font-semibold text-gray-700 mt-1">{profile.friendCount}</p>

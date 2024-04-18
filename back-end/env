@@ -1,2 +1,0 @@
-URI=mongodb+srv://js11692:js11692@cluster0.j4oqswv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-JWT_SECRET='secret'
