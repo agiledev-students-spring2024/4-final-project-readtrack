@@ -11,11 +11,13 @@ const BookPage = ({ loggedInUser }) => {
     const [book, setBook] = useState(null);
     const { bookId } = useParams();
     const [isFavorite, setIsFavorite] = useState(true);
+
     const FavoriteIcon = ({ isFavorite }) => (
         <span role="img" aria-label="favorite">
             {isFavorite ? "⭐️" : "✩"} {/* Filled star if favorite, else outline */}
         </span>
     );
+
     const toggleFavorite = () => {
         const token = localStorage.getItem("token");
 
@@ -37,7 +39,7 @@ const BookPage = ({ loggedInUser }) => {
     };
 
     const checkIfBookInList = (userData, bookId, listType) => {
-        console.log(`userData:${listType} `, userData[listType])
+        // console.log(`userData:${listType} `, userData[listType])
         return userData[listType].some(book => book._id === bookId);
     };
 
@@ -78,11 +80,11 @@ const BookPage = ({ loggedInUser }) => {
                             // console.log('userData: ', userData)
                             console.log('bookId: ', bookId)
                             const isCurrentlyReading = checkIfBookInList(userData, bookId, 'currentlyReading');
-                            console.log('isCurrentlyReading: ', isCurrentlyReading)
                             const isFinishedBook = checkIfBookInList(userData, bookId, 'finishedReading');
-                            console.log('isFinishedBook: ', isFinishedBook)
                             const isInWishList = checkIfBookInList(userData, bookId, 'wishlist');
-                            console.log('isInWishList: ', isInWishList)
+                            // console.log('isCurrentlyReading: ', isCurrentlyReading)
+                            // console.log('isFinishedBook: ', isFinishedBook)
+                            // console.log('isInWishList: ', isInWishList)
 
                             setBook((prevBook) => ({
                                 ...prevBook,
@@ -100,7 +102,6 @@ const BookPage = ({ loggedInUser }) => {
                 });
         }
     }, [bookId, loggedInUser._id]);
-
 
     if (!book) {
         return (
@@ -144,11 +145,11 @@ const BookPage = ({ loggedInUser }) => {
                             <span className="font-semibold">First Published:</span>{" "}
                             {book.publishedDate || "Unknown"}
                         </p>
-                        {loggedInUser && (
+                        {loggedInUser && book && (
                             <div className="grid grid-cols-3 gap-4">
                                 <CurrentlyReading userId={loggedInUser._id} bookId={bookId} isAdded={book.currentlyReading} />
-                                <ReadingFinished userId={loggedInUser._id} bookId={bookId} />
-                                <ReadingWishlist userId={loggedInUser._id} bookId={bookId} />
+                                <ReadingFinished userId={loggedInUser._id} bookId={bookId} isAdded={book.finishedBooks} />
+                                <ReadingWishlist userId={loggedInUser._id} bookId={bookId} isAdded={book.wishList} />
                             </div>
                         )}
                         <div className="pt-4">

@@ -31,8 +31,12 @@
   /* background-color: lightgray; */
 }
 
-.btn-sm {
-  @apply px-1 py-1 text-xs bg-goodreads-lightgray text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50;
+.btn-sm-1 {
+  @apply px-1 py-1 text-xs bg-goodreads-lightgray text-black font-semibold rounded-md;
+}
+
+.btn-sm-2 {
+  @apply px-1 py-1 text-xs bg-goodreads-red text-white font-semibold rounded-md;
 }
 
 .App {

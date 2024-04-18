@@ -1,18 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function ReadingWishlist() {
-  const [bookAdded, setBookAdded] = useState(false);
-  
+function ReadingWishlist({ userId, bookId, isAdded }) {
+  const [bookAdded, setBookAdded] = useState(isAdded || false);
+
+  useEffect(() => {
+    setBookAdded(isAdded);
+  }, [isAdded]);
+
   function UpdateWishList() {
-    // add/ remove this book to the user's "Finished Reading Book List" update button display below
-    setBookAdded(!bookAdded);
+    const token = localStorage.getItem("token");
+    const method = bookAdded ? "DELETE" : "POST";
+
+    fetch(`http://localhost:3001/api/users/${userId}/wishlist`, {
+      method: method,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookId }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update currently reading list");
+        }
+        return response.json();
+      })
+      .then(() => {
+        setBookAdded(!bookAdded);
+      })
+      .catch((error) => {
+        console.error("Error updating currently reading list:", error);
+      });
   }
 
   return (
-    <button className="btn-sm" onClick={UpdateWishList}>
-      {/* Add to Finished Books */}
-      {bookAdded ? 'Remove from Wish List' : 'Add to Wish List'}
-    </button>
+    <div>
+      {bookAdded ? (
+        <button className="btn-sm-2" onClick={UpdateWishList}>
+          Remove from Wishlist
+        </button>
+      ) : (
+        <button className="btn-sm-1" onClick={UpdateWishList}>
+          Add to Wishlist
+        </button>
+      )}
+    </div>
   );
 };
 
