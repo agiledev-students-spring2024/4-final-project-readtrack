@@ -184,10 +184,23 @@ exports.getSuggestions = async (req, res) => {
 
 exports.getBook = async (req, res) => {
   const { bookId } = req.params;
+  const userId = req.user;
 
   try {
     const book = await Book.findById(bookId);
-    res.status(200).json(book);
+    if (!book) {
+      return res.status(404).send("Book not found");
+    }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    // Check if the book is a favorite
+    const isFavorite = user.books.favorites.includes(bookId);
+    res.status(200).json({
+      ...book.toObject(),
+      isFavorite: isFavorite
+    });
   } catch (error) {
     console.error("Failed to retrieve book:", error);
     res.status(500).send("Error retrieving book");
@@ -279,3 +292,34 @@ exports.addBookToWishlist = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+exports.toggleFavoriteBook = async (req, res) => {
+  const userId = req.user;
+  const { bookId } = req.body;
+
+  try {
+
+    // Find the user and determine if the book is already a favorite
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    const index = user.books.favorites.indexOf(bookId);
+    
+    if (index === -1){
+      // Book is currently a favorite, so remove it
+      user.books.favorites.push(bookId);
+    } else {
+      // Book is not a favorite, so add it
+      user.books.favorites.splice(index, 1);
+    }
+
+    await user.save(); // Save the updated user document
+    console.log('Updated user:', user); // After await user.save();
+
+    res.status(200).json({ isFavorite: index < 0 }); // Respond with the new favorite status
+  } catch (error) {
+    console.error('Error toggling favorite book:', error);
+    res.status(500).send('Error updating favorite books');
+  }
+};
+

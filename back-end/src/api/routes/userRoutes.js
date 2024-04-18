@@ -40,4 +40,7 @@ router.delete('/users/:id/finishedReading', authenticateToken , userBooksControl
 router.post('/users/:id/wishlist', authenticateToken, userBooksController.addBookToWishlist)
 router.delete('/users/:id/wishlist', authenticateToken , userBooksController.removeBookFromWishlist);
 
+// favorites
+router.post('/users/:id/favorites', authenticateToken, userBooksController.toggleFavoriteBook)
+
 module.exports = router
