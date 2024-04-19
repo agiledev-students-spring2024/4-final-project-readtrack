@@ -110,7 +110,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                 <div>
                     <dl>
                         <div>
-                            <dd className="pr-8 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {profile.bio} </dd>
+                            <dd className="mt-1 text-sm text-gray-900 text-left sm:mt-0 sm:col-span-2"> {profile.bio} </dd>
                         </div>
                     </dl>
                 </div>
