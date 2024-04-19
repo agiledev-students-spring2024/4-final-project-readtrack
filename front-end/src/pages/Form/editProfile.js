@@ -8,6 +8,7 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
         fullname: "",
         username: "",
         email: "",
+        bio: "",
     });
 
     useEffect(() => {
@@ -16,6 +17,7 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
                 fullname: loggedInUser.fullname || "",
                 username: loggedInUser.username || "",
                 email: loggedInUser.email || "",
+                bio: loggedInUser.bio || "",
             });
         }
     }, [loggedInUser]);
@@ -54,10 +56,6 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
         } catch (error) {
             console.error("Error updating profile:", error)
         }
-
-
-
-
     };
 
     return (
@@ -96,12 +94,12 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
                             id="fullname"
                             type="text"
                             name="username"
-                            placeholder="John Doe"
+                            placeholder="JohnDoe"
                             value={formData.username}
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="mb-6">
+                    <div className="mb-4">
                         <label
                             className="block text-gray-700 font-bold mb-2"
                             htmlFor="email"
@@ -109,12 +107,29 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
                             Email
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="email"
                             type="email"
                             name="email"
                             placeholder="johndoe@example.com"
                             value={formData.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <label
+                            className="block text-gray-700 font-bold mb-2"
+                            htmlFor="bio"
+                        >
+                            Bio
+                        </label>
+                        <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            id="bio"
+                            type="bio"
+                            name="bio"
+                            placeholder="Tell us about yourself."
+                            value={formData.bio}
                             onChange={handleChange}
                         />
                     </div>

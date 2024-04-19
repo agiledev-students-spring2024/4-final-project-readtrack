@@ -87,10 +87,10 @@ exports.logout = async (req, res) => {
 exports.updateUser = async (req, res) => {
   console.log("in update user")
   const { id } = req.params;
-  const { fullname, username, email } = req.body
+  const { fullname, username, email, bio } = req.body
   try {
     // find user and update it
-    const updatedUser = await User.findByIdAndUpdate(id, { fullname, username, email }, { new: true })
+    const updatedUser = await User.findByIdAndUpdate(id, { fullname, username, email, bio }, { new: true })
     if (!updatedUser) {
       return res.status(404).send("User not found")
     }

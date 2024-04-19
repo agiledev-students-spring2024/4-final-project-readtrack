@@ -26,8 +26,13 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  // object with arrays of book references for each bookshelf , these will reference the ID's of the books
+  bio: {
+    type: String,
+    required: true,
+    default: 'This user prefers to keep an air of mystery about them...'
+  },
 
+  // object with arrays of book references for each bookshelf , these will reference the ID's of the books
   books: {
     currentlyReading: [bookReference],
     finishedReading: [bookReference],

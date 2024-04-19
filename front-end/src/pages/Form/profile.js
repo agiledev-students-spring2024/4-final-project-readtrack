@@ -97,22 +97,20 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                             alt="Profile"
                             className="w-20 h-20 object-cover rounded-full border-2 border-gray-300 mr-4"
                         />
-                        <p className="pt-3 pr-12 text-lg text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
+                        <p className="pt-3 pr-12 text-xl text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
                     </div>
                     <div>
-                        <p className="px-8 text-sm text-gray-500">Books Read</p>
+                        <p className="px-8 text-sm text-gray-700">Books Read</p>
                     </div>
                     <div>
-                        <p className="px-8 text-sm font-semibold text-gray-700 mt-1">{profile.friendCount}</p>
-                        <p className="px-8 text-sm font-semibold text-gray-700 mt-1"> Friends</p>
+                        <p className="px-8 text-sm text-gray-700 mt-1">{profile.friendCount}</p>
+                        <p className="px-8 text-sm text-gray-700 mt-1"> Friends</p>
                     </div>
                 </div>
                 <div>
                     <dl>
                         <div>
-                            <dd className="pr-8 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {profile.bio || "This user prefers to keep an air of mystery about them."}
-                            </dd>
+                            <dd className="pr-8 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"> {profile.bio} </dd>
                         </div>
                     </dl>
                 </div>
