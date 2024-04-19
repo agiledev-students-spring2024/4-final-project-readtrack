@@ -1,7 +1,6 @@
 // BookSearch.js
 import React from "react";
-// import SearchHeader from "../components/searchHeader";
-
+import SearchHeader from "../components/searchHeader";
 import Header from "../components/header";
 import { useState } from "react";
 import SearchComponent from "../components/SearchComponent"; // Adjust the import path as necessary
@@ -11,29 +10,31 @@ const BookSearchPage = ({ onSearch }) => {
   const [books, setBooks] = useState([]);
 
   const handleSearch = (searchTerm) => {
-
-    // Call the API to search for books 
-    const searchUrl = `http://localhost:3001/api/books/search?query=${encodeURIComponent(searchTerm)}`;
-      fetch(searchUrl)
+    // Call the API to search for books
+    const searchUrl = `http://localhost:3001/api/books/search?query=${encodeURIComponent(
+      searchTerm
+    )}`;
+    fetch(searchUrl)
       .then((response) => {
-        if(!response.ok) {
-          throw new Error('Failed to retrieve search results');
+        if (!response.ok) {
+          throw new Error("Failed to retrieve search results");
         }
         return response.json();
       })
       .then((data) => {
-       setBooks(data)
-
+        setBooks(data);
       });
-      console.log(books)
-      
-    
+    console.log(books);
   };
 
   return (
-    <div className=" ">
+    <div className="bg-goodreads-lightgray">
       {/* <SearchHeader */}
-      <Header
+      {/* <Header
+        className="font-cormorantGaramondSemibold text-goodreads-black"
+        title={`Search`}
+      /> */}
+      <SearchHeader
         className="font-cormorantGaramondSemibold text-goodreads-black"
         title={`Search`}
       />

@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Oswald";
-  src: url('fonts/Cormorant_Garamond/CormorantGaramond-Bold.ttf')
+  src: url("fonts/Cormorant_Garamond/CormorantGaramond-Bold.ttf");
 }
 
 @font-face {
@@ -129,7 +129,7 @@
   justify-content: center;
 }
 
-.inputContainer>.errorLabel {
+.inputContainer > .errorLabel {
   color: red;
   font-size: 12px;
 }
@@ -204,4 +204,32 @@
   border-radius: 18px;
   width: 100px;
   border: 1px black solid;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.shadow-book::after {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem; /* Adjust as needed */
+  left: 0;
+  width: 100%;
+  height: 0.5rem; /* Adjust as needed */
+  background: rgba(0, 0, 0, 0.25); /* Shadow color and opacity */
+  border-radius: 0.5rem; /* Adjust as needed */
+  z-index: -1;
+}
+
+.w-long-screen {
+  width: 102vw;
+}
+
+.border-small {
+  border: 1.7px solid #d9d9d9;
 }
