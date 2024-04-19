@@ -32,10 +32,10 @@ const BookShelf = ({ books, title, subtitle }) => {
 
   return (
     <div className="flex flex-col text-left py-4 pl-4 justify-center w-full">
-      <h2 className=" pl-2 text-l text-goodreads-black font-cormorantGaramondSemibold align-middle font-semibold">
+      <h2 className=" pl-2 text-lg font-semibold pb-0 text-goodreads-black font-cormorantGaramondSemibold align-middle">
         {title}
       </h2>
-      <h3 className="pl-2 text-sm text-goodreads-black font-cormorantGaramondSemibold align-middle pb-2">
+      <h3 className="pl-2 text-sm text-goodreads-black font-cormorantGaramondMedium align-middle pb-2">
         {subtitle}
       </h3>
       <div className="flex overflow-x-auto space-x-1 scrollbar-hide no-scrollbar pr-4">
@@ -68,7 +68,7 @@ const BookShelf = ({ books, title, subtitle }) => {
               </Link>
             ))}
       </div>
-      <div className="w-full mx-auto pr-4 pl-2">
+      <div className="w-full mx-auto pr-6 pl-2">
         <hr className="mt-2  border-t-0.5 border-goodreads-linegray" />
       </div>
     </div>
