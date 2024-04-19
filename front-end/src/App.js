@@ -79,7 +79,7 @@ function App() {
           path="/search"
           element={
             <Layout>
-              <BookSearchPage />
+              <BookSearchPage/>
             </Layout>
           }
         />

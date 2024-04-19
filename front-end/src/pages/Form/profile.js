@@ -97,43 +97,37 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                             alt="Profile"
                             className="w-20 h-20 object-cover rounded-full border-2 border-gray-300 mr-4"
                         />
-                        <p className="pt-3 pr-12 text-lg text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
+                        <p className="pt-3 pr-12 text-xl text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
                     </div>
                     <div>
-                        <p className="px-8 text-sm text-gray-500">Book Read</p>
+                        <p className="px-8 text-sm text-gray-700">Books Read</p>
                     </div>
                     <div>
-                        <p className="px-8 text-sm font-semibold text-gray-700 mt-1">{profile.friendCount}</p>
-                        <p className="px-8 text-sm font-semibold text-gray-700 mt-1"> Friends</p>
+                        <p className="px-8 text-sm text-gray-700 mt-1">{profile.friendCount}</p>
+                        <p className="px-8 text-sm text-gray-700 mt-1"> Friends</p>
                     </div>
                 </div>
                 <div>
                     <dl>
                         <div>
-                            <dd className="pr-8 mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                {profile.bio || "This user prefers to keep an air of mystery about them."}
-                            </dd>
+                            <dd className="mt-1 text-sm text-gray-900 text-left sm:mt-0 sm:col-span-2"> {profile.bio} </dd>
                         </div>
                     </dl>
                 </div>
-
+                
                 <div className="pt-2 flex justify-end">
-                    <div>
-                        <Link
-                            to="/edit-profile"
-                            className="text-sm text-goodreads-black font-cormorantGaramondSemibold rounded-md mb-2 border border-[#000000] px-3"
-                        >
-                            Edit Profile
-                        </Link>
-                    </div>
-                    <div>
-                        <button
-                            onClick={handleLogout}
-                            className="text-sm text-goodreads-black font-cormorantGaramondSemibold rounded-md mb-2 border border-[#000000] px-3"
-                        >
-                            Log out
-                        </button>
-                    </div>
+                    <Link
+                        to="/edit-profile"
+                        className="text-sm text-goodreads-black font-cormorantGaramondSemibold bg-goodreads-lightgray rounded-md mb-2 border border-goodreads-black mx-2 px-3"
+                    >
+                        Edit Profile
+                    </Link>
+                    <button
+                        onClick={handleLogout}
+                        className="text-sm text-goodreads-black font-cormorantGaramondSemibold bg-goodreads-lightgray rounded-md mb-2 border border-goodreads-black px-3"
+                    >
+                        Log Out
+                    </button>
                 </div>
                 <hr className="w-full border-t-2 border-goodreads-linegray" />
             </div>
