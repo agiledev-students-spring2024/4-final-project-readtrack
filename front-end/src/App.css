@@ -225,3 +225,11 @@
   border-radius: 0.5rem; /* Adjust as needed */
   z-index: -1;
 }
+
+.w-long-screen {
+  width: 102vw;
+}
+
+.border-small {
+  border: 1.7px solid #d9d9d9;
+}
