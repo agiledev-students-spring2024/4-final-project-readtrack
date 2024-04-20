@@ -18,10 +18,10 @@ const SearchComponent = ({ onSearch }) => {
 
   return (
     <div className="flex justify-center items-center bg-goodreads-lightgray">
-      <form className="w-full max-w-sm" onSubmit={handleSearchSubmit}>
+      <form className=" mx-2 w-full max-w-sm" onSubmit={handleSearchSubmit}>
         <div className="flex items-center flex-col">
           <input
-            className="appearance-none m-1 bg-transparent border bg-white border-goodreads-lightgray w-full text-gray-700 py-2 px-3 leading-tight focus:outline-none rounded-xl"
+            className=" appearance-none m-1 bg-transparent border bg-white border-goodreads-lightgray w-full text-gray-700 py-2 px-3 leading-tight focus:outline-none rounded-xl"
             type="text"
             placeholder="Search for books..."
             aria-label="Book search"
