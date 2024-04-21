@@ -32,11 +32,12 @@
 }
 
 .btn-sm-1 {
-  @apply px-1 py-1 text-xs bg-goodreads-lightgray text-black font-semibold rounded-md;
+  @apply bg-goodreads-lightgray font-semibold text-xs text-black leading-4 w-[100px] h-[80px] cursor-pointer text-center border touch-manipulation whitespace-normal px-4 py-0 rounded-md border-solid border-[#f8f9fa] hover:shadow-[rgba(0,0,0,0.1)_0_1px_1px];
+
 }
 
 .btn-sm-2 {
-  @apply px-1 py-1 text-xs bg-goodreads-red text-white font-semibold rounded-md;
+  @apply bg-goodreads-red font-semibold text-xs text-white leading-4 w-[100px] h-[80px] cursor-pointer text-center border touch-manipulation whitespace-normal px-4 py-0 rounded-md border-solid border-[#f8f9fa] hover:shadow-[rgba(0,0,0,0.1)_0_1px_1px];
 }
 
 .App {
