@@ -294,6 +294,7 @@ exports.addBookToWishlist = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
 exports.toggleFavoriteBook = async (req, res) => {
   const userId = req.params.id;
   const { bookId } = req.body;
@@ -325,3 +326,12 @@ exports.toggleFavoriteBook = async (req, res) => {
   }
 };
 
+exports.getAllBooks = async (req, res) => {
+  try {
+    const books = await Book.find();
+    res.status(200).json(books);
+  } catch (error) {
+    console.error('Error retrieving books:', error);
+    res.status(500).send('Error retrieving books');
+  }
+}

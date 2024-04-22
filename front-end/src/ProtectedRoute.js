@@ -7,9 +7,6 @@ const ProtectedRoute = ({ children, loggedInUser }) => {
   const token = localStorage.getItem('token');
   const storedUser = localStorage.getItem('loggedInUser');
 
-  console.log('loggedInUser in ProtectedRoute: ', loggedInUser);
-  console.log('token in ProtectedRoute: ', token);
-
   useEffect(() => {
     if (storedUser && token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
