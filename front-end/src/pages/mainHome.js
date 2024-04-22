@@ -76,7 +76,9 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
     <div className="bg-goodreads-lightgray">
       {loggedInUser ? (
         <>
-          <Header title={`${loggedInUser.username}'s Homepage`} />
+          {/* <Header title={`${loggedInUser.username}'s Homepage`} /> */}
+          <Header title={`Home`} />
+
           <div>
             <BookShelf
               title="Current Reads"

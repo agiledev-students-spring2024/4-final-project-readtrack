@@ -13,35 +13,38 @@ const SearchComponent = ({ onSearch }) => {
   };
   const handleViewAll = (e) => {
     e.preventDefault();
-    onSearch(""); 
+    onSearch("");
   };
 
   return (
-    <div className="flex justify-center items-center p-4 ">
+    <div className="flex justify-center items-center bg-goodreads-lightgray">
       <form className="w-full max-w-sm" onSubmit={handleSearchSubmit}>
-        <div className="flex items-center">
+        <div className="flex items-center flex-col">
           <input
-            className="appearance-none bg-transparent border border-goodreads-lightgray w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none rounded-xl"
-            // border-none
+            className="appearance-none m-1 bg-transparent border bg-white border-goodreads-lightgray w-full text-gray-700 py-2 px-3 leading-tight focus:outline-none rounded-xl"
             type="text"
             placeholder="Search for books..."
             aria-label="Book search"
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <button
-            className="btn flex-1 min-w-[100px] px-4 py-2 text-white bg-teal-500 hover:bg-teal-700 transition-colors duration-150 ease-in-out"
-            type="submit"
-          >
+          {/* <div className="w-full text-left mt-4 mb-4">
+            <button
+              className="rounded-full font-cormorantGaramondMedium flex-1 min-w-[80px] px-4 py-1 border border-goodreads-linegray"
+              type="submit"
+            >
+              Search
+            </button>
+            <button
+              className="rounded-full font-cormorantGaramondMedium flex-1 min-w-[80px] ml-2 px-4 py-1 border border-goodreads-linegray"
+              onClick={handleViewAll}
+            >
+              View All
+            </button>
+          </div> */}
+          {/* <hr className="w-full border-t-2 border-goodreads-linegray" /> */}
 
-            Search
-          </button>
-          <button
-            className="btn flex-1 min-w-[100px] ml-2 px-4 py-2 text-white bg-blue-500 hover:bg-blue-700 transition-colors duration-150 ease-in-out"
-            onClick={handleViewAll}
-          >
-            View All
-          </button>
+          <hr className="w-full border-t-2 mt-4 mb-4 border-goodreads-linegray" />
         </div>
       </form>
     </div>

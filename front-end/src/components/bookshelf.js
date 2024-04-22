@@ -31,30 +31,45 @@ const BookShelf = ({ books, title, subtitle }) => {
   ];
 
   return (
-    // <div className="flex flex-col text-left py-4 pl-4 justify-center bg-custom-gradient w-full my-1">
-    <div className="flex flex-col text-left py-4 pl-4 justify-center w-full my-1">
-      <h2 className="text-l text-goodreads-black font-cormorantGaramondSemibold align-middle font-semibold">
+    <div className="flex flex-col text-left py-4 pl-4 justify-center w-full">
+      <h2 className=" pl-2 text-lg font-semibold pb-0 text-goodreads-black font-cormorantGaramondSemibold align-middle">
         {title}
       </h2>
-      <h3 className="text-sm text-goodreads-black font-cormorantGaramondSemibold align-middle pb-2">{subtitle}</h3>
-      <div className="flex overflow-x-auto space-x-4 scrollbar-hide pr-4">
-        {books.length > 0 ? (
-          books.map((book) => (
-            <Link key={book._id} to={`/books/${book._id}`} className="shrink-0">
-              <img src={book.coverUrl} alt={`Cover of ${book.title}`} className="w-28 h-44" />
-
-            </Link>
-          )))
+      <h3 className="pl-2 text-sm text-goodreads-black font-cormorantGaramondMedium align-middle pb-2">
+        {subtitle}
+      </h3>
+      <div className="flex overflow-x-auto space-x-1 scrollbar-hide no-scrollbar pr-4">
+        {books.length > 0
+          ? books.map((book) => (
+              <Link
+                key={book._id}
+                to={`/books/${book._id}`}
+                className="shrink-0"
+              >
+                <div className="drop-shadow-md">
+                  <img
+                    src={book.coverUrl}
+                    alt={`Cover of ${book.title}`}
+                    className="w-28 h-44 rounded-sm p-2"
+                  />
+                </div>
+              </Link>
+            ))
           : dummyBooks.map((dummyBook) => (
-            <Link key={dummyBook.id} to="/search" className="shrink-0">
-              <img
-                src={dummyBook.coverUrl}
-                alt={dummyBook.title}
-                className="w-28 h-44"
-              />
-              <div>{dummyBook.title}</div>
-            </Link>
-          ))}
+              <Link key={dummyBook.id} to="/search" className="shrink-0">
+                <div className="drop-shadow-md">
+                  <img
+                    src={dummyBook.coverUrl}
+                    alt={dummyBook.title}
+                    className="w-28 h-44 rounded-sm p-2"
+                  />
+                </div>
+                <div>{dummyBook.title}</div>
+              </Link>
+            ))}
+      </div>
+      <div className="w-full mx-auto pr-6 pl-2">
+        <hr className="mt-2  border-t-0.5 border-goodreads-linegray" />
       </div>
     </div>
   );

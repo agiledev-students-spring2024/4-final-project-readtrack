@@ -28,7 +28,7 @@ exports.register = async (req, res) => {
     const token = jwt.sign(
       { user_id: newUser._id, email },
       process.env.JWT_SECRET,
-      { expiresIn: "4h" }
+      // { expiresIn: "4h" }
     );
     res.status(201).json({
       user: {
@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
       const token = jwt.sign(
         { user_id: user._id, email },
         process.env.JWT_SECRET,
-        { expiresIn: "4h" }
+        // { expiresIn: "4h" }
       );
       return res.status(200).json({
         user: {
@@ -87,10 +87,10 @@ exports.logout = async (req, res) => {
 exports.updateUser = async (req, res) => {
   console.log("in update user")
   const { id } = req.params;
-  const { fullname, username, email } = req.body
+  const { fullname, username, email, bio } = req.body
   try {
     // find user and update it
-    const updatedUser = await User.findByIdAndUpdate(id, { fullname, username, email }, { new: true })
+    const updatedUser = await User.findByIdAndUpdate(id, { fullname, username, email, bio }, { new: true })
     if (!updatedUser) {
       return res.status(404).send("User not found")
     }

@@ -63,7 +63,8 @@ exports.searchBooks = async (req, res) => {
 
 // get all books for a user
 exports.getAllUserBooks = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
+  console.log('userId in getAllUserBooks: ', userId)
   try {
     const user = await User.findById(userId).populate(
       "books.currentlyReading books.finishedReading books.wishlist books.favorites"
@@ -81,7 +82,8 @@ exports.getAllUserBooks = async (req, res) => {
 // get current reads
 exports.getCurrentUserBooks = async (req, res) => {
   console.log("gets to getCurrentUserBooks");
-  const userId = req.user;
+  const userId = req.params.id;
+  console.log('userId in getAllUserBooks: ', userId)
   try {
     const user = await User.findById(userId).populate("books.currentlyReading");
     // console.log("user current reads in getCurrentUserBooks: ", user.books.currentlyReading)
@@ -97,7 +99,7 @@ exports.getCurrentUserBooks = async (req, res) => {
 
 // get want to read
 exports.getWantToRead = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   try {
     const user = await User.findById(userId).populate("books.wishlist");
     if (!user) {
@@ -112,7 +114,7 @@ exports.getWantToRead = async (req, res) => {
 
 // get favorites
 exports.getFavorites = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   try {
     const user = await User.findById(userId).populate("books.favorites");
     if (!user) {
@@ -127,7 +129,7 @@ exports.getFavorites = async (req, res) => {
 
 // get past reads
 exports.getPastReads = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   try {
     const user = await User.findById(userId).populate("books.finishedReading");
     if (!user) {
@@ -141,7 +143,7 @@ exports.getPastReads = async (req, res) => {
 };
 
 exports.getFriendsReads = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   try {
     const user = await User.findById(userId).populate("books.friendsReads");
     if (!user) {
@@ -155,7 +157,7 @@ exports.getFriendsReads = async (req, res) => {
 };
 
 exports.getTopReads = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   try {
     const user = await User.findById(userId).populate("books.topReads");
     if (!user) {
@@ -169,7 +171,7 @@ exports.getTopReads = async (req, res) => {
 };
 
 exports.getSuggestions = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   try {
     const user = await User.findById(userId).populate("books.suggestions");
     if (!user) {
@@ -209,7 +211,7 @@ exports.getBook = async (req, res) => {
 
 // Controller to add a book to currently reading
 exports.addBookToCurrentlyReading = async (req, res) => {
-  const userId = req.user; // Assumed to be set from authenticated token
+  const userId = req.params.id;
   const { bookId } = req.body;
 
   try {
@@ -222,52 +224,52 @@ exports.addBookToCurrentlyReading = async (req, res) => {
 };
 
 exports.removeBookFromCurrentlyReading = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   const { bookId } = req.body; // Assuming bookId is sent in the body
 
   try {
     const user = await removeBookFromUserList(userId, bookId, "currentlyReading");
     res.status(200).json(user);
   } catch (error) {
-    if(error.message === 'User not found') {
+    if (error.message === 'User not found') {
       res.status(404).send('User not found');
     }
-      res.status(500).send('Error updating currently reading list');
+    res.status(500).send('Error updating currently reading list');
   }
 };
 exports.removeBookFromFinishedReading = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   const { bookId } = req.body; // Assuming bookId is sent in the body
 
   try {
     const user = await removeBookFromUserList(userId, bookId, "finishedReading");
     res.status(200).json(user);
   } catch (error) {
-    if(error.message === 'User not found') {
+    if (error.message === 'User not found') {
       res.status(404).send('User not found');
     }
-      res.status(500).send('Error updating finished reading list');
+    res.status(500).send('Error updating finished reading list');
   }
 }
 exports.removeBookFromWishlist = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   const { bookId } = req.body; // Assuming bookId is sent in the body
 
   try {
     const user = await removeBookFromUserList(userId, bookId, "wishlist");
     res.status(200).json(user);
   } catch (error) {
-    if(error.message === 'User not found') {
+    if (error.message === 'User not found') {
       res.status(404).send('User not found');
     }
-      res.status(500).send('Error updating wishlist');
+    res.status(500).send('Error updating wishlist');
   }
 }
 
 
 // Controller to add a book to finished reading
 exports.addBookToFinishedReading = async (req, res) => {
-  const userId = req.user; // Assumed to be set from authenticated token
+  const userId = req.params.id;
   const { bookId } = req.body;
 
   try {
@@ -281,7 +283,7 @@ exports.addBookToFinishedReading = async (req, res) => {
 
 // Controller to add a book to wishlist
 exports.addBookToWishlist = async (req, res) => {
-  const userId = req.user; // Assumed to be set from authenticated token
+  const userId = req.params.id;
   const { bookId } = req.body;
 
   try {
@@ -293,7 +295,7 @@ exports.addBookToWishlist = async (req, res) => {
   }
 };
 exports.toggleFavoriteBook = async (req, res) => {
-  const userId = req.user;
+  const userId = req.params.id;
   const { bookId } = req.body;
 
   try {
@@ -304,8 +306,8 @@ exports.toggleFavoriteBook = async (req, res) => {
       return res.status(404).send('User not found');
     }
     const index = user.books.favorites.indexOf(bookId);
-    
-    if (index === -1){
+
+    if (index === -1) {
       // Book is currently a favorite, so remove it
       user.books.favorites.push(bookId);
     } else {

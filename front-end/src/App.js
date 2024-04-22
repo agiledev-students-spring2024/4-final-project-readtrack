@@ -22,18 +22,29 @@ import BookPage from "./pages/Book";
 import FriendProfile from "./pages/friendsProfile";
 import ProtectedRoute from "./ProtectedRoute";
 import ProfilePage from "./pages/Form/profile";
+import axios from 'axios';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);  // Initialize to null or a default object
   const [registeredUser, setRegisteredUser] = useState(null);
 
   useEffect(() => {
-    // Optionally initialize loggedInUser from local storage or an API call
     const storedUser = localStorage.getItem('loggedInUser');
-    if (storedUser) {
-      setLoggedInUser(JSON.parse(storedUser));
+    const storedToken = localStorage.getItem('token');
+
+    if (storedUser && storedToken) {
+      try {
+        const userObj = JSON.parse(storedUser);
+        setLoggedInUser(userObj);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+      } catch (error) {
+        console.error('Error parsing user from localStorage:', error);
+        localStorage.removeItem('loggedInUser');
+        localStorage.removeItem('token');
+      }
     }
   }, []);
+
 
   useEffect(() => {
     // Update localStorage when loggedInUser changes
@@ -182,3 +193,4 @@ function App() {
 }
 
 export default App;
+
