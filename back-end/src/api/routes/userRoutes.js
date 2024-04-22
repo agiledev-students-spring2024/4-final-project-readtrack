@@ -30,15 +30,16 @@ router.get('/users/:id/books/topReads', authenticateToken, userBooksController.g
 router.get('/users/:id/books/suggestions', authenticateToken, userBooksController.getSuggestions)
 
 router.get('/books/:bookId', authenticateToken, userBooksController.getBook)
+router.get('/books', authenticateToken, userBooksController.getAllBooks)
 
 // Nested routes for user's books
 router.post('/users/:id/currentlyReading', authenticateToken, userBooksController.addBookToCurrentlyReading)
-router.delete('/users/:id/currentlyReading', authenticateToken , userBooksController.removeBookFromCurrentlyReading);
+router.delete('/users/:id/currentlyReading', authenticateToken, userBooksController.removeBookFromCurrentlyReading);
 router.post('/users/:id/finishedReading', authenticateToken, userBooksController.addBookToFinishedReading)
-router.delete('/users/:id/finishedReading', authenticateToken , userBooksController.removeBookFromFinishedReading);
+router.delete('/users/:id/finishedReading', authenticateToken, userBooksController.removeBookFromFinishedReading);
 // wishlist
 router.post('/users/:id/wishlist', authenticateToken, userBooksController.addBookToWishlist)
-router.delete('/users/:id/wishlist', authenticateToken , userBooksController.removeBookFromWishlist);
+router.delete('/users/:id/wishlist', authenticateToken, userBooksController.removeBookFromWishlist);
 
 // favorites
 router.post('/users/:id/favorites', authenticateToken, userBooksController.toggleFavoriteBook)
