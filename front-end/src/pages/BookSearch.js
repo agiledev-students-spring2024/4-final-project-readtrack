@@ -1,45 +1,80 @@
-// BookSearch.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SearchHeader from "../components/searchHeader";
-import Header from "../components/header";
-import { useState } from "react";
-import SearchComponent from "../components/SearchComponent"; // Adjust the import path as necessary
-import BookShelf from "../components/bookshelf";
-// TODO: Render books on screen
-const BookSearchPage = ({ onSearch }) => {
+import SearchShelf from "../components/SearchShelf";
+import SearchComponent from "../components/SearchComponent";
+
+const BookSearchPage = () => {
   const [books, setBooks] = useState([]);
 
-  const handleSearch = (searchTerm) => {
-    // Call the API to search for books
-    const searchUrl = `http://localhost:3001/api/books/search?query=${encodeURIComponent(
-      searchTerm
-    )}`;
-    fetch(searchUrl)
+  useEffect(() => {
+    fetchAllBooks();
+  }, []);
+
+  const fetchAllBooks = () => {
+    const apiUrl = `http://localhost:3001/api/books`;
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+
+    fetch(apiUrl, { headers })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Failed to retrieve search results");
+          throw new Error('Failed to fetch books due to authorization or server error');
         }
         return response.json();
       })
       .then((data) => {
-        setBooks(data);
+        if (Array.isArray(data)) {
+          setBooks(data);
+        } else {
+          throw new Error("Data received is not an array");
+        }
+      })
+      .catch((error) => {
+        console.error("Error loading the books:", error);
       });
-    console.log(books);
   };
+
+  const handleSearch = (searchTerm) => {
+    const searchUrl = `http://localhost:3001/api/books/search?query=${encodeURIComponent(searchTerm)}`;
+    const token = localStorage.getItem('token');
+    const headers = {
+      'Authorization': `Bearer ${token}`
+    };
+
+    fetch(searchUrl, { headers })
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setBooks(data);
+        } else {
+          throw new Error("Search data received is not an array");
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to retrieve search results", error);
+      });
+  };
+
+  // Function to split books array into chunks of 3
+  const chunkBooks = (books, chunkSize) => {
+    let result = [];
+    for (let i = 0; i < books.length; i += chunkSize) {
+      result.push(books.slice(i, i + chunkSize));
+    }
+    return result;
+  };
+
+  const bookChunks = chunkBooks(books, 3);
 
   return (
     <div className="bg-goodreads-lightgray">
-      {/* <SearchHeader */}
-      {/* <Header
-        className="font-cormorantGaramondSemibold text-goodreads-black"
-        title={`Search`}
-      /> */}
-      <SearchHeader
-        className="font-cormorantGaramondSemibold text-goodreads-black"
-        title={`Search`}
-      />
+      <SearchHeader title="Search" />
       <SearchComponent onSearch={handleSearch} />
-      <BookShelf title="Search Results" books={books} />
+      {bookChunks.map((chunk, index) => (
+        <SearchShelf key={index} books={chunk} />
+      ))}
     </div>
   );
 };
