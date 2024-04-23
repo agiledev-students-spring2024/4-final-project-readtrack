@@ -45,7 +45,7 @@ const Login = ({ registeredUser, setLoggedInUser }) => {
         const { user, token } = await response.json();
         console.log('user: ', user);
         console.log('user.id: ', user._id);
-        localStorage.setItem('loggedInUser', JSON.stringify(user._id));
+        localStorage.setItem('loggedInUser', JSON.stringify(user));
         localStorage.setItem('token', token);
         setLoggedInUser(user);
         navigate('/mainHome');
