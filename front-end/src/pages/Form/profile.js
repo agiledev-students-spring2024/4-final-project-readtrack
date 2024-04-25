@@ -7,6 +7,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     const [wantToRead, setWantToRead] = useState([]);
     const [pastReads, setPastReads] = useState([]);
     const [favorites, setFavorites] = useState([]);
+
     const navigate = useNavigate();
     const placeholder = "https://images.unsplash.com/photo-1526800544336-d04f0cbfd700?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
@@ -83,39 +84,40 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     }
 
     return (
-        <div className="bg-white container mx-auto p-4">
-
-
-            <div className="block text-left">
-                <h2 className="pt-5 text-4xl/[40px] tracking-wide pb-2 text-goodreads-black font-cormorantGaramondSemibold">
-                    {profile.username}</h2>
-            </div>
-            <div className="sm:px-10 flex-nowrap">
-                <div className="flex items-center">
-                    <div>
-                        <img
-                            src={placeholder}
-                            alt="Profile"
-                            className="w-20 h-20 object-cover rounded-full border-2 border-gray-300 mr-4"
-                        />
-                        <p className="pt-3 pr-12 text-xl text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
-                    </div>
-                    <div>
-                        <p className="px-8 text-sm text-gray-700">Books Read</p>
-                    </div>
-                    <div>
-                        <p className="px-8 text-sm text-gray-700 mt-1">{profile.friendCount}</p>
-                        <p className="px-8 text-sm text-gray-700 mt-1"> Friends</p>
-                    </div>
+        <div className="bg-goodreads-white mx-auto p-1">
+            <div className="px-5">
+                <div className="block text-left">
+                    <h2 className="pt-5 text-4xl/[40px] tracking-wide pb-2 text-goodreads-black font-cormorantGaramondSemibold">
+                        {profile.username}</h2>
                 </div>
-                <div>
-                    <dl>
+                <div className="sm:px-10 flex-nowrap">
+                    <div className="flex items-center">
                         <div>
-                            <dd className="mt-1 text-sm text-gray-900 text-left sm:mt-0 sm:col-span-2"> {profile.bio} </dd>
+                            <img
+                                src={placeholder}
+                                alt="Profile"
+                                className="w-20 h-20 object-cover rounded-full border-2 border-gray-300 mr-4"
+                            />
+                            <p className="pt-3 pr-12 text-xl text-goodreads-black font-cormorantGaramondSemibold">{profile.fullname}</p>
                         </div>
-                    </dl>
+                        <div>
+                            <p className="px-7 text-sm text-gray-700 mt-1"> {profile.books.finishedReading.count} </p>
+                            <p className="px-7 text-sm text-gray-700 mt-1">Books Read</p>
+                        </div>
+                        <div>
+                            {/* <p className="px-8 text-sm text-gray-700 mt-1">{profile.friendCount}</p> */}
+                            <p className="px-8 text-sm text-gray-700 mt-1"></p>
+                            <p className="px-8 text-sm text-gray-700 mt-1"> Friends</p>
+                        </div>
+                    </div>
+                    <div>
+                        <dl>
+                            <div>
+                                <dd className="px-1 mt-1 text-sm text-gray-900 text-left sm:mt-0 sm:col-span-2"> {profile.bio} </dd>
+                            </div>
+                        </dl>
+                    </div>
                 </div>
-
                 <div className="pt-2 flex justify-end">
                     <Link
                         to="/edit-profile"
