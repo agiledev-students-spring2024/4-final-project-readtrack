@@ -67,7 +67,7 @@ const FriendShelf = ({ friendsList = friendsReading }) => {
   return (
     <div className="flex align-middle flex-wrap p-0">
       {friendsList.map((friend) => (
-        <div className="w-1/3 h-38 mb-2">
+        <div key={friend.id} className="w-1/3 h-38 mb-2">
           <div
             onClick={() => openPopup(friend)}
             key={friend.id}
