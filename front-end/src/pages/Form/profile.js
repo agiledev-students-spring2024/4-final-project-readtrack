@@ -13,7 +13,6 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     useEffect(() => {
         const storedUser = localStorage.getItem("loggedInUser");
         // console.log('storedUser: ', storedUser);
-        console.log('loggedInUser in profile.js: ', loggedInUser);
         if (storedUser) {
             const token = localStorage.getItem('token');
             if (!token) {

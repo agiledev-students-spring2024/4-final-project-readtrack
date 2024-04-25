@@ -57,14 +57,20 @@ const BookSearchPage = () => {
       });
   };
 
-  // Function to split books array into chunks of 3
-  const chunkBooks = (books, chunkSize) => {
-    let result = [];
-    for (let i = 0; i < books.length; i += chunkSize) {
-      result.push(books.slice(i, i + chunkSize));
-    }
-    return result;
-  };
+  // Function to split books array into chunks of 3, ensuring the last chunk is not empty
+const chunkBooks = (books, chunkSize) => {
+  let result = [];
+  for (let i = 0; i < books.length; i += chunkSize) {
+     let chunk = books.slice(i, i + chunkSize);
+     // If the chunk is less than the chunkSize, it's the last chunk and should be added as is
+     if (chunk.length < chunkSize) {
+       result.push(chunk);
+     } else {
+       result.push(chunk);
+     }
+  }
+  return result;
+ };
 
   const bookChunks = chunkBooks(books, 3);
 
