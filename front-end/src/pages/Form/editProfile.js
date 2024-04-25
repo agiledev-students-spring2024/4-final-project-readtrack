@@ -59,11 +59,11 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="bg-goodreads-lightgray flex items-center justify-center min-h-screen">
             <div className="w-full max-w-md">
                 <form
                     onSubmit={handleSubmit}
-                    className="bg-white rounded-lg px-8 pt-6 pb-8 mb-4"
+                    className="rounded-lg px-8 pt-6 pb-8 mb-4"
                 >
                     <div className="mb-4">
                         <label
