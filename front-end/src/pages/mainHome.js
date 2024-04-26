@@ -4,8 +4,6 @@ import BookShelf from "../components/bookshelf";
 
 const MainHome = ({ loggedInUser, setLoggedInUser }) => {
   const [currentReads, setCurrentReads] = useState([]);
-  const [wantToRead, setWantToRead] = useState([]);
-  const [pastReads, setPastReads] = useState([]);
   const [friendsReads, setFriendsReads] = useState([]);
   const [topReads, setTopReads] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
@@ -21,11 +19,9 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      if (!loggedInUser) return; // Return early if loggedInUser is null
+      if (!loggedInUser) return;
 
-      // Retrieve the token from local storage
       const token = localStorage.getItem("token");
-
       const urls = [
         `http://localhost:3001/api/users/${loggedInUser._id}/books/currentReads`,
         `http://localhost:3001/api/users/${loggedInUser._id}/books/friendsReads`,
@@ -43,25 +39,48 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
             },
           }).then((res) => {
             if (!res.ok) {
-              // Check if the HTTP request was successful
               throw new Error("Network response was not ok");
             }
-            return res.json(); // Parse JSON body of response
+            return res.json();
           })
         );
 
         const [
-          currentReadsData,
-          friendsReadsData,
-          topReadsData,
-          suggestionsData,
+          currentReadsRefs,
+          friendsReadsRefs,
+          topReadsRefs,
+          suggestionsRefs,
         ] = await Promise.all(allRequests);
 
-        // Update state with the fetched data
-        setCurrentReads(currentReadsData);
-        setFriendsReads(friendsReadsData);
-        setTopReads(topReadsData);
-        setSuggestions(suggestionsData);
+        // Fetch the full book details using the googleBookId
+        const fetchBookDetails = async (bookRefs) => {
+          const bookDetailsRequests = bookRefs.map((bookRef) =>
+            fetch(`http://localhost:3001/api/books/${bookRef.id}`, {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }).then((res) => res.json())
+          );
+          return Promise.all(bookDetailsRequests);
+        };
+
+
+        const [currentReads, friendsReads, topReads, suggestions] =
+          await Promise.all([
+            fetchBookDetails(currentReadsRefs),
+            fetchBookDetails(friendsReadsRefs),
+            fetchBookDetails(topReadsRefs),
+            fetchBookDetails(suggestionsRefs),
+          ]);
+
+        // Update state with the fetched book details
+        setCurrentReads(currentReads);
+        setFriendsReads(friendsReads);
+        setTopReads(topReads);
+        setSuggestions(suggestions);
+
       } catch (error) {
         console.error("Error fetching book data:", error);
       }

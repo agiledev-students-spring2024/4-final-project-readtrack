@@ -39,18 +39,12 @@ const BookSearchPage = () => {
   const handleSearch = (searchTerm) => {
     const searchUrl = `http://localhost:3001/api/books/search?query=${encodeURIComponent(searchTerm)}`;
     const token = localStorage.getItem('token');
-    const headers = {
-      'Authorization': `Bearer ${token}`
-    };
+    const headers = { 'Authorization': `Bearer ${token}` };
 
     fetch(searchUrl, { headers })
       .then((response) => response.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          setBooks(data);
-        } else {
-          throw new Error("Search data received is not an array");
-        }
+        setBooks(data);
       })
       .catch((error) => {
         console.error("Failed to retrieve search results", error);
@@ -58,19 +52,19 @@ const BookSearchPage = () => {
   };
 
   // Function to split books array into chunks of 3, ensuring the last chunk is not empty
-const chunkBooks = (books, chunkSize) => {
-  let result = [];
-  for (let i = 0; i < books.length; i += chunkSize) {
-     let chunk = books.slice(i, i + chunkSize);
-     // If the chunk is less than the chunkSize, it's the last chunk and should be added as is
-     if (chunk.length < chunkSize) {
-       result.push(chunk);
-     } else {
-       result.push(chunk);
-     }
-  }
-  return result;
- };
+  const chunkBooks = (books, chunkSize) => {
+    let result = [];
+    for (let i = 0; i < books.length; i += chunkSize) {
+      let chunk = books.slice(i, i + chunkSize);
+      // If the chunk is less than the chunkSize, it's the last chunk and should be added as is
+      if (chunk.length < chunkSize) {
+        result.push(chunk);
+      } else {
+        result.push(chunk);
+      }
+    }
+    return result;
+  };
 
   const bookChunks = chunkBooks(books, 3);
 

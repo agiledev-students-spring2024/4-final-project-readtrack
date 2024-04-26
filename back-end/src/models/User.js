@@ -34,13 +34,13 @@ const userSchema = new Schema({
 
   // object with arrays of book references for each bookshelf , these will reference the ID's of the books
   books: {
-    currentlyReading: [bookReference],
-    finishedReading: [bookReference],
-    wishlist: [bookReference],
-    favorites: [bookReference],
-    friendsReads: [bookReference],
-    topReads: [bookReference],
-    suggestions: [bookReference]
+    currentlyReading: [String],
+    finishedReading: [String],
+    wishlist: [String],
+    favorites: [String],
+    friendsReads: [String],
+    topReads: [String],
+    suggestions: [String]
   },
   profile: {
     type: String,
