@@ -35,7 +35,6 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
         throw new Error('Network response was not ok.');
       })
       .then(data => {
-        console.log('User registered:', data);
         setLoggedInUser(data.user); // Update loggedInUser state with the user object
         setRegisteredUser("Please login to continue.");
         navigate('/mainHome');

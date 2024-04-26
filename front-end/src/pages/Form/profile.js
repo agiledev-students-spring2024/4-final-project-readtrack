@@ -4,7 +4,7 @@ import BookShelf from "../../components/bookshelf";
 
 const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
     const [profile, setProfile] = useState(null);
-    const [wantToRead, setWantToRead] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
     const [pastReads, setPastReads] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const navigate = useNavigate();
@@ -12,7 +12,6 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
     useEffect(() => {
         const storedUser = localStorage.getItem("loggedInUser");
-        // console.log('storedUser: ', storedUser);
         if (storedUser) {
             const token = localStorage.getItem('token');
             if (!token) {
@@ -62,7 +61,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
             fetchUserProfile();
             fetchBooks('favorites', setFavorites);
-            fetchBooks('wantToRead', setWantToRead);
+            fetchBooks('wishlist', setWishlist);
             fetchBooks('pastReads', setPastReads);
         }
     }, [loggedInUser, navigate]);
@@ -139,7 +138,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
                 <div className="bg-goodreads-lightgray">
                     <BookShelf title="Favorites" books={favorites} />
                 </div>
-                <BookShelf title="Wishlist" books={wantToRead} />
+                <BookShelf title="Wishlist" books={wishlist} />
                 <div className="bg-goodreads-lightgray">
                     <BookShelf title="Past Reads" books={pastReads} />
                 </div>

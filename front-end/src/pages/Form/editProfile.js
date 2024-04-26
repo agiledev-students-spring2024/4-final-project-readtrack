@@ -30,7 +30,6 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            console.log('loggedInUser.id editProfile:', loggedInUser._id)
             const response = await fetch(`http://localhost:3001/api/users/update/${loggedInUser._id}`, {
                 method: 'PUT',
                 headers: {
@@ -40,13 +39,8 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
                 body: JSON.stringify(formData),
             });
 
-            console.log("body formdata thing: ", JSON.stringify(formData))
-
-            console.log('response:', response)
-
             if (response.ok) {
                 const { user } = await response.json();
-                console.log("user in edit profile", user)
                 setLoggedInUser(user);
                 navigate('/profile');
             } else {
