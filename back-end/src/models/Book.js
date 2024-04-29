@@ -1,41 +1,43 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
+  googleBookId: {
+    type: String,
+    required: true,
+    unique: true
+  },
   title: {
     type: String,
     required: true
   },
-  author: {
+  authors: [{
     type: String,
     required: true
-  },
+  }],
   description: {
     type: String,
     required: true
   },
-  pages: {
+  pageCount: {
     type: Number,
-    // Making pages optional since one of your books has null pages, indicating it might not be applicable for all books.
     required: false
   },
-  genres: [{
+  categories: [{
     type: String,
-    required: true
+    required: false
   }],
   publishedDate: {
-    type: String, // Storing as a string to allow for a wide range of date formats, but consider Date type if you need date operations.
-    required: true
-  },
-  coverUrl: {
     type: String,
-    required: false // Assuming the cover image might not be available for all books.
+    required: false
+  },
+  thumbnailUrl: {
+    type: String,
+    required: false
   }
 }, {
-  timestamps: true // Adds createdAt and updatedAt timestamps automatically
+  timestamps: true
 });
 
 const Book = mongoose.model('Book', bookSchema);
-
 module.exports = Book;

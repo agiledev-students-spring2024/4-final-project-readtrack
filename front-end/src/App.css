@@ -234,3 +234,7 @@
 .border-small {
   border: 1.7px solid #d9d9d9;
 }
+
+.absolute-inset {
+  @apply absolute inset-0;
+}

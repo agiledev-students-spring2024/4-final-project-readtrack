@@ -4,11 +4,11 @@ import Header from "../components/header";
 import CurrentlyReading from "./CurrentlyReading";
 import ReadingFinished from "./ReadingFinished";
 import ReadingWishlist from "./ReadingWishlist";
-import ReadingProgress from "./ReadingProgress";
 
 
 const BookPage = ({ loggedInUser }) => {
     const [book, setBook] = useState(null);
+    const [bookImageLoaded, setBookImageLoaded] = useState(false);
     const { bookId } = useParams();
     const [isFavorite, setIsFavorite] = useState(true);
 
@@ -39,8 +39,7 @@ const BookPage = ({ loggedInUser }) => {
     };
 
     const checkIfBookInList = (userData, bookId, listType) => {
-        // console.log(`userData:${listType} `, userData[listType])
-        return userData[listType].some(book => book._id === bookId);
+        return userData[listType].includes(bookId);
     };
 
     useEffect(() => {
@@ -77,14 +76,9 @@ const BookPage = ({ loggedInUser }) => {
                             return response.json();
                         })
                         .then((userData) => {
-                            // console.log('userData: ', userData)
-                            console.log('bookId: ', bookId)
                             const isCurrentlyReading = checkIfBookInList(userData, bookId, 'currentlyReading');
                             const isFinishedBook = checkIfBookInList(userData, bookId, 'finishedReading');
                             const isInWishList = checkIfBookInList(userData, bookId, 'wishlist');
-                            // console.log('isCurrentlyReading: ', isCurrentlyReading)
-                            // console.log('isFinishedBook: ', isFinishedBook)
-                            // console.log('isInWishList: ', isInWishList)
 
                             setBook((prevBook) => ({
                                 ...prevBook,
@@ -101,7 +95,7 @@ const BookPage = ({ loggedInUser }) => {
                     console.error("Error fetching book:", error);
                 });
         }
-    }, [bookId, loggedInUser._id]);
+    }, [bookId]);
 
     if (!book) {
         return (
@@ -116,12 +110,20 @@ const BookPage = ({ loggedInUser }) => {
             <Header title={`${book.title} by ${book.author || "Unknown Author"}`} />
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
                 <div className="flex flex-col md:flex-row">
-                    <div className="md:w-1/3 bg-cover bg-center p-4 flex justify-center">
-                        <img
-                            src={book.coverUrl || "https://picsum.photos/400/600"}
-                            alt={book.title}
-                            className="rounded-lg w-40 md:w-auto md:max-h-96 object-cover"
-                        />
+                    <div className="md:w-1/3 bg-cover bg-center p-4 flex justify-center items-center">
+                        <div className="relative">
+                            {!bookImageLoaded && (
+                                <div className="w-40 md:w-auto md:max-h-96 rounded-lg bg-gray-200 animate-pulse absolute-inset"></div>
+                            )}
+                            <img
+                                src={book.thumbnail || "https://picsum.photos/400/600"}
+                                alt={book.title}
+                                className={`rounded-lg w-40 md:w-auto md:max-h-96 object-cover ${bookImageLoaded ? "opacity-100" : "opacity-0"
+                                    }`}
+                                onLoad={() => setBookImageLoaded(true)}
+                                onError={() => setBookImageLoaded(true)}
+                            />
+                        </div>
                     </div>
                     <div className="md:w-2/3 p-4">
                         <button onClick={toggleFavorite} title="Toggle favorite">
@@ -165,6 +167,7 @@ const BookPage = ({ loggedInUser }) => {
                                 </p>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
