@@ -4,6 +4,7 @@ import Header from "../components/header";
 import CurrentlyReading from "./CurrentlyReading";
 import ReadingFinished from "./ReadingFinished";
 import ReadingWishlist from "./ReadingWishlist";
+import LongText from "./LongText";
 
 
 const BookPage = ({ loggedInUser }) => {
@@ -11,6 +12,7 @@ const BookPage = ({ loggedInUser }) => {
     const [bookImageLoaded, setBookImageLoaded] = useState(false);
     const { bookId } = useParams();
     const [isFavorite, setIsFavorite] = useState(true);
+
 
     const FavoriteIcon = ({ isFavorite }) => (
         <span role="img" aria-label="favorite">
@@ -42,6 +44,8 @@ const BookPage = ({ loggedInUser }) => {
         return userData[listType].includes(bookId);
     };
 
+
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (bookId && token) {
@@ -59,7 +63,25 @@ const BookPage = ({ loggedInUser }) => {
                     return response.json();
                 })
                 .then((bookData) => {
-                    setBook(bookData);
+
+                    setBook(bookData); // set the book info on the page 
+
+                    /* altering the description here*/
+                    const regex = /(<([^>]+)>)/gi;
+                    const updatedDescription = bookData.description.replace(regex, "");
+
+                    setBook(() => ({
+                        id: bookData.id,
+                        title: bookData.title,
+                        author: bookData.author,
+                        thumbnail: bookData.thumbnail,
+                        description: updatedDescription,
+                        pages: bookData.pages,
+                        genres: bookData.genres,
+                        publishedDate: bookData.publishedDate,
+
+                    }));
+
                     setIsFavorite(bookData.isFavorite);
 
                     fetch(`http://localhost:3001/api/users/${loggedInUser._id}/books`, {
@@ -80,11 +102,13 @@ const BookPage = ({ loggedInUser }) => {
                             const isFinishedBook = checkIfBookInList(userData, bookId, 'finishedReading');
                             const isInWishList = checkIfBookInList(userData, bookId, 'wishlist');
 
+
                             setBook((prevBook) => ({
                                 ...prevBook,
                                 currentlyReading: isCurrentlyReading,
                                 finishedBooks: isFinishedBook,
                                 wishList: isInWishList,
+
                             }));
                         })
                         .catch((error) => {
@@ -131,10 +155,13 @@ const BookPage = ({ loggedInUser }) => {
                         </button>
                         <h2 className="text-2xl font-bold mb-2">{book.title}</h2>
                         <p className="italic mb-4">by {book.author || "Unknown Author"}</p>
-                        <p className="mb-4">
+                        <div className="mb-4">
                             <span className="font-semibold">Description:</span>{" "}
-                            {book.description || "No description available"}
-                        </p>
+                            <div>
+                                <LongText content={book.description} limit={420} />
+                            </div>
+
+                        </div>
                         <p className="mb-4">
                             <span className="font-semibold">Pages:</span>{" "}
                             {book.pages || "Unknown"}
