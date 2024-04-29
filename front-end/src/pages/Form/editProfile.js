@@ -64,10 +64,7 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
   return (
     <div className="bg-goodreads-lightgray flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md">
-        <form
-          onSubmit={handleSubmit}
-          className="rounded-lg px-8 pt-6 pb-8 mb-4"
-        >
+        <form onSubmit={handleSubmit} className="rounded-lg px-8 pt-6 mb-2">
           <div className="mb-4">
             <label
               className="block text-gray-700 font-bold mb-2"
@@ -142,20 +139,22 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
             </button>
           </div>
         </form>
-        <button
-          onClick={handleLogout}
-          className="text-sm text-goodreads-black font-cormorantGaramondSemibold bg-goodreads-lightgray rounded-md mb-2 border border-goodreads-black px-3"
-        >
-          Log Out
-        </button>
-
-        <div>
-          <Link
-            to="/profile"
-            className="text-sm text-goodreads-black font-cormorantGaramondSemibold bg-goodreads-lightgray rounded-md mb-2 border border-goodreads-black px-3"
+        <div className="rounded-lg px-8 mb-2">
+          <button
+            onClick={handleLogout}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-4"
           >
-            Cancel
-          </Link>
+            Log Out
+          </button>
+
+          <div>
+            <Link
+              to="/profile"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Cancel
+            </Link>
+          </div>
         </div>
       </div>
     </div>
