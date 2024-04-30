@@ -4,57 +4,50 @@ import BookShelf from "../../components/bookshelf";
 
 const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
   const [profile, setProfile] = useState(null);
-  const [wantToRead, setWantToRead] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   const [pastReads, setPastReads] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
-  const placeholder =
-    "https://images.unsplash.com/photo-1526800544336-d04f0cbfd700?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  const placeholder = "https://images.unsplash.com/photo-1526800544336-d04f0cbfd700?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   useEffect(() => {
-    console.log("loggedInUser.id: ", loggedInUser._id);
-    if (loggedInUser) {
-      const token = localStorage.getItem("token");
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      const token = localStorage.getItem('token');
       if (!token) {
         // Token not found, redirect to login page
-        navigate("/login");
+        navigate('/login');
         return;
       }
 
       const fetchUserProfile = async () => {
         try {
-          const response = await fetch(
-            `http://localhost:3001/api/users/${loggedInUser._id}`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await fetch(`http://localhost:3001/api/users/${loggedInUser._id}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
 
           if (response.ok) {
             const data = await response.json();
             setProfile(data);
           } else {
-            console.error("Error fetching user profile:", response.status);
+            console.error('Error fetching user profile:', response.status);
           }
         } catch (error) {
-          console.error("Error fetching user profile:", error);
+          console.error('Error fetching user profile:', error);
         }
       };
 
       const fetchBooks = async (endpoint, setBooks) => {
         try {
-          const response = await fetch(
-            `http://localhost:3001/api/users/${loggedInUser._id}/books/${endpoint}`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          );
+          const response = await fetch(`http://localhost:3001/api/users/${loggedInUser._id}/books/${endpoint}`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            },
+          });
           if (response.ok) {
             const data = await response.json();
             setBooks(data);
@@ -67,9 +60,9 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
       };
 
       fetchUserProfile();
-      fetchBooks("favorites", setFavorites);
-      fetchBooks("wantToRead", setWantToRead);
-      fetchBooks("pastReads", setPastReads);
+      fetchBooks('favorites', setFavorites);
+      fetchBooks('wishlist', setWishlist);
+      fetchBooks('pastReads', setPastReads);
     }
   }, [loggedInUser, navigate]);
 
@@ -149,7 +142,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
         <div className="bg-goodreads-lightgray">
           <BookShelf className="" title="Favorites" books={favorites} />
         </div>
-        <BookShelf className="" title="Wishlist" books={wantToRead} />
+        <BookShelf className="" title="Wishlist" books={wishlist} />
         <div className="bg-goodreads-lightgray">
           <BookShelf className="" title="Past Reads" books={pastReads} />
         </div>
@@ -159,3 +152,4 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 };
 
 export default ProfilePage;
+
