@@ -1,6 +1,8 @@
 # ReadTrack: Your Personal Bookshelf in the Cloud
 
 ## The Live Site
+*Submit a link to your front-end code live on the web, and include that link on your README.md document.*
+
 [This is where the link goes](./README.md)
 
 ## Product Vision Statement
@@ -39,11 +41,17 @@ npm start
 
 ### Testing
 
-To test this project, 
+To test this project, run the following commands:
+
+```
+cd back-end
+```
+
+```
+npm test
+```
 
 ## Product Development
-
-  > The project's wireframe is developed using Figma. The project's front-end is developed using ReactJs and TailwindCSS.
 
 ### A short history of how our project came to be:
 
@@ -68,3 +76,9 @@ To test this project,
 ### Contributing
 
 If you are interested in contributing to our project, please check out our [Guide to Contributing](./CONTRIBUTING.md) for information on how to do so.
+
+### Development Details
+
+  - The project's wireframe is developed using `Figma`. 
+  - The project's front-end is developed using `ReactJs` and `TailwindCSS`.
+  - The project's back-end is developed using `ExpressJS`
