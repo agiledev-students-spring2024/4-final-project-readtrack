@@ -14,7 +14,7 @@ function ReadingWishlist({ userId, bookId, isAdded }) {
     fetch(`http://localhost:3001/api/users/${userId}/wishlist`, {
       method: method,
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ bookId }),

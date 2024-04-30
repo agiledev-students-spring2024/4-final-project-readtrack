@@ -19,7 +19,7 @@ router.get('/books/search', userBooksController.searchBooks)
 router.get('/users/:id/books', authenticateToken, userBooksController.getAllUserBooks)
 router.get('/users/:id/books/currentReads', authenticateToken, userBooksController.getCurrentUserBooks)
 // want to read
-router.get('/users/:id/books/wantToRead', authenticateToken, userBooksController.getWantToRead)
+router.get('/users/:id/books/wishlist', authenticateToken, userBooksController.getWishlist)
 // favorites
 router.get('/users/:id/books/favorites', authenticateToken, userBooksController.getFavorites)
 //past reads
@@ -30,7 +30,7 @@ router.get('/users/:id/books/topReads', authenticateToken, userBooksController.g
 router.get('/users/:id/books/suggestions', authenticateToken, userBooksController.getSuggestions)
 
 router.get('/books/:bookId', authenticateToken, userBooksController.getBook)
-router.get('/books', authenticateToken, userBooksController.getAllBooks)
+router.get('/books', authenticateToken, userBooksController.getManyBooks)
 
 // Nested routes for user's books
 router.post('/users/:id/currentlyReading', authenticateToken, userBooksController.addBookToCurrentlyReading)

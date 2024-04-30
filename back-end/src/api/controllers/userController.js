@@ -85,7 +85,6 @@ exports.logout = async (req, res) => {
 }
 
 exports.updateUser = async (req, res) => {
-  console.log("in update user")
   const { id } = req.params;
   const { fullname, username, email, bio } = req.body
   try {

@@ -1,5 +1,6 @@
 const User = require("../../models/User");
 const Book = require("../../models/Book");
+const axios = require("axios");
 
 // utility function to update a user's book list
 async function updateUserBookList(userId, bookId, listType) {
@@ -14,7 +15,7 @@ async function updateUserBookList(userId, bookId, listType) {
     return updatedUser;
   } catch (error) {
     console.error("Error updating user book list:", error);
-    throw error; // Re-throw to handle in the calling function
+    throw error;
   }
 }
 async function removeBookFromUserList(userId, bookId, listType) {
@@ -32,31 +33,51 @@ async function removeBookFromUserList(userId, bookId, listType) {
     throw error; // Re-throw to handle in the calling function
   }
 }
+async function getBookDetails(bookIds) {
+  const G_BOOKS_API_KEY = process.env.G_BOOKS_API_KEY;
+  const bookData = [];
 
-//utility function to validate if a book exists
+  for (const bookId of bookIds) {
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${G_BOOKS_API_KEY}`;
 
-async function validateBook(bookId) {
-  const book = await Book.findById(bookId);
-  if (!book) {
-    throw new Error("Book not found");
+    try {
+      const response = await axios.get(apiUrl);
+      const book = {
+        id: response.data.id,
+        title: response.data.volumeInfo.title,
+        authors: response.data.volumeInfo.authors[0],
+        thumbnail: response.data.volumeInfo.imageLinks?.medium,
+      };
+      bookData.push(book);
+    } catch (error) {
+      console.error(`Error retrieving book details for bookId ${bookId}:`, error);
+    }
   }
+
+  return bookData;
 }
 
 // method to search all books in books collection
 exports.searchBooks = async (req, res) => {
   const { query } = req.query;
+  const G_BOOKS_API_KEY = process.env.G_BOOKS_API_KEY;
+  const maxResults = 9; // Adjust the number of results as needed
+
   try {
-    const searchPattern = new RegExp(query, "i");
-    const Books = await Book.find({
-      $or: [
-        { title: searchPattern },
-        { author: searchPattern },
-        { genres: searchPattern },
-      ],
-    });
-    res.status(200).json(Books);
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=${maxResults}&key=${G_BOOKS_API_KEY}`;
+
+    const response = await axios.get(apiUrl);
+    const bookData = response.data.items.map((item) => ({
+      id: item.id,
+      title: item.volumeInfo.title,
+      authors: item.volumeInfo.authors,
+      thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+      // Add other relevant book properties
+    }));
+
+    res.status(200).json(bookData);
   } catch (error) {
-    console.error(error);
+    console.error("Error searching books:", error);
     res.status(500).send("Error searching books");
   }
 };
@@ -64,7 +85,6 @@ exports.searchBooks = async (req, res) => {
 // get all books for a user
 exports.getAllUserBooks = async (req, res) => {
   const userId = req.params.id;
-  console.log('userId in getAllUserBooks: ', userId)
   try {
     const user = await User.findById(userId).populate(
       "books.currentlyReading books.finishedReading books.wishlist books.favorites"
@@ -81,16 +101,16 @@ exports.getAllUserBooks = async (req, res) => {
 
 // get current reads
 exports.getCurrentUserBooks = async (req, res) => {
-  console.log("gets to getCurrentUserBooks");
   const userId = req.params.id;
-  console.log('userId in getAllUserBooks: ', userId)
   try {
     const user = await User.findById(userId).populate("books.currentlyReading");
     // console.log("user current reads in getCurrentUserBooks: ", user.books.currentlyReading)
     if (!user) {
       return res.status(404).send("User not found");
     }
-    res.status(200).json(user.books.currentlyReading);
+    const bookIds = user.books.currentlyReading;
+    const bookDetails = await getBookDetails(bookIds);
+    res.status(200).json(bookDetails);
   } catch (error) {
     console.error("Failed to retrieve currently reading books:", error);
     res.status(500).send("Error retrieving user books");
@@ -98,14 +118,16 @@ exports.getCurrentUserBooks = async (req, res) => {
 };
 
 // get want to read
-exports.getWantToRead = async (req, res) => {
+exports.getWishlist = async (req, res) => {
   const userId = req.params.id;
   try {
     const user = await User.findById(userId).populate("books.wishlist");
     if (!user) {
       return res.status(404).send("User not found");
     }
-    res.status(200).json(user.books.wishlist);
+    const bookIds = user.books.wishlist;
+    const bookDetails = await getBookDetails(bookIds);
+    res.status(200).json(bookDetails);
   } catch (error) {
     console.error("Failed to retrieve user books:", error);
     res.status(500).send("Error retrieving user books");
@@ -116,11 +138,13 @@ exports.getWantToRead = async (req, res) => {
 exports.getFavorites = async (req, res) => {
   const userId = req.params.id;
   try {
-    const user = await User.findById(userId).populate("books.favorites");
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send("User not found");
     }
-    res.status(200).json(user.books.favorites);
+    const bookIds = user.books.favorites;
+    const bookDetails = await getBookDetails(bookIds);
+    res.status(200).json(bookDetails);
   } catch (error) {
     console.error("Failed to retrieve user books:", error);
     res.status(500).send("Error retrieving user books");
@@ -135,7 +159,10 @@ exports.getPastReads = async (req, res) => {
     if (!user) {
       return res.status(404).send("User not found");
     }
-    res.status(200).json(user.books.finishedReading);
+
+    const bookIds = user.books.finishedReading;
+    const bookDetails = await getBookDetails(bookIds);
+    res.status(200).json(bookDetails);
   } catch (error) {
     console.error("Failed to retrieve user books:", error);
     res.status(500).send("Error retrieving user books");
@@ -184,38 +211,13 @@ exports.getSuggestions = async (req, res) => {
   }
 };
 
-exports.getBook = async (req, res) => {
-  const { bookId } = req.params;
-  const userId = req.user;
-
-  try {
-    const book = await Book.findById(bookId);
-    if (!book) {
-      return res.status(404).send("Book not found");
-    }
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).send("User not found");
-    }
-    // Check if the book is a favorite
-    const isFavorite = user.books.favorites.includes(bookId);
-    res.status(200).json({
-      ...book.toObject(),
-      isFavorite: isFavorite
-    });
-  } catch (error) {
-    console.error("Failed to retrieve book:", error);
-    res.status(500).send("Error retrieving book");
-  }
-};
-
 // Controller to add a book to currently reading
 exports.addBookToCurrentlyReading = async (req, res) => {
   const userId = req.params.id;
   const { bookId } = req.body;
 
   try {
-    await validateBook(bookId);
+    // await validateBook(bookId);
     const user = await updateUserBookList(userId, bookId, "currentlyReading");
     res.status(200).json(user);
   } catch (error) {
@@ -251,6 +253,7 @@ exports.removeBookFromFinishedReading = async (req, res) => {
     res.status(500).send('Error updating finished reading list');
   }
 }
+
 exports.removeBookFromWishlist = async (req, res) => {
   const userId = req.params.id;
   const { bookId } = req.body; // Assuming bookId is sent in the body
@@ -273,7 +276,6 @@ exports.addBookToFinishedReading = async (req, res) => {
   const { bookId } = req.body;
 
   try {
-    await validateBook(bookId);
     const user = await updateUserBookList(userId, bookId, "finishedReading");
     res.status(200).json(user);
   } catch (error) {
@@ -287,7 +289,6 @@ exports.addBookToWishlist = async (req, res) => {
   const { bookId } = req.body;
 
   try {
-    await validateBook(bookId);
     const user = await updateUserBookList(userId, bookId, "wishlist");
     res.status(200).json(user);
   } catch (error) {
@@ -317,7 +318,7 @@ exports.toggleFavoriteBook = async (req, res) => {
     }
 
     await user.save(); // Save the updated user document
-    console.log('Updated user:', user); // After await user.save();
+    // console.log('Updated user:', user);
 
     res.status(200).json({ isFavorite: index < 0 }); // Respond with the new favorite status
   } catch (error) {
@@ -326,12 +327,49 @@ exports.toggleFavoriteBook = async (req, res) => {
   }
 };
 
-exports.getAllBooks = async (req, res) => {
+exports.getManyBooks = async (req, res) => {
   try {
-    const books = await Book.find();
-    res.status(200).json(books);
+    const G_BOOKS_API_KEY = process.env.G_BOOKS_API_KEY;
+    const maxResults = 21;
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:fiction&maxResults=${maxResults}&orderBy=newest&key=${G_BOOKS_API_KEY}`;
+
+    const response = await axios.get(apiUrl);
+    const bookData = response.data.items.map((item) => ({
+      id: item.id,
+      title: item.volumeInfo.title,
+      authors: item.volumeInfo.authors,
+      thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+    }));
+    res.status(200).json(bookData);
   } catch (error) {
     console.error('Error retrieving books:', error);
     res.status(500).send('Error retrieving books');
   }
-}
+};
+
+exports.getBook = async (req, res) => {
+  const { bookId } = req.params;
+  const G_BOOKS_API_KEY = process.env.G_BOOKS_API_KEY;
+
+  try {
+    const apiUrl = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${G_BOOKS_API_KEY}`;
+    const response = await axios.get(apiUrl);
+    const bookData = response.data;
+
+    const book = {
+      id: bookData.id,
+      title: bookData.volumeInfo.title,
+      author: bookData.volumeInfo.authors?.join(", ") || "Unknown Author",
+      thumbnail: bookData.volumeInfo.imageLinks?.medium,
+      description: bookData.volumeInfo.description,
+      pages: bookData.volumeInfo.pageCount,
+      genres: bookData.volumeInfo.categories,
+      publishedDate: bookData.volumeInfo.publishedDate,
+    };
+
+    res.status(200).json(book);
+  } catch (error) {
+    console.error("Failed to retrieve book:", error);
+    res.status(500).send("Error retrieving book");
+  }
+};
