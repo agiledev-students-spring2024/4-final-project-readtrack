@@ -355,12 +355,13 @@ exports.getBook = async (req, res) => {
     const apiUrl = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${G_BOOKS_API_KEY}`;
     const response = await axios.get(apiUrl);
     const bookData = response.data;
+    console.log('bookdata:', bookData)
 
     const book = {
       id: bookData.id,
       title: bookData.volumeInfo.title,
       author: bookData.volumeInfo.authors?.join(", ") || "Unknown Author",
-      thumbnail: bookData.volumeInfo.imageLinks?.medium,
+      thumbnail: bookData.volumeInfo.imageLinks?.thumbnail || bookData.volumeInfo.imageLinks?.medium || null,
       description: bookData.volumeInfo.description,
       pages: bookData.volumeInfo.pageCount,
       genres: bookData.volumeInfo.categories,
