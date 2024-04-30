@@ -81,4 +81,4 @@ If you are interested in contributing to our project, please check out our [Guid
 
   - The project's wireframe is developed using `Figma`. 
   - The project's front-end is developed using `ReactJs` and `TailwindCSS`.
-  - The project's back-end is developed using `ExpressJS`
+  - The project's back-end is developed using `ExpressJS`.
