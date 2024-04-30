@@ -3,7 +3,7 @@
 ## The Live Site
 *Submit a link to your front-end code live on the web, and include that link on your README.md document.*
 
-[This is where the link goes](./README.md)
+[The Deployed ReadTrack App](./README.md)
 
 ## Product Vision Statement
 
