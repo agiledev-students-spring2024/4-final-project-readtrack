@@ -1,7 +1,9 @@
 {
     "scripts": {
         "install-all": "concurrently \"cd front-end && npm install\" \"cd back-end && npm install\"",
-        "start": "concurrently \"cd front-end && npm start\" \"cd back-end && npm start\""
+        "start": "concurrently \"cd front-end && npm start\" \"cd back-end && npm start\"" ,
+        "setup-frontend": "cd front-end && npm install && npm start",
+        "setup-backend": "cd back-end && npm install && npm start" 
       }
       
     ,
