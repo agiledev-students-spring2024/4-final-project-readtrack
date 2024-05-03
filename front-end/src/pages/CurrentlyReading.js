@@ -12,7 +12,7 @@ function CurrentlyReading({ userId, bookId, isAdded }) {
     const token = localStorage.getItem("token");
     const method = bookAdded ? "DELETE" : "POST";
 
-    fetch(`http://localhost:3001/api/users/${userId}/currentlyReading`, {
+    fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${userId}/currentlyReading`, {
       method: method,
       headers: {
         'Authorization': `Bearer ${token}`,

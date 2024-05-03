@@ -23,10 +23,10 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
 
       const token = localStorage.getItem("token");
       const urls = [
-        `http://localhost:3001/api/users/${loggedInUser._id}/books/currentReads`,
-        `http://localhost:3001/api/users/${loggedInUser._id}/books/friendsReads`,
-        `http://localhost:3001/api/users/${loggedInUser._id}/books/topReads`,
-        `http://localhost:3001/api/users/${loggedInUser._id}/books/suggestions`,
+        `https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}/books/currentReads`,
+        `https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}/books/friendsReads`,
+        `https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}/books/topReads`,
+        `https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}/books/suggestions`,
       ];
 
       try {
@@ -55,7 +55,7 @@ const MainHome = ({ loggedInUser, setLoggedInUser }) => {
         // Fetch the full book details using the googleBookId
         const fetchBookDetails = async (bookRefs) => {
           const bookDetailsRequests = bookRefs.map((bookRef) =>
-            fetch(`http://localhost:3001/api/books/${bookRef.id}`, {
+            fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/books/${bookRef.id}`, {
               method: "GET",
               headers: {
                 Authorization: `Bearer ${token}`,

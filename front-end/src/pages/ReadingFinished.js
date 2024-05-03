@@ -11,7 +11,7 @@ function ReadingFinished({ userId, bookId, isAdded }) {
     const token = localStorage.getItem("token");
     const method = bookAdded ? "DELETE" : "POST";
 
-    fetch(`http://localhost:3001/api/users/${userId}/finishedReading`, {
+    fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${userId}/finishedReading`, {
       method: method,
       headers: {
         'Authorization': `Bearer ${token}`,

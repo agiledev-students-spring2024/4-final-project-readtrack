@@ -23,7 +23,7 @@ const BookPage = ({ loggedInUser }) => {
     const toggleFavorite = () => {
         const token = localStorage.getItem("token");
 
-        fetch(`http://localhost:3001/api/users/${loggedInUser._id}/favorites`, {
+        fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}/favorites`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ const BookPage = ({ loggedInUser }) => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (bookId && token) {
-            fetch(`http://localhost:3001/api/books/${bookId}`, {
+            fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/books/${bookId}`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -84,7 +84,7 @@ const BookPage = ({ loggedInUser }) => {
 
                     setIsFavorite(bookData.isFavorite);
 
-                    fetch(`http://localhost:3001/api/users/${loggedInUser._id}/books`, {
+                    fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}/books`, {
                         method: "GET",
                         headers: {
                             'Authorization': `Bearer ${token}`,
