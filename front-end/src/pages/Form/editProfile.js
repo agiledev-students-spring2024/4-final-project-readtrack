@@ -37,7 +37,7 @@ const EditProfile = ({ loggedInUser, setLoggedInUser }) => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        `http://localhost:3001/api/users/update/${loggedInUser._id}`,
+        `https://readtrack-yi3cj.ondigitalocean.app/api/users/update/${loggedInUser._id}`,
         {
           method: "PUT",
           headers: {

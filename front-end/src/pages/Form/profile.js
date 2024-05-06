@@ -22,7 +22,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
       const fetchUserProfile = async () => {
         try {
-          const response = await fetch(`http://localhost:3001/api/users/${loggedInUser._id}`, {
+          const response = await fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -42,7 +42,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser }) => {
 
       const fetchBooks = async (endpoint, setBooks) => {
         try {
-          const response = await fetch(`http://localhost:3001/api/users/${loggedInUser._id}/books/${endpoint}`, {
+          const response = await fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}/books/${endpoint}`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`
