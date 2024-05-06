@@ -11,7 +11,7 @@ function ReadingWishlist({ userId, bookId, isAdded }) {
     const token = localStorage.getItem("token");
     const method = bookAdded ? "DELETE" : "POST";
 
-    fetch(`http://localhost:3001/api/users/${userId}/wishlist`, {
+    fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${userId}/wishlist`, {
       method: method,
       headers: {
         Authorization: `Bearer ${token}`,

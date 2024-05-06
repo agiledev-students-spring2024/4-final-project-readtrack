@@ -10,7 +10,7 @@ const Friends = ({ loggedInUser, setLoggedInUser }) => {
 
   useEffect(() => {
     if (loggedInUser) {
-      fetch(`http://localhost:3001/api/users/${loggedInUser._id}`)
+      fetch(`https://readtrack-yi3cj.ondigitalocean.app/api/users/${loggedInUser._id}`)
         .then((response) => response.json())
         .then((data) => {
           setProfile(data);

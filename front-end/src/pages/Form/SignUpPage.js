@@ -16,7 +16,7 @@ const SignUpPage = ({ setLoggedInUser, loggedInUser, setRegisteredUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/api/register', {
+    fetch('https://readtrack-yi3cj.ondigitalocean.app/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
