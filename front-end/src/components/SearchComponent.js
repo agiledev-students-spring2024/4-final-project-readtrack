@@ -11,11 +11,6 @@ const SearchComponent = ({ onSearch }) => {
     e.preventDefault();
     onSearch(searchTerm);
   };
-  const handleViewAll = (e) => {
-    e.preventDefault();
-    onSearch("");
-  };
-
   return (
     <div className="flex justify-center items-center bg-goodreads-lightgray">
       <form className=" mx-2 w-full max-w-sm" onSubmit={handleSearchSubmit}>

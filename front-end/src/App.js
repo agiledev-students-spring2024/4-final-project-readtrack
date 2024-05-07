@@ -3,17 +3,12 @@ import "./App.css";
 import "./index.css";
 
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
-import Navbar from "./pages/navbar";
 import SignUpPage from "./pages/Form/SignUpPage";
 import Login from "./pages/Form/login";
 import EditProfile from "./pages/Form/editProfile";
 import MainHome from "./pages/mainHome";
-import ReadingFinished from "./pages/ReadingFinished";
-import ReadingProgress from "./pages/ReadingProgress";
-import ReadingWishlist from "./pages/ReadingWishlist";
-import CurrentlyReading from "./pages/CurrentlyReading";
 import BookSearchPage from "./pages/BookSearch";
 import FriendShelf from "./components/FriendShelf";
 import Friends from "./pages/Friends";

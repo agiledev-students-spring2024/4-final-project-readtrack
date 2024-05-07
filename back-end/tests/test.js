@@ -5,24 +5,7 @@ const expect = chai.expect;
 const {authenticateToken} = require('../src/api/middleware/authMiddleware.js')
 const jwt = require("jsonwebtoken");
 
-
 chai.use(chaiHttp);
-
-/* TEMPLATE - for hannah, delete when done :)
-describe('Name', () => {
-    describe('level', () => {
-        it('what', (done) => {
-            chai.request(app)
-                .get(route)
-                .end((err, res) => {
-                    expect(res).to.have.status(200);
-                    expect(res.body).to.be.an('TYPE');
-                    done();
-                })
-        })
-    })
-})
-*/
 
 // Helper function to generate a token for testing
 function generateToken(payload) {
@@ -64,8 +47,6 @@ describe("User Routes - Protected", () => {
   });
 });
 
-
-  
 
 describe("Login & Signup", () => {
     
@@ -178,6 +159,7 @@ describe("Friends Routes", () => {
   //   });
   // });
 });
+
 
 describe("User Routes", () => {
   describe ("Gets all users", () => {

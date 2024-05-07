@@ -11,7 +11,7 @@ const BookSearchPage = () => {
   }, []);
 
   const fetchAllBooks = () => {
-    const apiUrl = `http://localhost:3001/api/books`;
+    const apiUrl = `https://readtrack-yi3cj.ondigitalocean.app/api/books`;
     const token = localStorage.getItem('token');
     const headers = {
       'Authorization': `Bearer ${token}`
@@ -37,7 +37,7 @@ const BookSearchPage = () => {
   };
 
   const handleSearch = (searchTerm) => {
-    const searchUrl = `http://localhost:3001/api/books/search?query=${encodeURIComponent(searchTerm)}`;
+    const searchUrl = `https://readtrack-yi3cj.ondigitalocean.app/api/books/search?query=${encodeURIComponent(searchTerm)}`;
     const token = localStorage.getItem('token');
     const headers = { 'Authorization': `Bearer ${token}` };
 

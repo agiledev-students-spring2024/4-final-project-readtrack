@@ -5,7 +5,7 @@ import App from './App';
 import axios from 'axios';
 
 // base URL for all Axios requests
-axios.defaults.baseURL = 'http://localhost:3001/api';
+axios.defaults.baseURL = 'http://readtrack-yi3cj.ondigitalocean.app/';
 
 // using interceptor to attach the token to every request
 axios.interceptors.request.use(function (config) {
